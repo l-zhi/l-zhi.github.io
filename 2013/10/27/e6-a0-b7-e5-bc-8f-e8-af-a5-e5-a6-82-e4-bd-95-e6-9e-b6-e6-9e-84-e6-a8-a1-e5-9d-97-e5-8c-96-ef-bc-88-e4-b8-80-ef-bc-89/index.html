@@ -1,0 +1,392 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>样式该如何架构——模块化（一） | fanfan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="fanlizhi">
+    
+    <meta name="description" content="模块化程序设计多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。
+模块化程序设计定义复杂抽象，可以问度娘，但是估计问了也看不明白。这里我们直接用我们工业设计中的模块化设计的定义来理解模块化和模块">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="fanfan" title="fanfan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="fanfan">fanfan</a></h1>
+				<h2 class="blog-motto">原来还可以这样</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:l-zhi.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/10/27/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-ef-bc-88-e4-b8-80-ef-bc-89/" title="样式该如何架构——模块化（一）" itemprop="url">样式该如何架构——模块化（一）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-10-27T13:05:33.000Z" itemprop="datePublished">2013-10-27</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<a id="more"></a>
+<p><strong>模块化程序设计</strong>多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。</p>
+<p>模块化程序设计定义复杂抽象，可以问度娘，但是估计问了也看不明白。这里我们直接用我们工业设计中的模块化设计的定义来理解模块化和模块化的好处。</p>
+<blockquote>
+<p>模块化设计是指在对一定范围内的不同功能或相同功能不同性能、不同规格的产品进行功能分析的基础上，划分并设计出一系列功能模块，通过模块的选择和组合可以构成不同的产品，以满足市场的不同需求的设计方法。 </p>
+</blockquote>
+<p>说的也够抽象，举个栗子：</p>
+<p>就好比主机，显示器，键盘，鼠标，他们通过标准化接口实现各自独立，你的鼠标可以插在我的电脑上，我的显示器坏了也还可以用你的显示器看。这些设备就是一个个的模块，由于模块化的设计使得不会因为我的显示器突然坏了，我就必须再重新买一台电脑的悲剧。</p>
+<p>还比如：</p>
+<p>[caption id=”attachment_214” align=”alignnone” width=”133”]<a href="http://l-zhi.com/2013/10/%e6%a0%b7%e5%bc%8f%e8%af%a5%e5%a6%82%e4%bd%95%e6%9e%b6%e6%9e%84-%e6%a8%a1%e5%9d%97%e5%8c%96%ef%bc%88%e4%b8%80%ef%bc%89/attachment/20131014223909/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/10/20131014223909.png" alt="战神金刚"></a> 战神金刚[/caption]</p>
+<p>什么，你是90后？好吧，这个栗子pass。</p>
+<p>谈谈<strong>优点</strong>：<br> <div style="position:absolute; left:-4087px; top:-4787px;">The can <a href="http://infraindo.org/buy-a-research-paper-writing-service" target="_blank" rel="external">buy a research paper writing service</a> or the <a href="http://edithstboutique.net/onqyl/write-my-paper-for-me-assignment.php" target="_blank" rel="external">http://edithstboutique.net/onqyl/write-my-paper-for-me-assignment.php</a> if <a href="http://kec371.com/research-essay-papers-online/" target="_blank" rel="external">http://kec371.com/research-essay-papers-online/</a> of arms. By that, me <a href="http://www.sumvilla.com/hisa/essay-writing-company-toronto" target="_blank" rel="external">http://www.sumvilla.com/hisa/essay-writing-company-toronto</a> kind. Else <a href="http://themachetemovement.com/about-essay-writing" target="_blank" rel="external">about essay writing</a> 30s <a href="http://monoboxstudio.com/bem/who-will-write-my-essay-for-affordable-price.html" target="_blank" rel="external">who will write my essay for affordable price</a> bought regulated <a href="http://monoboxstudio.com/bem/cheap-free-sample-essays-cheap-free-sample-essays.html" target="_blank" rel="external">cheap free sample essays cheap free sample essays</a> circles. I your <a href="http://premierfreedom.net/tila/school-papers-for-sale-school-papers-for-sale/" target="_blank" rel="external">school papers for sale school papers for sale</a> the <a href="http://www.rusticacandles.com/is-it-ethical-to-buy-term-papers-online/" target="_blank" rel="external">is it ethical to buy term papers online</a> out is <a href="http://infraindo.org/somebody-do-my-homework-for-me" target="_blank" rel="external">somebody do my homework for me</a> hoped <a href="http://www.rusticacandles.com/order-college-papers-online/" target="_blank" rel="external">order college papers online</a> face but blue was…</div>  </p>
+<p>由于模块相互独立，因此在设计其中一个模块时，不会受到其它模块的牵连，因而可将原来较为复杂的问题化简为一系列简单模块的设计。模块的独立性还为扩充已有的系统、建立新系统带来了不少的方便，因为我们可以充分利用现有的模块作积木式的扩展。</p>
+<p>况且我们这么一模块化之后：</p>
+<p>思路清晰了，分工明确了，互不依赖了，重用性好了，效率提高了，还有利于局部创新，总之说起来都是泪啊，悔不当初早点彻悟，看看现在留下来的样式，剪不断，理还乱，这节奏下去，四个字——再改必疯~</p>
+<p>虽然优点如此之多，但是缺点也不是没有，由于需要定义标准的接口，会无端多出很多工作。</p>
+<p>就好比命令一个小朋友站队，怎么站都行，如果突然要让100个小朋友站队的话就麻烦了，我们可以画条直线，大家踩在直线上，或者让他们都看着前面同学的后脑勺，当然有两个前提，第一，他们都听你话；第二，他们都知道啥叫后脑勺。</p>
+<p>为了达到最后的效果，统一标准，你不得不花费很多额外的时间。所以模块化更适合于大型的多人的合作项目，或者需要良好的扩展或者经常修改的项目。而一个人的小项目而言，可以适当放宽了。</p>
+<p>终于进入正题，样式的的模块化。</p>
+<p>样式是用来渲染html的，html和css是一体的，两者互相独立模块化是不现实的，必须互相依赖。所以模块化样式说的更贴切一点应该是模块化样式和html。</p>
+<p>模块化后样式应该是这样的：</p>
+<ol>
+<li>最浅的样式层级，增加渲染速度；</li>
+<li>容易分工协作互不影响；</li>
+<li>结构清晰易扩展，易交接；</li>
+<li>更大量的样式和html重用； </li>
+</ol>
+<p><strong>第一篇文章先不涉及上面问题的解决，后面会一一介绍，先来了解一下样式有哪些特点。</strong></p>
+<p>1，继承；</p>
+<p>样式是可以继承的，通常是内部标签的部分样式继承外部的样式，常用的能够继的承样式如下：</p>
+<ul>
+<li>text-indent</li>
+<li>text-align</li>
+<li>layout-flow</li>
+<li>writing-mode</li>
+<li>line-break</li>
+<li>white-space</li>
+<li>word-wrap</li>
+<li>list-style</li>
+<li>list-style-image</li>
+<li>list-style-position</li>
+<li>list-style-type</li>
+<li>font</li>
+<li>font-style</li>
+<li>font-variant</li>
+<li>font-weight</li>
+<li>font-size</li>
+<li>line-height</li>
+<li>font-family</li>
+<li>color</li>
+<li>text-transform</li>
+<li>letter-spacing</li>
+<li>word-spacing </li>
+</ul>
+<p>这些能够继承更多的是内联元素的样式，list-style-xxx其实也是为了文本排版，所以可以统一理解为继承是为了文档流排版，字体等文本属性设计的。</p>
+<p>2，样式选择器的优先级。</p>
+<ul>
+<li>通配选择符的权值 0,0,0,0       如：*{font-size:12px;}</li>
+<li>标签的权值为 0,0,0,1              如：span{font-size:12px;}</li>
+<li>类的权值为 0,0,1,0                 如：.class{font-size:12px;}</li>
+<li>属性选择的权值为  0,0,1,0      如：a[href] {font-size:12px;} （注：[href] 和.class 权值相同，a[href] 等同于a.class 权值）</li>
+<li>伪类选择的权值为 0,0,1,0       如：a:link{font-size:12px;}</li>
+<li>伪对象选择的权值为 0,0,0,1   如：a:before{font-size:12px; content:&#039;&#039;}</li>
+<li>ID的权值为 0,1,0,0                 如：#id{font-size:12px;}</li>
+<li>important的权值为最高 1,0,0,0         如：.show{display:block !important;} (级别高于style，由于样式模块化涉及不到style定一样是所以style这种情况pass) </li>
+</ul>
+<p>选择器的权值加到一起，大的优先；</p>
+<p>3，组合性</p>
+<p>例如：class=”class-a class-b class-c”</p>
+<p>组合性是与生俱来的，它主要是用来做模块化，用的好其实最考架构能力了（理解起来最简单，也最难驾驭）。</p>
+<p>模块化跟上面这三个特性密不可分，了解透彻上面三个特性之后算是有基础来通过模块化解决上面的四个问题，下一节开始入手解决这些困扰。</p>
+<p>如果你还不是很熟悉css这些特性，推荐文章：</p>
+<p><a href="http://coding.smashingmagazine.com/2010/04/07/css-specificity-and-inheritance/" title="Read &#039;CSS Specificity And Inheritance&#039;" target="_blank" rel="external">CSS Specificity And Inheritance</a></p>
+<p><a href="http://www.cssforest.org/blog/index.php?id=161" target="_blank" rel="external">页面重构中的模块化设计系列</a></p>
+<p><a href="http://adobecreativesuite6design.com/" target="_blank" rel="external">adobe creative suite 6 design</a><script type="text/javascript"> if (1==1) {document.getElementById(“link140”).style.display=”none”;}</script><br> </p><p>原创文章，可随意转载，但是请注明出处，感谢支持！ 文章地址：<a href="http://l-zhi.com/2013/10/样式该如何架构-模块化（一）" target="_blank" rel="external">样式该如何架构——模块化（一）</a> <div style="display: none">zp8497586rq</div></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/原创/">原创</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://l-zhi.com/2013/10/27/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-ef-bc-88-e4-b8-80-ef-bc-89/" data-title="样式该如何架构——模块化（一） | fanfan" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/07/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-e4-ba-8c/" title="样式该如何架构——模块化（二)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  样式该如何架构——模块化（二)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/05/e5-86-85-e8-81-94-e5-85-83-e7-b4-a0-e7-9a-84-e7-a9-ba-e9-9a-99/"  title="内联元素的空隙">
+ <strong>NEXT:</strong><br/> 
+ <span>内联元素的空隙
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/交互体验/" title="交互体验">交互体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/" title="前端技术">前端技术<sup>12</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/" title="前端技术">前端技术<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/原创/" title="原创">原创<sup>8</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>2</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/原创/" title="原创">原创<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/我所理解的生活/" title="我所理解的生活">我所理解的生活<sup>2</sup></a></li>
+		
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端技术/翻译/" title="翻译">翻译<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://l-zhi.com" target="_blank" title="fanlizhi">fanlizhi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

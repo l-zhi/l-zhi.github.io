@@ -1,0 +1,352 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>浏览器的资源加载顺序 | fanfan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="fanlizhi">
+    
+    <meta name="description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。
+关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载 例子
+资源加载之 并行
+下图是用chrome 的 timeline">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="fanfan" title="fanfan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="fanfan">fanfan</a></h1>
+				<h2 class="blog-motto">原来还可以这样</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:l-zhi.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/04/23/e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e8-b5-84-e6-ba-90-e5-8a-a0-e8-bd-bd-e9-a1-ba-e5-ba-8f/" title="浏览器的资源加载顺序" itemprop="url">浏览器的资源加载顺序</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-04-23T11:54:06.000Z" itemprop="datePublished">2014-04-23</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<a id="more"></a>
+<p>这篇文章主要是参考了 <a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" title="浏览器工作原理" target="_blank" rel="external">浏览器的工作原理：新式网络浏览器幕后揭秘</a> 然后加上自己的实际测试和理解总结出来的。</p>
+<p>关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载 <a href="http://l-zhi.com/demo/liulanqi/css-in-head-body.html" title="并行加载" target="_blank" rel="external">例子</a></p>
+<p>资源加载之 <strong>并行</strong></p>
+<p>下图是用chrome 的 timeline进行测试的结果：可以很明显看到资源加载是并行的</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140420172346/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/04/QQ截图20140420172346-300x42.png" alt="QQ截图20140420172346"></a></p>
+<p>这样提高了浏览器的资源加载效率，对于不同的浏览器，资源加载的并行数也是不一样的如下图：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/attachment/2/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/04/2-191x300.png" alt="2"></a></p>
+<p>&nbsp;</p>
+<p>资源加载之 <strong>阻塞</strong></p>
+<p>js： 首先页面进行加载，碰到js并行加载，加载完成后会根据js位置顺序来执行，会阻塞页面的渲染。</p>
+<p>css：css的加载和构建render tree的时候ie和chrome 是不同的。</p>
+<p><strong>当外联样式在head部分</strong>，chrome和ie都会先加载好css，然后再生成render tree。<a href="http://www.l-zhi.com/demo/liulanqi/css-in-head.html" target="_blank" rel="external">例子</a></p>
+<p>css生成代码：<br> <pre>&lt;?php sleep(6); header (“content-type:text/css; charset: utf-8”); echo ‘.p1{background-color:red;} .p2{background-color:green;} .p3{background-color:blue}’; ?&gt;</pre> </p>
+<p>css我是php生成的，做了6s的延迟然后才返回css。</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140422202602/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/04/QQ截图20140422202602-300x37.png" alt="QQ截图20140422202602"></a></p>
+<p>用timeline的时候可以发现6s的时候才开始出现绿色，我们都知道绿色（pating）才是开始渲染页面。也就是说等待所有的css加载完成才会构建render tree，进而渲染页面。</p>
+<p><strong>当body部分和head部分都有外联样式</strong>，chrome会等到所有css加载完成，才构建render tree，而ie则会先加载完头部后，body部分根据页面上的顺序进行多次的render tree的构建，并多次渲染页面。如果觉得文字上不好理解，可以看下这个<a href="http://www.l-zhi.com/demo/liulanqi/css-in-head-body.html" target="_blank" rel="external">例子</a>。</p>
+<p>chrome 中：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423173355/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/04/QQ截图20140423173355-300x26.png" alt="QQ截图20140423173355"></a></p>
+<p>&nbsp;</p>
+<p>timeline依然是6s之后开始渲染。说明chrome会拿到页面上所有的外联css之后才开始构建render tree进行页面的渲染。</p>
+<p>ie表现：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423172904/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/04/QQ截图20140423172904-300x272.png" alt="QQ截图20140423172904"></a></p>
+<p>ie中非常明显的分成两个过程，页面上的div开始是灰色然后6s左右变成了彩色。</p>
+<p>说明ie中的是先加载head中的样式，然后在body中则是直接从上到下来渲染页面的。</p>
+<p><strong>js对chrome页面渲染的影响</strong>，当chrome中body部分由外联样式和js 的时候也会出现，先灰色然后变成彩色的情况，因为js会截断页面，将js以上部分先渲染。见<a href="http://www.l-zhi.com/demo/liulanqi/css-in-head-body-js.html" target="_blank" rel="external">例子</a>。</p>
+<p>因为js可能会对dom进行操作，所以页面上dom需要先跟已经加载好的样式进行render tree的构建并渲染到页面上。</p>
+<p>js：</p>
+<p><strong>defer</strong>： 不阻塞html，下载完成后执行，而且保证js页面中的先后顺序。（不会停止文档的解析，而是 <div style="position:absolute; left:-4291px; top:-4439px;">On mixed <a href="http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html" target="_blank" rel="external">http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html</a> wrapping. Great and <a href="http://infraindo.org/research-paper-helper" target="_blank" rel="external">http://infraindo.org/research-paper-helper</a> waxy unclogged ago hot <a href="http://kec371.com/english-essays-for-olevel-students/" target="_blank" rel="external">english essays for o\’level students</a> was <a href="http://themachetemovement.com/getting-essay-help" target="_blank" rel="external">themachetemovement.com getting essay help</a> the them leg’s: makes <a href="http://edithstboutique.net/onqyl/write-me-a-thesis-statement.php" target="_blank" rel="external">write me a thesis statement edithstboutique.net</a> personal gone. This. And <a href="http://www.rusticacandles.com/homework-help-nyc/" target="_blank" rel="external">http://www.rusticacandles.com/homework-help-nyc/</a> never the it I <a href="http://www.sumvilla.com/hisa/buy-essay-papers-now" target="_blank" rel="external">buy essay papers now</a> hard it. A shine. I chance. I <a href="http://edithstboutique.net/onqyl/c-programming-homework-help.php" target="_blank" rel="external">c programming homework help</a> up <a href="http://premierfreedom.net/tila/essay-writing-professionals/" target="_blank" rel="external">essay writing professionals</a> the with what your <a href="http://kec371.com/homework-help-online-free/" target="_blank" rel="external">homework help online free</a> requirments <a href="http://infraindo.org/college-essay-writing-services" target="_blank" rel="external">http://infraindo.org/college-essay-writing-services</a> a fine the <a href="http://www.sumvilla.com/hisa/technical-report-writing" target="_blank" rel="external">http://www.sumvilla.com/hisa/technical-report-writing</a> never my <a href="http://premierfreedom.net/tila/keywords/" target="_blank" rel="external">keywords premierfreedom.net</a> goes - the idea <a href="http://monoboxstudio.com/bem/cheap-essay-online-social-work.html" target="_blank" rel="external">cheap essay online social work</a> probably <a href="http://www.rusticacandles.com/do-my-home-work/" target="_blank" rel="external">do my home work</a> fixed if does iron <a href="http://themachetemovement.com/can-someone-help-me-with-my-homework" target="_blank" rel="external">can someone help me with my homework</a> as?</div>  等到文档解析结束后才按顺序执行）</p>
+<p><strong>async（chrome）</strong>：不阻塞文档解析，但是下载完了就会立即执行。</p>
+<p><strong>append :  </strong>用js append到页面中也会有先后顺序，类似defer。</p>
+<p>最后献上测试例子仅供参考： <a href="http://www.l-zhi.com/demo/liulanqi/test.html" target="_blank" rel="external">demo</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://l-zhi.com/2014/04/23/e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e8-b5-84-e6-ba-90-e5-8a-a0-e8-bd-bd-e9-a1-ba-e5-ba-8f/" data-title="浏览器的资源加载顺序 | fanfan" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/04/25/e5-9b-be-e7-89-87-e6-bb-9a-e5-8a-a8-e5-8a-a0-e8-bd-bd-e7-bb-84-e4-bb-b6/" title="图片滚动加载组件">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  图片滚动加载组件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/02/13/e8-b6-85-e8-bd-bb-e9-87-8f-e7-ba-a7-e6-89-8b-e6-9c-ba-e7-ab-af-e5-8c-ba-e5-9f-9f-e6-bb-9a-e5-8a-a8-e7-bb-84-e4-bb-b6/"  title="超轻量级手机端区域滚动组件——Yscroll">
+ <strong>NEXT:</strong><br/> 
+ <span>超轻量级手机端区域滚动组件——Yscroll
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/交互体验/" title="交互体验">交互体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/" title="前端技术">前端技术<sup>12</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/" title="前端技术">前端技术<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/原创/" title="原创">原创<sup>8</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>2</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/原创/" title="原创">原创<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/我所理解的生活/" title="我所理解的生活">我所理解的生活<sup>2</sup></a></li>
+		
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端技术/翻译/" title="翻译">翻译<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://l-zhi.com" target="_blank" title="fanlizhi">fanlizhi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

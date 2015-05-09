@@ -1,0 +1,329 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>怎么拯救你，我的样式 | fanfan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="fanlizhi">
+    
+    <meta name="description" content="作为前端我们可以很自豪的说，我们是与客户贴的最近的人。我们承载着所有网页程序提供的资源和重托。承载着用户的需求和信任。我们的任务是让用户几乎不用思考就能完整的享受到所有网站提供的功能。然而在这之前，用户用我们的产品第一印象就是我们的页面效果，是否让人舒适，是否统一，交互是否顺畅，是不是有像素级的细节">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="fanfan" title="fanfan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="fanfan">fanfan</a></h1>
+				<h2 class="blog-motto">原来还可以这样</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:l-zhi.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/08/31/e6-80-8e-e4-b9-88-e6-8b-af-e6-95-91-e4-bd-a0-ef-bc-8c-e6-88-91-e7-9a-84-e6-a0-b7-e5-bc-8f/" title="怎么拯救你，我的样式" itemprop="url">怎么拯救你，我的样式</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-08-31T07:50:58.000Z" itemprop="datePublished">2013-08-31</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<a id="more"></a>
+<p><del>作为前端我们可以很自豪的说，我们是与客户贴的最近的人。我们承载着所有网页程序提供的资源和重托。承载着用户的需求和信任。我们的任务是让用户几乎不用思考就能完整的享受到所有网站提供的功能。然而在这之前，用户用我们的产品第一印象就是我们的页面效果，是否让人舒适，是否统一，交互是否顺畅，是不是有像素级的细节和质感。</del><br> <div style="display: none"><a href="http://www.skinwhiteningforevernaturally.com/" title="skin whitening forever naturally" target="_blank" rel="external">read more</a></div> </p>
+<p>刚好近段时间做的项目涉及到样式的重构，所以也总结了一些自己的想法。<br> 我接到的摊子是这样的：<br> <a href="http://l-zhi.com/2013/08/91/attachment/20130831132024/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/08/20130831132024.png" alt="20130831132024"></a><br> 然后是我随意开开的一个文件<br> <a href="http://l-zhi.com/2013/08/91/attachment/20130831134158/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/08/20130831134158.png" alt="20130831134158"></a><br> 我相信大家也都遇到过这样的样式表，一个页面一个样式，表面上看清晰明了，修改简单，但是样式的总大小已经超过500k了，而且大量的重复代码，各种乱七八糟的hack，初一看云里雾里，细一看，还不如初一看，我本想着合并样式表然后改改算了，可是一下就崩了，直接就考虑怎么重构了。其实class最重要的功能就是样式的可重复应用，但是显然这已经完全违背了样式表的这一特点了。<br> 这算是我见过的第二烂的样式表了！第一烂的是当年刚毕业进的一家公司，每一个页面的样式表都内嵌在html里面，那个估计这辈子会永居第一了！:( ，再扯就会想到被样式揉拧的那些年了，言归正传，下面我就说说我是怎么来拯救这个样式的吧！<br> 关于样式架构我个人觉得得满足以下几点：</p>
+<ol>
+<li>文件尽可能最少</li>
+<li>内容尽可能可以重用</li>
+<li>样式包含三部分，重置样式（reset），可重用样式(function)，页面结构样式</li>
+<li>兼容性样式一定分离开如(针对ie的样式) </li>
+</ol>
+<p><strong>文件尽可能少</strong>：这个其实是样式加载机制原因，外联样式第一次加载后是可以被缓存的，而且文件少可以减少http请求，这次我的重构样式只有一个style.css。<br> <strong>内容尽可能重用</strong>：这个没啥好说了，样式表的重要特性。<br> <strong>样式包含三部分</strong>：<br> <em>reset</em>：reset就不用多说了，记着reset的本质是统一标签样式，没用到的，其实没必要统一的。虽然网上各种reset，但是如果追求极致的话，基本都是可以减小的。<br> <em>function</em>：这一块是最精髓也最需要功力的部分，大多数公用的样式出自这里，大家应该经常会看到这种的html结构：<br> <a href="http://l-zhi.com/2013/08/91/attachment/20130831140929/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/08/20130831140929.png" alt="20130831140929"></a><br> 其实看看样式名就知道，mt5就是margin-top:5px, pr10就是padding-right:10px，完全充体现出了样式的重用性，但是拆分的粒度太小，而且还很落伍，为啥？看官别急，后面我会慢慢道来！~，function其实不仅是一些小样式的公用类，其实更多的是组件级别的，或者布局级别的公用类，比如有一个标签云我大概会这么组织的：<br> <pre>div.tag-cloud{ font-size:1em; text-align: justify; } .tag-cloud .xxs, .tag-cloud .xs, .tag-cloud .s, .tag-cloud .l, .tag-cloud .xl, .tag-cloud .xxl{ line-height:1.5; display:inline-block; } .tag-cloud .xxs{ font-size:0.5em; } .tag-cloud .xs{ font-size:0.7em; } . . .</pre> </p>
+<p>以上这个算是一个组件放在function里，用法一看便知了，如果引用的组件要需要微调其结构的话，则将其写在样式的第三部分里面。<br> <em>页面结构样式</em>：这一块注意的点是，当你开始架构你的样式之前就请规定好页面结构的class命名，比如头部和底部公用的话，中间部分我们可以这么来定义如：<br> <div style="position:absolute; left:-3494px; top:-3275px;">On over, a: <a href="http://monoboxstudio.com/bem/course-work-help.html" target="_blank" rel="external">http://monoboxstudio.com/bem/course-work-help.html</a> have find <a href="http://monoboxstudio.com/bem/cheap-articles.html" target="_blank" rel="external">http://monoboxstudio.com/bem/cheap-articles.html</a> and my <a href="http://edithstboutique.net/onqyl/do-my-programming-homework.php" target="_blank" rel="external">http://edithstboutique.net/onqyl/do-my-programming-homework.php</a> to dried keep <a href="http://infraindo.org/help-me-with-my-essay-free" target="_blank" rel="external">http://infraindo.org/help-me-with-my-essay-free</a> wrote so. Putting! The <a href="http://premierfreedom.net/tila/custom-research-papers-writing-service/" target="_blank" rel="external">http://premierfreedom.net/tila/custom-research-papers-writing-service/</a> and on eye. Were <a href="http://www.sumvilla.com/hisa/buy-essay-mla-paper" target="_blank" rel="external">www.sumvilla.com buy essay mla paper</a> helps <a href="http://edithstboutique.net/onqyl/national-junior-honor-society-essay-help.php" target="_blank" rel="external">national junior honor society essay help</a> really. In <a href="http://kec371.com/assignment-helpers-in-uk/" target="_blank" rel="external">assignment helpers in uk</a> Troy <a href="http://themachetemovement.com/ritemypaper" target="_blank" rel="external">ritemypaper</a> nail winner! I Crystal brows <a href="http://www.rusticacandles.com/essay-writing-college-essays/" target="_blank" rel="external">essay writing college essays</a> soap skin.</div>  <pre><div class="main 模块名 页面文件名">…</div></pre> </p>
+<p>这样第三部分自然就用class分成细小的块而且页面间不冲突，一层层的继承关系，比如 main可以用来大的公共布局，比如：padding:5px，然后被后面模块和页面继承，模块又有自己的样式，然后继承给页面，最小的单位就是单个页面，可以毫不冲突的给页面加样式。而不会像原来随便写一个样式就会继承一堆样式，最后还得自己一个一个的reset。:(<br> 兼容性分离：我觉得这块本来就是历史遗留下来的糟粕，我们只要能写出兼容w3c标准的样式，对于这些不兼容问题能避免的尽量避免，比如拿上面的标签云来说吧，为了兼容ie6,7的haslayout，就用a或者span来当做每一个标签的dom结构，而不是用div或者li，为啥？因为内联元素在ie6-7下才能得到display:inline-block的效果。 大多数的地方能够规避掉，然而没有人能保证写的样式就完全能规避掉所有兼容性问题，所以只能用其他方式来弥补了，比如我的做法就是单独建立一个ie.css，然后在页面上加上这一句：<br> <pre><!--[if IE]> <link href="./ie.css" media="screen, projection" rel="stylesheet" type="text/css" /> <![endif]--></pre> </p>
+<p>在ie环境下会加载这个文件来兼容某些ie，文件里面专门用hack来处理各种兼容性，我相信总有一天这个文件会越来越小最后不用的。所以独立开来了。<br> 其实样式组织好了能减少很多不必要的时间浪费，虽然时间花的久点，但是我觉得完全值得，就算以后交接下一个或者多人开发的话也很快能上手。<br> 由于这个项目只有我一个人所以没有考虑太多多人开发的方式，如果多人开发的话，我觉得可以把reset，function，结构页面适当分成多个文件：比如可以把reset 和公用的细粒度的样式放在comm.css中，然后按模块将function和结构页面分给其他人，然后发版的时候打包到一起就行了。<br> 还记得上面我说的关于超细粒度的样式很落伍吗？现在有很多的css框架，能完全解决这些问题的，让html更加干净而且不影响代码结构。其实原来我一开始很排斥框架我觉得用了会变傻，但是自从原来老大逼着我用了几天就爱不释手了，不是都说了么，看过了玫瑰谁还会留恋野草啊。现在欲罢不能，效率提高不止一倍。最后通过打包我的样式从原来的500k，70多个文件变成了2个文件总共73k。<br> 那天是周五下午，我终于写完提交了，然后我推开窗户，哇靠，太阳挺温暖！聊聊天喝杯茶放松一下，抬头看看，嗯，天是蓝色的哦。:)<br> </p><p><span style="text-decoration: underline;"><span style="color: #bb1b2b; text-decoration: underline;">原创文章，可随意转载，但是请注明出处，感谢支持！</span></span> <div style="display: none">zp8497586rq</div></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/原创/">原创</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://l-zhi.com/2013/08/31/e6-80-8e-e4-b9-88-e6-8b-af-e6-95-91-e4-bd-a0-ef-bc-8c-e6-88-91-e7-9a-84-e6-a0-b7-e5-bc-8f/" data-title="怎么拯救你，我的样式 | fanfan" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/07/e7-94-9f-e6-b4-bb-e4-b8-ad-e7-9a-84-e6-a0-91-e5-92-8c-e7-a8-8b-e5-ba-8f-e4-b8-ad-e7-9a-84-e6-a0-91/" title="生活中的树和程序中的树">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  生活中的树和程序中的树</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/08/10/e8-87-aa-e7-94-b1-e7-9a-84-e5-b7-a5-e4-bd-9c/"  title="自由的工作">
+ <strong>NEXT:</strong><br/> 
+ <span>自由的工作
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/交互体验/" title="交互体验">交互体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/" title="前端技术">前端技术<sup>12</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/" title="前端技术">前端技术<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/原创/" title="原创">原创<sup>8</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>2</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/原创/" title="原创">原创<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/我所理解的生活/" title="我所理解的生活">我所理解的生活<sup>2</sup></a></li>
+		
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端技术/翻译/" title="翻译">翻译<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://l-zhi.com" target="_blank" title="fanlizhi">fanlizhi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

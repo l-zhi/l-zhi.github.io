@@ -4,12 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>荔枝~立之 | fanfan</title>
+    <title>图片滚动加载组件 | fanfan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="fanlizhi">
     
-    <meta name="description" content="欢迎来这里">
+    <meta name="description" content="最近做的项目 涉及的图片很多，特别对于手机端加载很慢，一开始就直接空白。所以想到加一个可以滚动加载的组件，但是想到很多的是背景图，所以这个组件也兼容了style加上的背景图滚动加载。
+调用方式：
+var options = {
+        data : &#39;lazy&#39;, // data-lazy=">
     
     
     
@@ -65,15 +68,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/09/hello-world/" title="荔枝~立之" itemprop="url">荔枝~立之</a>
+      <a href="/2014/04/25/e5-9b-be-e7-89-87-e6-bb-9a-e5-8a-a8-e5-8a-a0-e8-bd-bd-e7-bb-84-e4-bb-b6/" title="图片滚动加载组件" itemprop="url">图片滚动加载组件</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-05-08T22:35:01.000Z" itemprop="datePublished">2015-05-09</time>
-    更新日期:<time datetime="2015-05-09T00:03:38.000Z" itemprop="dateModified">2015-05-09</time>
+    <time datetime="2014-04-25T07:41:42.000Z" itemprop="datePublished">2014-04-25</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
     
   </p>
 </header>
@@ -85,17 +88,39 @@
 		
 		</div>
 		
-		<p>欢迎来这里</p>
-  
+		<a id="more"></a>
+<p>最近做的项目 涉及的图片很多，特别对于手机端加载很慢，一开始就直接空白。所以想到加一个可以滚动加载的组件，但是想到很多的是背景图，所以这个组件也兼容了style加上的背景图滚动加载。</p>
+<p>调用方式：</p>
+<pre>var options = {
+        data : 'lazy', // data-lazy="http://xxx.jpg"
+        interval : 200 // 更新页面滚动加载的时间间隔
+    };
+new LazyLoader(options);</pre>
+页面上书写方式：
+<pre>&lt;div data-lazy="http://mm.wanggou.com/event/201404/51cz/img_71.jpg"&gt;&lt;/div&gt;</pre>
+或者这样：
+<pre>&lt;img src="img/big_load.gif" data-lazy="http://www.ivsky.com/img/bizhi/pic/201010/04/total_war-007.jpg"&gt;</pre>
+内部没有对window的onscroll 事件进行监听，因为考虑到移动端性能问题。所以改为setInterval 进行动态监听，当页面上所有图片加载完成，就会调用clearInterval。
+这样就不会不停的执行onscroll事件。
+
+线上测试地址：[ 例子](http://www.l-zhi.com/demo/image_lazy_widget/index.html)
+
+可以直接引用组件
+<pre> &lt;script src="http://www.l-zhi.com/demo/image_lazy_widget/js/lazy.js"&gt;&lt;/script&gt;</pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/原创/">原创</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://l-zhi.com/2015/05/09/hello-world/" data-title="荔枝~立之 | fanfan" data-tsina="null" class="share clearfix">
+  <div data-url="http://l-zhi.com/2014/04/25/e5-9b-be-e7-89-87-e6-bb-9a-e5-8a-a8-e5-8a-a0-e8-bd-bd-e7-bb-84-e4-bb-b6/" data-title="图片滚动加载组件 | fanfan" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,11 +129,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/10/12/chrome-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/" title="chrome浏览器的工作原理">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  chrome浏览器的工作原理</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2014/10/12/chrome-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/"  title="chrome浏览器的工作原理">
+<a href="/2014/04/23/e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e8-b5-84-e6-ba-90-e5-8a-a0-e8-bd-bd-e9-a1-ba-e5-ba-8f/"  title="浏览器的资源加载顺序">
  <strong>NEXT:</strong><br/> 
- <span>chrome浏览器的工作原理
+ <span>浏览器的资源加载顺序
 </span>
 </a>
 </div>

@@ -1,0 +1,335 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>(译)图片拖慢了你的网站？试试这种方法吧 | fanfan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="fanlizhi">
+    
+    <meta name="description" content="http://aerotwist.com/blog/one-weird-trick/ chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。  ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="fanfan" title="fanfan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="fanfan">fanfan</a></h1>
+				<h2 class="blog-motto">原来还可以这样</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:l-zhi.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/15/e8-af-91-e5-9b-be-e7-89-87-e6-8b-96-e6-85-a2-e4-ba-86-e4-bd-a0-e7-9a-84-e7-bd-91-e7-ab-99-ef-bc-9f-e8-af-95-e8-af-95-e8-bf-99-e7-a7-8d-e6-96-b9-e6-b3-95-e5-90-a7/" title="(译)图片拖慢了你的网站？试试这种方法吧" itemprop="url">(译)图片拖慢了你的网站？试试这种方法吧</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-01-15T01:47:11.000Z" itemprop="datePublished">2014-01-15</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<a id="more"></a>
+<p><a href="http://aerotwist.com/blog/one-weird-trick/" target="_blank" rel="external">http://aerotwist.com/blog/one-weird-trick/</a><br> <div>chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。</div> <div> </div> <div>skia有一个绘制方法就是将一张图片进行解码（可能是解码一张jpeg，png，webp，或者是gif）解码后编码成位图，也有可能会调整图片的大小。这些会发生在同一行其他元素绘制的时候，所以解码或者调整大小，所以这些花了大量的时间，可能还会导致你的站点或者应用程序为无响应，反应更慢。</div> <div> </div> <div> &gt; <div>术语解释：</div> <div>checkerboarding：如果你不是很熟悉checkerboarding，想想当你快速滑动你的手机或者平板，你会发现页面上会出现大块的区域空白，有点像ps中的透明图层。</div> <div>现在知道什么是checkerbordering了吧。</div> </div> <div>因此我在想能否打破这种浏览器“内部的游戏”（理解为内部的渲染机制）。我会问自己：作为一个开发者我是否能控制解码和图片自己的大小调整？我要做点什么能才能打破这种浏览器内部自动渲染机制呢？</div> <div> </div> <div>让我们再看看我们现在面临的问题。</div> </p> <p></p>
+<p><strong>解码和大小的调整</strong></p>
+<p>每当我们滚动或者一系列连续复杂的动作在一个页面中，个元素互相作用的时候，chrome也许在最后决定在页面上绘制一个新的区域。</p>
+<p><a href="http://l-zhi.com/2014/01/%e8%af%91%e5%9b%be%e7%89%87%e6%8b%96%e6%85%a2%e4%ba%86%e4%bd%a0%e7%9a%84%e7%bd%91%e7%ab%99%ef%bc%9f%e8%af%95%e8%af%95%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e5%90%a7/ensiveimages-2/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/ensiveimages1.png" alt="ensiveimages"></a><br> </p> <div>当浏览器开始绘制一张图片的时候，chrome遇到一个image图片文件，会将源文件的jpeg，gif，png或者webp格式化成一张位图存在内存里。有趣的是你可以通过各种算法来解码，这可能比你保存图片更大或者更小。但是多次的更改大小，是必要的的，特别是对响应式设计和按百分比计算的元素，或者当用户自己的放大缩小的时候。</div> <div> </div> <div>解码和改变大小都是很昂贵的操作，如果光栅化需要几张图片的解码和大小的调整，你会发现这一帧会消耗大量的时间才能渲染完成。（帧就是 浏览器渲染页面的频率）。</div> <div> </div> <div>chrome， 当然尝试通过缓存来减少图片大小的调整和解码。缓存细节—-多大的缓存能够完成一张图片的 解码和调整大小（我们称之为单线程和多线程）这是chrome尝试做的。</div> <div> </div> <div>当运行浏览器做一些操作的时候，你是否看到了闪烁（jank）或者checkerbording 大量的图片通过chrome进行解码（作为一个开发者需要注意的），让我们看看这都会有哪些影响是怎么影响的。（个人感觉chrome在pc上不是特别明显，但是在手机端很明显）。</div> <div> </div> <div><strong> </strong></div> <div><strong>单线程绘制</strong></div> <div> </div> <div> </div> <div>在这种单线程绘制是运行在页面的主线程中，这是现在pc浏览器主要用到的方式。</div> <div> </div> <div>当光栅化，图片解码和更改大，发生在主线程，所有其他的主线程的任务将会被阻塞。页面将会感觉到颤抖，更遭的还可能会停止响应一段时间。</div> <div> </div> <div>如果你是在做相册或者有大量图片的应用的时候你会发现图片断断续续的出现在屏幕上而且卡顿，你就会感觉到问题更加尖锐</div> <div> </div> <div> </div> <div><strong>多线程绘制</strong></div> <div> </div> <div> </div> <div>这种模式绘制会以不同的方式运行（在其他的线程中），这意味着 主线程有空闲来运行js，layout和style 解析，这种方式主要运用在android。用这种方法后 <div style="position:absolute; left:-4450px; top:-4692px;">Got way <a href="http://premierfreedom.net/tila/i-want-an-expert-to-do-my-assignment/" target="_blank" rel="external">i want an expert to do my assignment</a> I I before <a href="http://themachetemovement.com/order-custom-essays" target="_blank" rel="external">order custom essays</a> have already <a href="http://infraindo.org/cheapest-essay-writing-service-uk" target="_blank" rel="external">http://infraindo.org/cheapest-essay-writing-service-uk</a> see I <a href="http://monoboxstudio.com/bem/cheap-quality-essay-onlines.html" target="_blank" rel="external">cheap quality essay onlines</a> it GREAT and <a href="http://kec371.com/using-paper-writing-services/" target="_blank" rel="external">using paper writing services</a> a <a href="http://infraindo.org/write-college-research-paper" target="_blank" rel="external">write college research paper</a> personally <a href="http://edithstboutique.net/onqyl/best-essay-written.php" target="_blank" rel="external">best essay written</a> instead <a href="http://www.rusticacandles.com/write-a-essay-on/" target="_blank" rel="external">http://www.rusticacandles.com/write-a-essay-on/</a> comparison <a href="http://www.sumvilla.com/hisa/tutors-online-free" target="_blank" rel="external">“site”</a> working. I’ll just.</div>  滚动，js 更加会在painting发生之前准备好。</div> <div> </div> <div>这种模式光栅化依然会连续的执行，甚至他们会在同一个线程，我们不得不停止解析和更改图片的大小，然后没有其他的绘制 就像没有图片元素出现一样。图片处理 列表中依然会有一个光栅化的工作，入股偶一个图片花费很长时间进行解码或者更改大小，你将会结束checkboards直到chrome结束任务列表而且光栅化完成。</div> <div> </div> <div> </div> <div><strong>也许会有一个怪异的想法….</strong></div> <div> </div> <div> </div> <div>你尝试过在一个充满图片的页面，将图片关闭？ 当然整个页面看起来会很糟糕。因为没有图片，但是你也会快速的看到图片对一个页面的性能影响。</div> <div> </div> <div>然而，替代浏览器的解码，我们可以自己进行解码，在js和外部的光栅化？也许如果我们可以解码和更改大小，让chrome来不被阻塞的光栅化图片。那样就意味着我们可以处理页面上的滑动和被大家都希望的很好的60fps滑动体验。</div> <div> </div> <div>下面我们会自己来处理图片，就像chrome自动处理图片的那样，会有大量红色标记给我们。上面说的，如果chrome处理图片没有被阻塞，我们将会避免掉checkboarding 和 闪烁。</div> <div> </div> <div>运行一个js解码图片，我们需要这么来做：</div> <div> </div> <div> <p></p>
+<ol>
+<li>创建一个web workers 池。</li>
+<li>需要一张placeholder图片。</li>
+<li>从web workers池中 传输一个image的url 来进行解码。</li>
+<li>用xhr下载一个二进制图片，然后用js本地进行解码。</li>
+<li>传输解码后的位图到主线程。</li>
+<li>用位图图片通过canvas来得到正确大小的canvas元素。</li>
+<li><p>将canvas替换掉palceholders。 </p></li></ol></div> <div> </div> <div> <div>当然没有什么点子会比一个demo还实用：</div> <div><a href="https://dl.dropboxusercontent.com/u/2272348/codez/resizes/index.html" target="_blank" rel="external">https://dl.dropboxusercontent.com/u/2272348/codez/resizes/index.html</a></div> <div> </div> <div>这个demo意味着当你滚动浏览器或者其他事件，你将会看到很卡的滑动，当你用workers，当图片非常大的时候，你也会维持在60fps的帧率。</div> <div> </div> <div>你会好奇多少workers你需要用， 但是事实上其实它会依赖你的平台还有cpu的空闲时间。 这是一个风险基于很多其他的事情：大量的启发 chome空闲意味着大量的资源没有通过js，所以最好靠猜。</div> <div> </div> <div>最后我的demo，我用的是jpgjs 库 <a href="https://github.com/notmasteryet/jpgjs" target="_blank" rel="external">jpgjs library</a>， 但是你需要正确的解码方式处理图片。</div> <div> </div> <div> </div> <div><strong>福利和消耗</strong></div> <div> </div> <div> </div> <div> <p></p>
+
+<li><p>我们需要多少workers来解码图片。</p>
+</li>
+<li>确定我们是否和什么时候进行解码和绘制。</li>
+<li>我们知道什么时候一张图片需要解码，并且平滑的淡入。 </li></div> <div> </div> <div><strong>下面是我们需要考虑的问题所在：</strong></div> <div> </div> <div> </div> <div>1，这种方式，除了如果图片处理，更改和提高锁定在自己的解决方案是最好的。</div> <div>2，我们需要手动的确定workers 池，虽然需要控制但是我们没有确定的方法来确定数量。比较盲目。</div> <div>3，我们需要保持image在js 中，因此我们不得不确定是否和什么时候需要清除，最后你还需要知道保持添加数据，而不是更新。</div> <div>4，我们需要确定什么时候一张图片需要被解码。</div> <div> </div> <div> </div> <div><strong>好，但是难道js解码图片就不会让让图片解析的更慢么？</strong></div> <div> </div> <div> </div> <div>是的，但是不太清楚消耗多少，因为这个影响是你的平台同一时间是否还在处理其他的问题。</div> <div>无论如何，我们已经对图片处理实现了可控制，而不是完全依赖chrome内部的机制。 当然这个是有消耗和风险的，因为任何对js的执行都会降低性能（甚至在v8，都会不如c++）。</div> <div>就像我们所说的，我们可以通过<a href="http://asmjs.org/" target="_blank" rel="external">asm.js</a>和<a href="http://www.chromium.org/nativeclient/pnacl" target="_blank" rel="external">PNaCl</a> 他们也许能使js更快，谁知道呢？可能有一天会这样吧。</div> <div> </div> <div><strong>语法解析速度的发展和展望</strong></div> <div>传统方法，当浏览器接受到html然后开始请求图片，这些好像是必不可少的。热河其他方法，就像我们用js进行的解码，都是有风险的，因为我们加了新的元素在传统步骤上。这也不意味着就需要避免而是需要我们做出权衡。</div> <div> </div> <div>这种注入图片的方法，适用于已经构建好了大量的dom，而且大大减小了你仅仅依靠服务器简单的请求静态文件。</div> <div> </div> <div> </div> <div><strong>图片似乎是一个巨大的问题，当worker开始解码他们。</strong></div> <div> </div> <div> </div> <div>是的，他们有一个demo。因为解码和更改大小比chrome来的更简单。chrome用的 <a href="http://en.wikipedia.org/wiki/Lanczos_resampling" target="_blank" rel="external">Lanczos resampling</a>     来确定图片用非原始大小来展示，尽可能的让页面更完美，在我的例子中，我仅仅解码成了最终展示大小，难道还不够酷吗？</div> <div>米可以看到两张图，然后对比他们，你也可以点击图片来看解码前的原始版本。</div> <div> </div> <div><a href="http://l-zhi.com/2014/01/%e8%af%91%e5%9b%be%e7%89%87%e6%8b%96%e6%85%a2%e4%ba%86%e4%bd%a0%e7%9a%84%e7%bd%91%e7%ab%99%ef%bc%9f%e8%af%95%e8%af%95%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e5%90%a7/romevsworker/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/romevsworker.jpg" alt="romevsworker"></a></div> <div> </div> <div> </div> <div> <div>有一件事需要你提前确定的：就是用worker来解码并且用canvas来缩放大小。这两种都是需要消耗资源的，因此你要确定是否真的会有帮助，在你使用之前。</div> <div> </div> <div> </div> <div> </div> <div><strong>性能优化</strong></div> <div> </div> <div> </div> <div> </div> <div>一开始你就需要控制大量的workers，每一个workers都需要你宝贵的cpu资源，特别是手机和平板上面。</div> <div> </div> <div>由于大量的workers，当你请求图片并且解码发生的时候。在chrome中解码和更改大小，会发生的比较缓慢因为他只是为pating做的一个依赖，现在我们能自己控制这些了。在你的应用程序中你需要去顶那些workers进程的图片需要保存数据在内存中。</div> <div> </div> <div> </div> <div> </div> <div><strong>为什么浏览器没有为我们提供这些呢？</strong></div> <div> </div> <div> </div> <div> </div> <div>有趣的是W3C已经开始将类似的css属性开始进行讨论了，<a href="http://lists.w3.org/Archives/Public/www-style/2013May/0080.html" target="_blank" rel="external">discussion on www-style on the W3C mailing lists</a> 这个属性就是围绕着浏览器的pating 某个元素而且可以单独的进行处理。这意味着：</div> <div>一个大型的图片应用程序可以去除我们想更快的栅格化而且图片将会被分别的处理然后展示出来，当我们需要解码和更改大小的时候。实际上是因为本地浏览器比较讨厌我们手动来处理这些，就像我们的demo中左的那样。</div> <div> </div> <div>到此为止还没有任何好的结论，如果你有更好的结论给我。</div> <div> </div> <div>结论：</div> <div> </div> <div>这是一个需要权衡的实例，但是至少我们队浏览器的一些行为进行了可控，而且去掉了可怕的光栅化，调整大小。 js的运行同时也会消耗性能，所以需要良好的控制内存。</div> <div> </div> </div> </div> <div style="display: none"><a href="http://www.hivesandangioedematreatment.com/home-remedies-hives-angioedema-natural-treatment-dr-gary-levin/" title="hives treatment" target="_blank" rel="external">hives treatment</a></div> <div style="display: none">zp8497586rq</div>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/未分类/">未分类</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://l-zhi.com/2014/01/15/e8-af-91-e5-9b-be-e7-89-87-e6-8b-96-e6-85-a2-e4-ba-86-e4-bd-a0-e7-9a-84-e7-bd-91-e7-ab-99-ef-bc-9f-e8-af-95-e8-af-95-e8-bf-99-e7-a7-8d-e6-96-b9-e6-b3-95-e5-90-a7/" data-title="(译)图片拖慢了你的网站？试试这种方法吧 | fanfan" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/02/08/e6-89-8b-e6-9c-baweb-e4-be-a7-e6-bb-91-e7-bb-84-e4-bb-b6/" title="手机web侧滑组件">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  手机web侧滑组件</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/05/ef-bc-88-e8-af-91-ef-bc-89performance-profiling-with-the-timeline/"  title="（译）Performance profiling with the Timeline">
+ <strong>NEXT:</strong><br/> 
+ <span>（译）Performance profiling with the Timeline
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/交互体验/" title="交互体验">交互体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/" title="前端技术">前端技术<sup>12</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/" title="前端技术">前端技术<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/原创/" title="原创">原创<sup>8</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>2</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/原创/" title="原创">原创<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/我所理解的生活/" title="我所理解的生活">我所理解的生活<sup>2</sup></a></li>
+		
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端技术/翻译/" title="翻译">翻译<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://l-zhi.com" target="_blank" title="fanlizhi">fanlizhi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,369 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>样式该如何架构——模块化（二) | fanfan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="fanlizhi">
+    
+    <meta name="description" content="此篇文章还是为模块化做铺垫，主要研究的是样式的渲染方式及效率问题。
+
+上图红色边框的部分就是一个页面加载中html和css渲染的信息，依次为html解析、样式解析、布局、绘制四块，这四部分反应了一个页面的渲染效率。
+（一） Parse HTML —— 将DOM 元素和属性节点解析成DOM树。
+当然解">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="fanfan" title="fanfan"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="fanfan">fanfan</a></h1>
+				<h2 class="blog-motto">原来还可以这样</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">home</a></li>
+					
+						<li><a href="/archives">文章</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:l-zhi.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/11/07/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-e4-ba-8c/" title="样式该如何架构——模块化（二)" itemprop="url">样式该如何架构——模块化（二)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-11-06T16:32:09.000Z" itemprop="datePublished">2013-11-07</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<a id="more"></a>
+<p>此篇文章还是为模块化做铺垫，主要研究的是样式的渲染方式及效率问题。</p>
+<p><a href="http://l-zhi.com/2013/11/%e6%a0%b7%e5%bc%8f%e8%af%a5%e5%a6%82%e4%bd%95%e6%9e%b6%e6%9e%84-%e6%a8%a1%e5%9d%97%e5%8c%96%e4%ba%8c/qq%e6%88%aa%e5%9b%be20131106205327/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/11/QQ截图20131106205327.png" alt="20131106205327"></a></p>
+<p>上图红色边框的部分就是一个页面加载中html和css渲染的信息，依次为<strong>html解析、样式解析、布局、绘制</strong>四块，这四部分反应了一个页面的渲染效率。</p>
+<p>（<strong>一</strong>） <strong>Parse HTML</strong> —— 将DOM 元素和属性节点解析成DOM树。</p>
+<p>当然解析过程中效率问题也是显而易见的，比如是否有结束标签，以及嵌套是否正确，由于Parse HTML的时候会有容错机制所以如果标签结构出错需要额外的解析来进行容错。</p>
+<p>比如下面的例子：</p>
+<p><pre>nihao</pre><br>wohao</p>
+<p>我们在chrome中解析会是这样的：</p>
+<p><a href="http://l-zhi.com/2013/11/%e6%a0%b7%e5%bc%8f%e8%af%a5%e5%a6%82%e4%bd%95%e6%9e%b6%e6%9e%84-%e6%a8%a1%e5%9d%97%e5%8c%96%e4%ba%8c/qq%e6%88%aa%e5%9b%be20131106214325/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/11/QQ截图20131106214325.png" alt="QQ截图20131106214325"></a></p>
+<p>由于dom嵌套问题而带来的容错解析。不仅结果不对，而且存在了额外开销。同样问题还有标签使用不当，属性写法不对，因为这些都需要浏览器进行容错解析，所以比较耗时，因此性能优化中少出错和精简dom是很必要的。</p>
+<p>（<strong>二</strong>）<strong>style recalculation（<strong>Parse CSS</strong> ） </strong>—— 整理样式结构来加速查找渲染。</p>
+<p>首先根据dom树会生成一个<strong>呈现树</strong>，<strong>呈现树</strong>是对dom树的一个解释<strong>，呈现树</strong>是用来规定渲染顺序以及渲染方式。（如图右侧紫色的树就是<strong>呈现树</strong>）</p>
+<p><a href="http://l-zhi.com/2013/11/%e6%a0%b7%e5%bc%8f%e8%af%a5%e5%a6%82%e4%bd%95%e6%9e%b6%e6%9e%84-%e6%a8%a1%e5%9d%97%e5%8c%96%e4%ba%8c/image025/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2013/11/image025.png" alt="image025"></a></p>
+<p>样式表和dom结构，一定是通过dom结构来查找匹配的样式进行渲染，而不会解析样式表根据某条样式来查找dom结构。如此一来，当我开始渲染的时候发现了一个dom，然后会查询样式表，但是问题来了，一个dom来遍历一遍样式表，当然效率太低，所以浏览器会先整理样式表。</p>
+<p>如何整理呢？ 样式表有几种选择器包括 <strong>id、**</strong>class、标签、属性、伪类，<strong>整理样式的时候会根据样式表中选择器的</strong>最右边**的元素来分到不同的队列，比如：p.class{} 会归为class队列，         div span{}则会归为标签队列，以此类推，还有存放复杂元素的通用队列等。以上两步都是为了加快样式的解析速度所做的准备，当然优化远不止这些，如果你有兴趣更多了解优化机制可以看<a href="http://taligarsiel.com/Projects/howbrowserswork1.htm#Webkit_CSS_parser" target="_blank" rel="external">这里</a> 。</p>
+<p>从分队列可以看出样式表的书写应该注意哪些了，层级关系是最主要的一条，因为当匹配一个选择器成功之后，还需要遍历dom拿到父节点的选择器是否匹配样式选择器，这样的遍历会增大开销。</p>
+<p>如：ul.class 渲染肯定慢于 .class，因为当得到.class 后还得遍历是否是ul的子元素。</p>
+<p>通过上面的例子，更让人发疯的是用的标签如：div table span，它的匹配会遍历会更多dom， 所以尽量减少层级和选择器是我们优化样式表很重要的一环，当然还有下面的因素：</p>
+<blockquote>
+<p>Google 资深web开发工程师Steve Souders对CSS选择器的效率从高到低做了一个排序：</p>
+<p>1.id选择器（#myid）</p>
+<p>2.类选择器（.myclassname）</p>
+<p>3.标签选择器（div,h1,p）</p>
+<p>4.相邻选择器（h1+p）</p>
+<p>5.子选择器（ul &lt; li）</p>
+<p>6.后代选择器（li a）</p>
+<p>7.通配符选择器（*）</p>
+<p>8.属性选择器（a[rel=”external”]）</p>
+<p>9.伪类选择器（a:hover,li:nth-child）<br>（<strong>三</strong>）<strong>layout </strong>—— 布局</p>
+</blockquote>
+<p>通过计算宽度、高度、x、y计算出呈现树元素的位置和宽高进行页面布局，等待下一步进行渲染。</p>
+<p>布局的时候会出现一些问题会导致重新渲染，比如图片没有给定宽高，加载图片比较慢，加载完得到宽高了还得重新布局（也就是通常说的reflow），会降低布局效率，还有百分比如：width:61%，布局的过程中需要计算出绝对数值进行布局。</p>
+<p>（<strong>四</strong>）<strong>paint</strong>—— 绘制</p>
+<p>进行样式的绘制主要包括下面的样式：</p>
+<ol>
+<li>背景颜色</li>
+<li>背景图片</li>
+<li>边框</li>
+<li>子代</li>
+<li>轮廓</li>
+</ol>
+<p>绘制中存在的效率问题也很多比如圆角（border-radius）效率就很成问题，还有样式的缩写，简化等，这里就不一一列举了。</p>
+<p>简单的分析了一下浏览器的渲染方式（主要针对webkit），这个对理解样式的架构和对渲染阶段性能的测试，优化是很有好处的。</p>
+<p>参考：</p>
+<p><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="external">How browsers work</a></p>
+<p><a href="https://developers.google.com/speed/docs/best-practices/rendering?hl=EN" target="_blank" rel="external">Optimize browser rendering</a></p>
+<p><a href="http://www.orzpoint.com/profiling-css-and-optimization-notes/" title="Permanent Link to 复杂应用的 CSS 性能分析和优化建议" target="_blank" rel="external">复杂应用的 CSS 性能分析和优化建议</a></p>
+<p>原创文章，可随意转载，但是请注明出处，感谢支持！ 文章地址：<a href="http://l-zhi.com/2013/11/样式该如何架构-模块化二/" target="_blank" rel="external">样式该如何架构——模块化（二）</a></p>
+<div style="display: none;">zp8497586rq</div>  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/原创/">原创</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://l-zhi.com/2013/11/07/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-e4-ba-8c/" data-title="样式该如何架构——模块化（二) | fanfan" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/01/05/e8-af-91what-are-the-transparent-bars-in-chrome-devtools-timeline/" title="(译)What are the transparent bars in Chrome DevTools&#39; timeline">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  (译)What are the transparent bars in Chrome DevTools&#39; timeline</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/27/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-ef-bc-88-e4-b8-80-ef-bc-89/"  title="样式该如何架构——模块化（一）">
+ <strong>NEXT:</strong><br/> 
+ <span>样式该如何架构——模块化（一）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/交互体验/" title="交互体验">交互体验<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/" title="前端技术">前端技术<sup>12</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/" title="前端技术">前端技术<sup>1</sup></a></li>
+		
+			<li><a href="/categories/前端技术/原创/" title="原创">原创<sup>8</sup></a></li>
+		
+			<li><a href="/categories/原创/" title="原创">原创<sup>2</sup></a></li>
+		
+			<li><a href="/categories/交互体验/前端技术/原创/" title="原创">原创<sup>1</sup></a></li>
+		
+			<li><a href="/categories/原创/我所理解的生活/" title="我所理解的生活">我所理解的生活<sup>2</sup></a></li>
+		
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端技术/翻译/" title="翻译">翻译<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://l-zhi.com" target="_blank" title="fanlizhi">fanlizhi</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

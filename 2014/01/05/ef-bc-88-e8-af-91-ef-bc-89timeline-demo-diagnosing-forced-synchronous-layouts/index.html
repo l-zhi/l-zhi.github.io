@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>荔枝~立之 | fanfan</title>
+    <title>（译）Timeline demo: Diagnosing forced synchronous layouts | fanfan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="fanlizhi">
     
-    <meta name="description" content="欢迎来这里">
+    <meta name="description" content="这篇文章翻译自https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/
+best essay editing service他是一个很小的例子，但是是通过timeline从头到尾测试发现解决一个性">
     
     
     
@@ -65,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/09/hello-world/" title="荔枝~立之" itemprop="url">荔枝~立之</a>
+      <a href="/2014/01/05/ef-bc-88-e8-af-91-ef-bc-89timeline-demo-diagnosing-forced-synchronous-layouts/" title="（译）Timeline demo: Diagnosing forced synchronous layouts" itemprop="url">（译）Timeline demo: Diagnosing forced synchronous layouts</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-05-08T22:35:01.000Z" itemprop="datePublished">2015-05-09</time>
-    更新日期:<time datetime="2015-05-09T00:03:38.000Z" itemprop="dateModified">2015-05-09</time>
+    <time datetime="2014-01-05T11:34:38.000Z" itemprop="datePublished">2014-01-05</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
     
   </p>
 </header>
@@ -85,17 +86,23 @@
 		
 		</div>
 		
-		<p>欢迎来这里</p>
-  
+		<a id="more"></a>
+<p>这篇文章翻译自<a href="https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/" target="_blank" rel="external">https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/</a></p>
+<div style="display: none"><a href="http://bestessaywritersonline.com/" target="_blank" rel="external">best essay editing service</a></div><br>他是一个很小的例子，但是是通过timeline从头到尾测试发现解决一个性能问题。<br><br>下面是翻译文章：<br><br>有一个例子是教你 如何破由于强制同步布局而导致的性能瓶颈，实例应用程序用<code>[requestAnimationFrame()](http://docs.webplatform.org/wiki/apis/timing/methods/requestAnimationFrame)的基本帧画法，通过几张图片，用动画的形式来回运动，但是我们能很明显的看到掉帧的情况。我们可以用timeline来诊断到底发生了什么。</code><br><br>## 生成一条记录<br><br>首先你将要生成一条这段动画的timeline记录。<br><br>1.  点击开始动画<br>2.  打开timeline面板并且切换到帧视图<br>3.  点击按钮变红开始记录<br>4.  跑了大概一秒（10-12帧）的时候停止记录，然后停止动画<br><br>## 分析<br><br>看第一帧，很清楚的看到已经超过300ms，滑到帧上你可以看到这帧的详细信息。<br><br><a href="http://l-zhi.com/2014/01/%ef%bc%88%e8%af%91%ef%bc%89timeline-demo-diagnosing-forced-synchronous-layouts/frame-rate/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/frame-rate.png" alt="frame-rate"></a><br><br>定位到这个帧动画，会发现有一个黄色的警告，表明被强迫同步布局，说明你的子记录中的代码会有问题，影响到了整条记录。<br><br><a href="http://l-zhi.com/2014/01/%ef%bc%88%e8%af%91%ef%bc%89timeline-demo-diagnosing-forced-synchronous-layouts/recording-1/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/recording-1.png" alt="recording-1"></a><br><br>子记录是一条很长的重绘计算样式和绘制记录，每一个布局记录的结果都是样式计算的结果，每一次requestAnimationFrame()都会要求得到页面上所有图片的offsetTop的值，然而你的鼠标滑过每一条布局记录，并且点击source.js的超链接，然后回调到对应的代码。<br><br><a href="http://l-zhi.com/2014/01/%ef%bc%88%e8%af%91%ef%bc%89timeline-demo-diagnosing-forced-synchronous-layouts/arning-hover/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/arning-hover.png" alt="arning-hover"></a><br><br>资源面板打开第43行的update方法就是回调，回调会计算出图片的left和offsetTop的值，并且立马确定真确的值来计算。<br><pre>// Animation loop<br>function update(timestamp) {<br>    for(var m = 0; m &lt; movers.length; m++) {<br>        movers[m].style.left = ((Math.sin(movers[m].offsetTop + timestamp/1000)+1) <em> 500) + &#039;px&#039;;<br>        }<br>    raf = window.requestAnimationFrame(update);<br>};</em></pre><br>他会让每一帧变慢，现在我们来修复这个bug<br><br>现在我们可以把问题代码进行修改，并且直接在timeline中测试，是否修复了这个问题。<br><br><pre>movers[m].style.left = ((Math.sin(m + timestamp/1000)+1)  500) + &#039;px&#039;;</pre><br>这个版本是用变量数组来保存left的值。<br><br>1.  Cmd-S or Ctrl-保存修改<br>验证结果，动画明显更快更流畅了。<br><br><a href="http://l-zhi.com/2014/01/%ef%bc%88%e8%af%91%ef%bc%89timeline-demo-diagnosing-forced-synchronous-layouts/fixed/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/fixed.png" alt="fixed"></a> <div style="display: none">zp8497586rq</div>  
 	</div>
 		<footer class="article-footer clearfix">
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/翻译/">翻译</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://l-zhi.com/2015/05/09/hello-world/" data-title="荔枝~立之 | fanfan" data-tsina="null" class="share clearfix">
+  <div data-url="http://l-zhi.com/2014/01/05/ef-bc-88-e8-af-91-ef-bc-89timeline-demo-diagnosing-forced-synchronous-layouts/" data-title="（译）Timeline demo: Diagnosing forced synchronous layouts | fanfan" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,11 +111,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/01/05/ef-bc-88-e8-af-91-ef-bc-89performance-profiling-with-the-timeline/" title="（译）Performance profiling with the Timeline">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  （译）Performance profiling with the Timeline</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2014/10/12/chrome-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/"  title="chrome浏览器的工作原理">
+<a href="/2014/01/05/e8-af-91what-are-the-transparent-bars-in-chrome-devtools-timeline/"  title="(译)What are the transparent bars in Chrome DevTools&#39; timeline">
  <strong>NEXT:</strong><br/> 
- <span>chrome浏览器的工作原理
+ <span>(译)What are the transparent bars in Chrome DevTools&#39; timeline
 </span>
 </a>
 </div>

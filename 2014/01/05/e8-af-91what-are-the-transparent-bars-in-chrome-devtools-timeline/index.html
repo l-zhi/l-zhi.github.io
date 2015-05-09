@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>荔枝~立之 | fanfan</title>
+    <title>(译)What are the transparent bars in Chrome DevTools&#39; timeline | fanfan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="fanlizhi">
     
-    <meta name="description" content="欢迎来这里">
+    <meta name="description" content="argumentative research essay">
     
     
     
@@ -65,15 +65,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/09/hello-world/" title="荔枝~立之" itemprop="url">荔枝~立之</a>
+      <a href="/2014/01/05/e8-af-91what-are-the-transparent-bars-in-chrome-devtools-timeline/" title="(译)What are the transparent bars in Chrome DevTools&#39; timeline" itemprop="url">(译)What are the transparent bars in Chrome DevTools&#39; timeline</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://l-zhi.com" title="fanlizhi">fanlizhi</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-05-08T22:35:01.000Z" itemprop="datePublished">2015-05-09</time>
-    更新日期:<time datetime="2015-05-09T00:03:38.000Z" itemprop="dateModified">2015-05-09</time>
+    <time datetime="2014-01-05T11:10:06.000Z" itemprop="datePublished">2014-01-05</time>
+    更新日期:<time datetime="2015-05-09T04:38:20.000Z" itemprop="dateModified">2015-05-09</time>
     
   </p>
 </header>
@@ -85,17 +85,21 @@
 		
 		</div>
 		
-		<p>欢迎来这里</p>
-  
+		<div><img src="file:///C:/Users/lizhi/AppData/Local/YNote/Data/a569171010%40163.com/d949db95681f4ff49d1df2808bc183f1/3421376_3262.png" alt=""><img src="file:///C:/Users/lizhi/AppData/Local/YNote/Data/a569171010%40163.com/dd4556f31d0945fbb7a98adb2683336a/3420331_4227.png" alt=""></div><br><div style="display: none"><a href="http://argumentativepapersessay.com/" target="_blank" rel="external">argumentative research essay</a></div><div><a id="more"></a></div><br><div> 这篇文章翻译自：Nat Duca 的一篇小文章 <a href="https://plus.google.com/+NatDuca/posts/BvMgvdnBvaQ?e=-RedirectToSandbox" target="_blank" rel="external">https://plus.google.com/+NatDuca/posts/BvMgvdnBvaQ?e=-RedirectToSandbox</a></div><br><div></div><br><div>首先给出两张原文没有的图，来加深理解CPU bound 和GPU buoud 。</div><br><div></div><br><div>（左）图形密集型（GPU bound）和 （右） 计算密集型（CPU bound）</div><br><div><a href="http://l-zhi.com/2014/01/%e8%af%91what-are-the-transparent-bars-in-chrome-devtools-timeline/attachment/20140105174438/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/20140105174438.png" alt="20140105174438"></a></div><br><div></div><br><div>下面是原文翻译：</div><br><div><br><div>最近经常有人问，“chrome开发者工具中timeline中的透明区域是什么意思？”这种空心帧其实归根结底就两个原因，要么你的js占用了主线没有空在timeline上渲染，要么就是GPU很忙遇到了性能瓶颈。换句话说就是你的程序要么在忙着处理js要么就是忙着处理图形。不同之处在于，你需要在开发者工具的设置中打开timeline（查看cpu的状态），然后观察记录中的浅灰色条，这些就是线程繁忙的时候渲染出来的。如果线程空闲的时候则没有灰色区域，就比如这个截图，就是GPU比较忙的时候，（即灰色cpu，空心Gpu）<br><br></div><br><div></div><br><div>GPU bound有两个影响因素：</div><br><div>1，带有 ‘-webkit-’前缀的渲染， preserves3D 属性的元素，它们就像饿鬼一样消耗GPU。</div><br><div>2，带有很多超大的层。消耗GPU的因素不仅仅是层的数量还有层的区域大小。PS：大多数电脑显示器上的像素，被设计者们设计成原始像素的4倍，举个简单的例子：对于一个两年前的macBook air 的显示器LCD的尺寸，接到<span style="font-size: 1rem; line-height: 1;">一个30寸的显示器上，将会出现不止一个层，这样就会触及到GPU bound。</span><br><br></div><br><div>为什么会出现这种问题？ 如果层的大小等于window的大小的时候，我们把每一个像素渲染到屏幕上,我们得到了宽高都是100%的div 并设置了 -webkit-transform: translateZ(0)来触发GPU层，一旦每个像素都渲染到屏幕上，把层上的所有区域加起来，如果超过4倍区域在你的屏幕上，也许你就不会那么轻松的渲染上去了（因为你的GPU已经超出负荷了）</div><br><div></div><br><div>一个很好的测试gpu的边界就是缩小你的屏幕尺寸为原来的1/2，如果依然很慢，然后事情就发生了， 如果变快了，说明就是GPU边界问题了。</div><br><div><a href="http://l-zhi.com/2014/01/%e8%af%91what-are-the-transparent-bars-in-chrome-devtools-timeline/screen-shot-2013-04-04-at-2-16-40-pm-1/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/Screen-Shot-2013-04-04-at-2.16.40-PM-1.png" alt="Screen Shot 2013-04-04 at 2.16.40 PM 1"></a> <a href="http://l-zhi.com/2014/01/%e8%af%91what-are-the-transparent-bars-in-chrome-devtools-timeline/screen-shot-2013-04-04-at-2-17-23-pm/" target="_blank" rel="external"><img src="http://l-zhi.com/wp-content/uploads/2014/01/Screen-Shot-2013-04-04-at-2.17.23-PM.png" alt="Screen Shot 2013-04-04 at 2.17.23 PM"></a></div><br></div> <div style="display: none">zp8497586rq</div>  
 	</div>
 		<footer class="article-footer clearfix">
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端技术/">前端技术</a>►<a class="article-category-link" href="/categories/前端技术/翻译/">翻译</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://l-zhi.com/2015/05/09/hello-world/" data-title="荔枝~立之 | fanfan" data-tsina="null" class="share clearfix">
+  <div data-url="http://l-zhi.com/2014/01/05/e8-af-91what-are-the-transparent-bars-in-chrome-devtools-timeline/" data-title="(译)What are the transparent bars in Chrome DevTools&#39; timeline | fanfan" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,11 +108,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/01/05/ef-bc-88-e8-af-91-ef-bc-89timeline-demo-diagnosing-forced-synchronous-layouts/" title="（译）Timeline demo: Diagnosing forced synchronous layouts">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  （译）Timeline demo: Diagnosing forced synchronous layouts</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2014/10/12/chrome-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/"  title="chrome浏览器的工作原理">
+<a href="/2013/11/07/e6-a0-b7-e5-bc-8f-e8-af-a5-e5-a6-82-e4-bd-95-e6-9e-b6-e6-9e-84-e6-a8-a1-e5-9d-97-e5-8c-96-e4-ba-8c/"  title="样式该如何架构——模块化（二)">
  <strong>NEXT:</strong><br/> 
- <span>chrome浏览器的工作原理
+ <span>样式该如何架构——模块化（二)
 </span>
 </a>
 </div>
