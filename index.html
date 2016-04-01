@@ -78,7 +78,7 @@
     motion: true,
     duoshuo: {
       userId: 0,
-      author: 'Author'
+      author: '博主'
     }
   };
 </script>
@@ -86,7 +86,7 @@
   <title> 立之 - 荔枝 </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
 
@@ -143,7 +143,7 @@
             
               <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
-            Startseite
+            首页
           </a>
         </li>
       
@@ -199,7 +199,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2016-03-24T19:31:53+08:00" content="2016-03-24">
               2016-03-24
             </time>
@@ -238,6 +238,112 @@
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/24/koa-spdy-demo/" itemprop="url">
+                  初探HTTP2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-24T19:31:53+08:00" content="2016-03-24">
+              2016-03-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>HTTP2的理论网上已经太多了如果你还想了解可以看<a href="http://aotu.io/notes/2016/03/17/http2-char/" target="_blank" rel="external">这里</a></p>
+<p>HTTP1.1:</p>
+<ul>
+<li>请求延迟，等待自我调节</li>
+<li>每一个源最大只支持6个请求</li>
+</ul>
+<p>HTTP/2:</p>
+<ul>
+<li>二进制分帧层，把通讯的基本单位缩小为帧，双向交换消息，提高速度</li>
+<li>允许一个连接发起多重的请求</li>
+<li>支持首部压缩</li>
+<li>服务器推送（Server Push）还可以缓存推送资源</li>
+</ul>
+<p>看到了如此之多的好处，不得不手痒的尝试了一下，结果真的让人吃惊，有兴趣的可以去运行下 <strong><a href="https://github.com/l-zhi/koa-spdy-demo" target="_blank" rel="external">DEMO</a><br></strong><br>至于DEMO为什么是SPDY而不是HTTP/2 来实现的？</p>
+<blockquote>
+<p>SPDY是HTTP/2的上一代，总体性能相同。因为它已经出现好几年了，所以有很多浏览器支持SPDY却不支持HTTP/2。不过，在本文写作时，这个支持上的差距正在缩小。具体来说，有三分之二的浏览器支持HTTP/2，而有五分之四的浏览器支持SPDY.</p>
+</blockquote>
+<p>HTTP/2 的不成熟以及其实HTTP/2是基于SPDY的，所以接口和推送基本是一样的，差别不大，现在市面上更多的都是用的SPDY来实现HTTP/2的。</p>
 
           
         
@@ -303,8 +409,8 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">1</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
@@ -353,11 +459,11 @@
 </div>
 
 <!--注释<div class="powered-by">
-  鄂ICP备13011210号-1
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
 </div>-->
 
 <!--注释<div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Muse
   </a>
