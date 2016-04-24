@@ -1,0 +1,789 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="模块化程序设计多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="样式该如何架构——模块化（一）">
+<meta property="og:url" content="http://l-zhi.com/2013/10/27/css-thinking03/index.html">
+<meta property="og:site_name" content="荔枝说 · l-zhi">
+<meta property="og:description" content="模块化程序设计多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。">
+<meta property="og:image" content="http://l-zhi.com/img/2013/10/20131014223909.png">
+<meta property="og:updated_time" content="2016-04-24T08:54:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="样式该如何架构——模块化（一）">
+<meta name="twitter:description" content="模块化程序设计多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。">
+<meta name="twitter:image" content="http://l-zhi.com/img/2013/10/20131014223909.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 样式该如何架构——模块化（一） | 荔枝说 · l-zhi </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?32e9bab226b5988b659d0c7483b844c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">荔枝说 · l-zhi</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">l-zhi</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                样式该如何架构——模块化（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-10-27T21:05:33+08:00" content="2013-10-27">
+              2013-10-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/10/27/css-thinking03/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/10/27/css-thinking03/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>模块化程序设计</strong>多是基于程序语言的，并通过各种条件控制，继承，抽象等特性来实现，而对于css而言是没有这种复杂逻辑判断的，所以样式模块化不能简单的套用模块化程序设计的思路。</p>
+<a id="more"></a>
+<p>模块化程序设计定义复杂抽象，可以问度娘，但是估计问了也看不明白。这里我们直接用我们工业设计中的模块化设计的定义来理解模块化和模块化的好处。</p>
+<blockquote>
+<p>模块化设计是指在对一定范围内的不同功能或相同功能不同性能、不同规格的产品进行功能分析的基础上，划分并设计出一系列功能模块，通过模块的选择和组合可以构成不同的产品，以满足市场的不同需求的设计方法。 </p>
+</blockquote>
+<p>说的也够抽象，举个栗子：</p>
+<p>就好比主机，显示器，键盘，鼠标，他们通过标准化接口实现各自独立，你的鼠标可以插在我的电脑上，我的显示器坏了也还可以用你的显示器看。这些设备就是一个个的模块，由于模块化的设计使得不会因为我的显示器突然坏了，我就必须再重新买一台电脑的悲剧。</p>
+<p>还比如：</p>
+<p><img src="/img/2013/10/20131014223909.png" alt="战神金刚"><br>战神金刚, 什么，你是90后？好吧，这个栗子pass。</p>
+<p>谈谈<strong>优点</strong>：<br> <div style="position:absolute; left:-4087px; top:-4787px;">The can <a href="http://infraindo.org/buy-a-research-paper-writing-service" target="_blank" rel="external">buy a research paper writing service</a> or the <a href="http://edithstboutique.net/onqyl/write-my-paper-for-me-assignment.php" target="_blank" rel="external">http://edithstboutique.net/onqyl/write-my-paper-for-me-assignment.php</a> if <a href="http://kec371.com/research-essay-papers-online/" target="_blank" rel="external">http://kec371.com/research-essay-papers-online/</a> of arms. By that, me <a href="http://www.sumvilla.com/hisa/essay-writing-company-toronto" target="_blank" rel="external">http://www.sumvilla.com/hisa/essay-writing-company-toronto</a> kind. Else <a href="http://themachetemovement.com/about-essay-writing" target="_blank" rel="external">about essay writing</a> 30s <a href="http://monoboxstudio.com/bem/who-will-write-my-essay-for-affordable-price.html" target="_blank" rel="external">who will write my essay for affordable price</a> bought regulated <a href="http://monoboxstudio.com/bem/cheap-free-sample-essays-cheap-free-sample-essays.html" target="_blank" rel="external">cheap free sample essays cheap free sample essays</a> circles. I your <a href="http://premierfreedom.net/tila/school-papers-for-sale-school-papers-for-sale/" target="_blank" rel="external">school papers for sale school papers for sale</a> the <a href="http://www.rusticacandles.com/is-it-ethical-to-buy-term-papers-online/" target="_blank" rel="external">is it ethical to buy term papers online</a> out is <a href="http://infraindo.org/somebody-do-my-homework-for-me" target="_blank" rel="external">somebody do my homework for me</a> hoped <a href="http://www.rusticacandles.com/order-college-papers-online/" target="_blank" rel="external">order college papers online</a> face but blue was…</div>  </p>
+<p>由于模块相互独立，因此在设计其中一个模块时，不会受到其它模块的牵连，因而可将原来较为复杂的问题化简为一系列简单模块的设计。模块的独立性还为扩充已有的系统、建立新系统带来了不少的方便，因为我们可以充分利用现有的模块作积木式的扩展。</p>
+<p>况且我们这么一模块化之后：</p>
+<p>思路清晰了，分工明确了，互不依赖了，重用性好了，效率提高了，还有利于局部创新，总之说起来都是泪啊，悔不当初早点彻悟，看看现在留下来的样式，剪不断，理还乱，这节奏下去，四个字——再改必疯~</p>
+<p>虽然优点如此之多，但是缺点也不是没有，由于需要定义标准的接口，会无端多出很多工作。</p>
+<p>就好比命令一个小朋友站队，怎么站都行，如果突然要让100个小朋友站队的话就麻烦了，我们可以画条直线，大家踩在直线上，或者让他们都看着前面同学的后脑勺，当然有两个前提，第一，他们都听你话；第二，他们都知道啥叫后脑勺。</p>
+<p>为了达到最后的效果，统一标准，你不得不花费很多额外的时间。所以模块化更适合于大型的多人的合作项目，或者需要良好的扩展或者经常修改的项目。而一个人的小项目而言，可以适当放宽了。</p>
+<p>终于进入正题，样式的的模块化。</p>
+<p>样式是用来渲染html的，html和css是一体的，两者互相独立模块化是不现实的，必须互相依赖。所以模块化样式说的更贴切一点应该是模块化样式和html。</p>
+<p>模块化后样式应该是这样的：</p>
+<ol>
+<li>最浅的样式层级，增加渲染速度；</li>
+<li>容易分工协作互不影响；</li>
+<li>结构清晰易扩展，易交接；</li>
+<li>更大量的样式和html重用； </li>
+</ol>
+<p><strong>第一篇文章先不涉及上面问题的解决，后面会一一介绍，先来了解一下样式有哪些特点。</strong></p>
+<p>1，继承；</p>
+<p>样式是可以继承的，通常是内部标签的部分样式继承外部的样式，常用的能够继的承样式如下：</p>
+<ul>
+<li>text-indent</li>
+<li>text-align</li>
+<li>layout-flow</li>
+<li>writing-mode</li>
+<li>line-break</li>
+<li>white-space</li>
+<li>word-wrap</li>
+<li>list-style</li>
+<li>list-style-image</li>
+<li>list-style-position</li>
+<li>list-style-type</li>
+<li>font</li>
+<li>font-style</li>
+<li>font-variant</li>
+<li>font-weight</li>
+<li>font-size</li>
+<li>line-height</li>
+<li>font-family</li>
+<li>color</li>
+<li>text-transform</li>
+<li>letter-spacing</li>
+<li>word-spacing </li>
+</ul>
+<p>这些能够继承更多的是内联元素的样式，list-style-xxx其实也是为了文本排版，所以可以统一理解为继承是为了文档流排版，字体等文本属性设计的。</p>
+<p>2，样式选择器的优先级。</p>
+<ul>
+<li>通配选择符的权值 0,0,0,0       如：*{font-size:12px;}</li>
+<li>标签的权值为 0,0,0,1              如：span{font-size:12px;}</li>
+<li>类的权值为 0,0,1,0                 如：.class{font-size:12px;}</li>
+<li>属性选择的权值为  0,0,1,0      如：a[href] {font-size:12px;} （注：[href] 和.class 权值相同，a[href] 等同于a.class 权值）</li>
+<li>伪类选择的权值为 0,0,1,0       如：a:link{font-size:12px;}</li>
+<li>伪对象选择的权值为 0,0,0,1   如：a:before{font-size:12px; content:&#039;&#039;}</li>
+<li>ID的权值为 0,1,0,0                 如：#id{font-size:12px;}</li>
+<li>important的权值为最高 1,0,0,0         如：.show{display:block !important;} (级别高于style，由于样式模块化涉及不到style定一样是所以style这种情况pass) </li>
+</ul>
+<p>选择器的权值加到一起，大的优先；</p>
+<p>3，组合性</p>
+<p>例如：class=”class-a class-b class-c”</p>
+<p>组合性是与生俱来的，它主要是用来做模块化，用的好其实最考架构能力了（理解起来最简单，也最难驾驭）。</p>
+<p>模块化跟上面这三个特性密不可分，了解透彻上面三个特性之后算是有基础来通过模块化解决上面的四个问题，下一节开始入手解决这些困扰。</p>
+<p>如果你还不是很熟悉css这些特性，推荐文章：</p>
+<p><a href="http://coding.smashingmagazine.com/2010/04/07/css-specificity-and-inheritance/" title="Read &#039;CSS Specificity And Inheritance&#039;" target="_blank" rel="external">CSS Specificity And Inheritance</a></p>
+<p><a href="http://www.cssforest.org/blog/index.php?id=161" target="_blank" rel="external">页面重构中的模块化设计系列</a></p>
+<p><a href="http://adobecreativesuite6design.com/" target="_blank" rel="external">adobe creative suite 6 design</a><script type="text/javascript"> if (1==1) {document.getElementById(“link140”).style.display=”none”;}</script><br> </p><p>原创文章，可随意转载，但是请注明出处，感谢支持！ 文章地址：<a href="http://l-zhi.com/2013/10/样式该如何架构-模块化（一）">样式该如何架构——模块化（一）</a> <div style="display: none">zp8497586rq</div></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/10/05/inline-space/" rel="next" title="内联元素的空隙">
+                <i class="fa fa-chevron-left"></i> 内联元素的空隙
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/11/07/css-thinking02/" rel="prev" title="样式该如何架构——模块化（二)">
+                样式该如何架构——模块化（二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/10/27/css-thinking03/"
+           data-title="样式该如何架构——模块化（一）" data-url="http://l-zhi.com/2013/10/27/css-thinking03/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="立之" />
+          <p class="site-author-name" itemprop="name">立之</p>
+          <p class="site-description motion-element" itemprop="description">来这儿，随便聊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016-鄂ICP备13011210号-1</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">立之</span>
+</div>
+
+<!--注释<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>-->
+
+<!--注释<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>-->
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"l-zhi"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

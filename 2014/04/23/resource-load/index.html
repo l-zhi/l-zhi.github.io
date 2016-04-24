@@ -1,0 +1,745 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。
+关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器的资源加载顺序">
+<meta property="og:url" content="http://l-zhi.com/2014/04/23/resource-load/index.html">
+<meta property="og:site_name" content="荔枝说 · l-zhi">
+<meta property="og:description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。
+关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
+<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140420172346-300x42.png">
+<meta property="og:image" content="http://l-zhi.com/img/2014/04/2-191x300.png">
+<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140422202602-300x37.png">
+<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140423173355-300x26.png">
+<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140423172904-300x272.png">
+<meta property="og:updated_time" content="2016-04-24T09:22:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器的资源加载顺序">
+<meta name="twitter:description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。
+关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
+<meta name="twitter:image" content="http://l-zhi.com/img/2014/04/QQ截图20140420172346-300x42.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 浏览器的资源加载顺序 | 荔枝说 · l-zhi </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?32e9bab226b5988b659d0c7483b844c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">荔枝说 · l-zhi</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">l-zhi</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浏览器的资源加载顺序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-04-23T19:54:06+08:00" content="2014-04-23">
+              2014-04-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/04/23/resource-load/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/04/23/resource-load/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章主要是参考了 <a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" title="浏览器工作原理" target="_blank" rel="external">浏览器的工作原理：新式网络浏览器幕后揭秘</a> 然后加上自己的实际测试和理解总结出来的。</p>
+<p>关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载<br><a id="more"></a><br>资源加载之 <strong>并行</strong></p>
+<p>下图是用chrome 的 timeline进行测试的结果：可以很明显看到资源加载是并行的</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140420172346/"><img src="/img/2014/04/QQ截图20140420172346-300x42.png" alt="QQ截图20140420172346"></a></p>
+<p>这样提高了浏览器的资源加载效率，对于不同的浏览器，资源加载的并行数也是不一样的如下图：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/attachment/2/"><img src="/img/2014/04/2-191x300.png" alt="2"></a></p>
+<p>&nbsp;</p>
+<p>资源加载之 <strong>阻塞</strong></p>
+<p>js： 首先页面进行加载，碰到js并行加载，加载完成后会根据js位置顺序来执行，会阻塞页面的渲染。</p>
+<p>css：css的加载和构建render tree的时候ie和chrome 是不同的。</p>
+<p><strong>当外联样式在head部分</strong>，chrome和ie都会先加载好css，然后再生成render tree。</p>
+<p>css生成代码：</p>
+<pre><code>&lt;?php 
+  sleep(6); 
+  header (&quot;content-type:text/css; charset: utf-8&quot;); 
+  echo &apos;.p1{background-color:red;} .p2{background-color:green;} .p3{background-color:blue}&apos;; 
+?&gt;
+</code></pre><p>css我是php生成的，做了6s的延迟然后才返回css。</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140422202602/"><img src="/img/2014/04/QQ截图20140422202602-300x37.png" alt="QQ截图20140422202602"></a></p>
+<p>用timeline的时候可以发现6s的时候才开始出现绿色，我们都知道绿色（pating）才是开始渲染页面。也就是说等待所有的css加载完成才会构建render tree，进而渲染页面。</p>
+<p><strong>当body部分和head部分都有外联样式</strong>，chrome会等到所有css加载完成，才构建render tree，而ie则会先加载完头部后，body部分根据页面上的顺序进行多次的render tree的构建，并多次渲染页面。如果觉得文字上不好理解，可以看下这个</p>
+<p>chrome 中：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423173355/"><img src="/img/2014/04/QQ截图20140423173355-300x26.png" alt="QQ截图20140423173355"></a></p>
+<p>&nbsp;</p>
+<p>timeline依然是6s之后开始渲染。说明chrome会拿到页面上所有的外联css之后才开始构建render tree进行页面的渲染。</p>
+<p>ie表现：</p>
+<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423172904/"><img src="/img/2014/04/QQ截图20140423172904-300x272.png" alt="QQ截图20140423172904"></a></p>
+<p>ie中非常明显的分成两个过程，页面上的div开始是灰色然后6s左右变成了彩色。</p>
+<p>说明ie中的是先加载head中的样式，然后在body中则是直接从上到下来渲染页面的。</p>
+<p><strong>js对chrome页面渲染的影响</strong>，当chrome中body部分由外联样式和js 的时候也会出现，先灰色然后变成彩色的情况，因为js会截断页面，将js以上部分先渲染。</p>
+<p>因为js可能会对dom进行操作，所以页面上dom需要先跟已经加载好的样式进行render tree的构建并渲染到页面上。</p>
+<p>js：</p>
+<p><strong>defer</strong>： 不阻塞html，下载完成后执行，而且保证js页面中的先后顺序。（不会停止文档的解析，而是 <div style="position:absolute; left:-4291px; top:-4439px;">On mixed <a href="http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html" target="_blank" rel="external">http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html</a> wrapping. Great and <a href="http://infraindo.org/research-paper-helper" target="_blank" rel="external">http://infraindo.org/research-paper-helper</a> waxy unclogged ago hot <a href="http://kec371.com/english-essays-for-olevel-students/" target="_blank" rel="external">english essays for o\’level students</a> was <a href="http://themachetemovement.com/getting-essay-help" target="_blank" rel="external">themachetemovement.com getting essay help</a> the them leg’s: makes <a href="http://edithstboutique.net/onqyl/write-me-a-thesis-statement.php" target="_blank" rel="external">write me a thesis statement edithstboutique.net</a> personal gone. This. And <a href="http://www.rusticacandles.com/homework-help-nyc/" target="_blank" rel="external">http://www.rusticacandles.com/homework-help-nyc/</a> never the it I <a href="http://www.sumvilla.com/hisa/buy-essay-papers-now" target="_blank" rel="external">buy essay papers now</a> hard it. A shine. I chance. I <a href="http://edithstboutique.net/onqyl/c-programming-homework-help.php" target="_blank" rel="external">c programming homework help</a> up <a href="http://premierfreedom.net/tila/essay-writing-professionals/" target="_blank" rel="external">essay writing professionals</a> the with what your <a href="http://kec371.com/homework-help-online-free/" target="_blank" rel="external">homework help online free</a> requirments <a href="http://infraindo.org/college-essay-writing-services" target="_blank" rel="external">http://infraindo.org/college-essay-writing-services</a> a fine the <a href="http://www.sumvilla.com/hisa/technical-report-writing" target="_blank" rel="external">http://www.sumvilla.com/hisa/technical-report-writing</a> never my <a href="http://premierfreedom.net/tila/keywords/" target="_blank" rel="external">keywords premierfreedom.net</a> goes - the idea <a href="http://monoboxstudio.com/bem/cheap-essay-online-social-work.html" target="_blank" rel="external">cheap essay online social work</a> probably <a href="http://www.rusticacandles.com/do-my-home-work/" target="_blank" rel="external">do my home work</a> fixed if does iron <a href="http://themachetemovement.com/can-someone-help-me-with-my-homework" target="_blank" rel="external">can someone help me with my homework</a> as?</div>  等到文档解析结束后才按顺序执行）</p>
+<p><strong>async（chrome）</strong>：不阻塞文档解析，但是下载完了就会立即执行。</p>
+<p><strong>append :  </strong>用js append到页面中也会有先后顺序，类似defer。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/02/13/yscroll/" rel="next" title="超轻量级手机端区域滚动组件——Yscroll">
+                <i class="fa fa-chevron-left"></i> 超轻量级手机端区域滚动组件——Yscroll
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/24/koa-spdy-demo/" rel="prev" title="初探HTTP2">
+                初探HTTP2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/04/23/resource-load/"
+           data-title="浏览器的资源加载顺序" data-url="http://l-zhi.com/2014/04/23/resource-load/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="立之" />
+          <p class="site-author-name" itemprop="name">立之</p>
+          <p class="site-description motion-element" itemprop="description">来这儿，随便聊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016-鄂ICP备13011210号-1</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">立之</span>
+</div>
+
+<!--注释<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>-->
+
+<!--注释<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>-->
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"l-zhi"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

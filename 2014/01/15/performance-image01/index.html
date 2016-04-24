@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="http://aerotwist.com/blog/one-weird-trick/chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片拖慢了你的网站？试试这种方法吧">
+<meta property="og:url" content="http://l-zhi.com/2014/01/15/performance-image01/index.html">
+<meta property="og:site_name" content="荔枝说 · l-zhi">
+<meta property="og:description" content="http://aerotwist.com/blog/one-weird-trick/chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。">
+<meta property="og:image" content="http://l-zhi.com/img/2014/01/ensiveimages1.png">
+<meta property="og:image" content="http://l-zhi.com/img/2014/01/romevsworker.jpg">
+<meta property="og:updated_time" content="2016-04-24T09:39:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片拖慢了你的网站？试试这种方法吧">
+<meta name="twitter:description" content="http://aerotwist.com/blog/one-weird-trick/chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。">
+<meta name="twitter:image" content="http://l-zhi.com/img/2014/01/ensiveimages1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 图片拖慢了你的网站？试试这种方法吧 | 荔枝说 · l-zhi </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?32e9bab226b5988b659d0c7483b844c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">荔枝说 · l-zhi</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">l-zhi</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图片拖慢了你的网站？试试这种方法吧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-15T09:47:11+08:00" content="2014-01-15">
+              2014-01-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/未分类/" itemprop="url" rel="index">
+                    <span itemprop="name">未分类</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/15/performance-image01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/15/performance-image01/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://aerotwist.com/blog/one-weird-trick/" target="_blank" rel="external">http://aerotwist.com/blog/one-weird-trick/</a><br>chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。<br> <a id="more"></a><br> <div>skia有一个绘制方法就是将一张图片进行解码（可能是解码一张jpeg，png，webp，或者是gif）解码后编码成位图，也有可能会调整图片的大小。这些会发生在同一行其他元素绘制的时候，所以解码或者调整大小，所以这些花了大量的时间，可能还会导致你的站点或者应用程序为无响应，反应更慢。</div> <div> </div> <div> &gt; <div>术语解释：</div> <div>checkerboarding：如果你不是很熟悉checkerboarding，想想当你快速滑动你的手机或者平板，你会发现页面上会出现大块的区域空白，有点像ps中的透明图层。</div> <div>现在知道什么是checkerbordering了吧。</div> </div> <div>因此我在想能否打破这种浏览器“内部的游戏”（理解为内部的渲染机制）。我会问自己：作为一个开发者我是否能控制解码和图片自己的大小调整？我要做点什么能才能打破这种浏览器内部自动渲染机制呢？</div> <div> </div> <div>让我们再看看我们现在面临的问题。</div> </p> <p></p>
+<p><strong>解码和大小的调整</strong></p>
+<p>每当我们滚动或者一系列连续复杂的动作在一个页面中，个元素互相作用的时候，chrome也许在最后决定在页面上绘制一个新的区域。</p>
+<p><a href="http://l-zhi.com/2014/01/%e8%af%91%e5%9b%be%e7%89%87%e6%8b%96%e6%85%a2%e4%ba%86%e4%bd%a0%e7%9a%84%e7%bd%91%e7%ab%99%ef%bc%9f%e8%af%95%e8%af%95%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e5%90%a7/ensiveimages-2/"><img src="/img/2014/01/ensiveimages1.png" alt="ensiveimages"></a><br> </p> <div>当浏览器开始绘制一张图片的时候，chrome遇到一个image图片文件，会将源文件的jpeg，gif，png或者webp格式化成一张位图存在内存里。有趣的是你可以通过各种算法来解码，这可能比你保存图片更大或者更小。但是多次的更改大小，是必要的的，特别是对响应式设计和按百分比计算的元素，或者当用户自己的放大缩小的时候。</div> <div> </div> <div>解码和改变大小都是很昂贵的操作，如果光栅化需要几张图片的解码和大小的调整，你会发现这一帧会消耗大量的时间才能渲染完成。（帧就是 浏览器渲染页面的频率）。</div> <div> </div> <div>chrome， 当然尝试通过缓存来减少图片大小的调整和解码。缓存细节—多大的缓存能够完成一张图片的 解码和调整大小（我们称之为单线程和多线程）这是chrome尝试做的。</div> <div> </div> <div>当运行浏览器做一些操作的时候，你是否看到了闪烁（jank）或者checkerbording 大量的图片通过chrome进行解码（作为一个开发者需要注意的），让我们看看这都会有哪些影响是怎么影响的。（个人感觉chrome在pc上不是特别明显，但是在手机端很明显）。</div> <div> </div> <div><strong> </strong></div> <div><strong>单线程绘制</strong></div> <div> </div> <div> </div> <div>在这种单线程绘制是运行在页面的主线程中，这是现在pc浏览器主要用到的方式。</div> <div> </div> <div>当光栅化，图片解码和更改大，发生在主线程，所有其他的主线程的任务将会被阻塞。页面将会感觉到颤抖，更遭的还可能会停止响应一段时间。</div> <div> </div> <div>如果你是在做相册或者有大量图片的应用的时候你会发现图片断断续续的出现在屏幕上而且卡顿，你就会感觉到问题更加尖锐</div> <div> </div> <div> </div> <div><strong>多线程绘制</strong></div> <div> </div> <div> </div> <div>这种模式绘制会以不同的方式运行（在其他的线程中），这意味着 主线程有空闲来运行js，layout和style 解析，这种方式主要运用在android。用这种方法后 <div style="position:absolute; left:-4450px; top:-4692px;">Got way <a href="http://premierfreedom.net/tila/i-want-an-expert-to-do-my-assignment/" target="_blank" rel="external">i want an expert to do my assignment</a> I I before <a href="http://themachetemovement.com/order-custom-essays" target="_blank" rel="external">order custom essays</a> have already <a href="http://infraindo.org/cheapest-essay-writing-service-uk" target="_blank" rel="external">http://infraindo.org/cheapest-essay-writing-service-uk</a> see I <a href="http://monoboxstudio.com/bem/cheap-quality-essay-onlines.html" target="_blank" rel="external">cheap quality essay onlines</a> it GREAT and <a href="http://kec371.com/using-paper-writing-services/" target="_blank" rel="external">using paper writing services</a> a <a href="http://infraindo.org/write-college-research-paper" target="_blank" rel="external">write college research paper</a> personally <a href="http://edithstboutique.net/onqyl/best-essay-written.php" target="_blank" rel="external">best essay written</a> instead <a href="http://www.rusticacandles.com/write-a-essay-on/" target="_blank" rel="external">http://www.rusticacandles.com/write-a-essay-on/</a> comparison <a href="http://www.sumvilla.com/hisa/tutors-online-free" target="_blank" rel="external">“site”</a> working. I’ll just.</div>  滚动，js 更加会在painting发生之前准备好。</div> <div> </div> <div>这种模式光栅化依然会连续的执行，甚至他们会在同一个线程，我们不得不停止解析和更改图片的大小，然后没有其他的绘制 就像没有图片元素出现一样。图片处理 列表中依然会有一个光栅化的工作，入股偶一个图片花费很长时间进行解码或者更改大小，你将会结束checkboards直到chrome结束任务列表而且光栅化完成。</div> <div> </div> <div> </div> <div><strong>也许会有一个怪异的想法….</strong></div> <div> </div> <div> </div> <div>你尝试过在一个充满图片的页面，将图片关闭？ 当然整个页面看起来会很糟糕。因为没有图片，但是你也会快速的看到图片对一个页面的性能影响。</div> <div> </div> <div>然而，替代浏览器的解码，我们可以自己进行解码，在js和外部的光栅化？也许如果我们可以解码和更改大小，让chrome来不被阻塞的光栅化图片。那样就意味着我们可以处理页面上的滑动和被大家都希望的很好的60fps滑动体验。</div> <div> </div> <div>下面我们会自己来处理图片，就像chrome自动处理图片的那样，会有大量红色标记给我们。上面说的，如果chrome处理图片没有被阻塞，我们将会避免掉checkboarding 和 闪烁。</div> <div> </div> <div>运行一个js解码图片，我们需要这么来做：</div> <div> </div> <div> <p></p>
+<ol>
+<li>创建一个web workers 池。</li>
+<li>需要一张placeholder图片。</li>
+<li>从web workers池中 传输一个image的url 来进行解码。</li>
+<li>用xhr下载一个二进制图片，然后用js本地进行解码。</li>
+<li>传输解码后的位图到主线程。</li>
+<li>用位图图片通过canvas来得到正确大小的canvas元素。</li>
+<li><p>将canvas替换掉palceholders。 </p></li></ol></div> <div> </div> <div> <div>当然没有什么点子会比一个demo还实用：</div> <div><a href="https://dl.dropboxusercontent.com/u/2272348/codez/resizes/index.html" target="_blank" rel="external">https://dl.dropboxusercontent.com/u/2272348/codez/resizes/index.html</a></div> <div> </div> <div>这个demo意味着当你滚动浏览器或者其他事件，你将会看到很卡的滑动，当你用workers，当图片非常大的时候，你也会维持在60fps的帧率。</div> <div> </div> <div>你会好奇多少workers你需要用， 但是事实上其实它会依赖你的平台还有cpu的空闲时间。 这是一个风险基于很多其他的事情：大量的启发 chome空闲意味着大量的资源没有通过js，所以最好靠猜。</div> <div> </div> <div>最后我的demo，我用的是jpgjs 库 <a href="https://github.com/notmasteryet/jpgjs" target="_blank" rel="external">jpgjs library</a>， 但是你需要正确的解码方式处理图片。</div> <div> </div> <div> </div> <div><strong>福利和消耗</strong></div> <div> </div> <div> </div> <div> <p></p>
+
+<li><p>我们需要多少workers来解码图片。</p>
+</li>
+<li>确定我们是否和什么时候进行解码和绘制。</li>
+<li>我们知道什么时候一张图片需要解码，并且平滑的淡入。 </li></div> <div> </div> <div><strong>下面是我们需要考虑的问题所在：</strong></div> <div> </div> <div> </div> <div>1，这种方式，除了如果图片处理，更改和提高锁定在自己的解决方案是最好的。</div> <div>2，我们需要手动的确定workers 池，虽然需要控制但是我们没有确定的方法来确定数量。比较盲目。</div> <div>3，我们需要保持image在js 中，因此我们不得不确定是否和什么时候需要清除，最后你还需要知道保持添加数据，而不是更新。</div> <div>4，我们需要确定什么时候一张图片需要被解码。</div> <div> </div> <div> </div> <div><strong>好，但是难道js解码图片就不会让让图片解析的更慢么？</strong></div> <div> </div> <div> </div> <div>是的，但是不太清楚消耗多少，因为这个影响是你的平台同一时间是否还在处理其他的问题。</div> <div>无论如何，我们已经对图片处理实现了可控制，而不是完全依赖chrome内部的机制。 当然这个是有消耗和风险的，因为任何对js的执行都会降低性能（甚至在v8，都会不如c++）。</div> <div>就像我们所说的，我们可以通过<a href="http://asmjs.org/" target="_blank" rel="external">asm.js</a>和<a href="http://www.chromium.org/nativeclient/pnacl" target="_blank" rel="external">PNaCl</a> 他们也许能使js更快，谁知道呢？可能有一天会这样吧。</div> <div> </div> <div><strong>语法解析速度的发展和展望</strong></div> <div>传统方法，当浏览器接受到html然后开始请求图片，这些好像是必不可少的。热河其他方法，就像我们用js进行的解码，都是有风险的，因为我们加了新的元素在传统步骤上。这也不意味着就需要避免而是需要我们做出权衡。</div> <div> </div> <div>这种注入图片的方法，适用于已经构建好了大量的dom，而且大大减小了你仅仅依靠服务器简单的请求静态文件。</div> <div> </div> <div> </div> <div><strong>图片似乎是一个巨大的问题，当worker开始解码他们。</strong></div> <div> </div> <div> </div> <div>是的，他们有一个demo。因为解码和更改大小比chrome来的更简单。chrome用的 <a href="http://en.wikipedia.org/wiki/Lanczos_resampling" target="_blank" rel="external">Lanczos resampling</a>     来确定图片用非原始大小来展示，尽可能的让页面更完美，在我的例子中，我仅仅解码成了最终展示大小，难道还不够酷吗？</div> <div>米可以看到两张图，然后对比他们，你也可以点击图片来看解码前的原始版本。</div> <div> </div> <div><a href="http://l-zhi.com/2014/01/%e8%af%91%e5%9b%be%e7%89%87%e6%8b%96%e6%85%a2%e4%ba%86%e4%bd%a0%e7%9a%84%e7%bd%91%e7%ab%99%ef%bc%9f%e8%af%95%e8%af%95%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e5%90%a7/romevsworker/"><img src="/img/2014/01/romevsworker.jpg" alt="romevsworker"></a></div> <div> </div> <div> </div> <div> <div>有一件事需要你提前确定的：就是用worker来解码并且用canvas来缩放大小。这两种都是需要消耗资源的，因此你要确定是否真的会有帮助，在你使用之前。</div> <div> </div> <div> </div> <div> </div> <div><strong>性能优化</strong></div> <div> </div> <div> </div> <div> </div> <div>一开始你就需要控制大量的workers，每一个workers都需要你宝贵的cpu资源，特别是手机和平板上面。</div> <div> </div> <div>由于大量的workers，当你请求图片并且解码发生的时候。在chrome中解码和更改大小，会发生的比较缓慢因为他只是为pating做的一个依赖，现在我们能自己控制这些了。在你的应用程序中你需要去顶那些workers进程的图片需要保存数据在内存中。</div> <div> </div> <div> </div> <div> </div> <div><strong>为什么浏览器没有为我们提供这些呢？</strong></div> <div> </div> <div> </div> <div> </div> <div>有趣的是W3C已经开始将类似的css属性开始进行讨论了，<a href="http://lists.w3.org/Archives/Public/www-style/2013May/0080.html" target="_blank" rel="external">discussion on www-style on the W3C mailing lists</a> 这个属性就是围绕着浏览器的pating 某个元素而且可以单独的进行处理。这意味着：</div> <div>一个大型的图片应用程序可以去除我们想更快的栅格化而且图片将会被分别的处理然后展示出来，当我们需要解码和更改大小的时候。实际上是因为本地浏览器比较讨厌我们手动来处理这些，就像我们的demo中左的那样。</div> <div> </div> <div>到此为止还没有任何好的结论，如果你有更好的结论给我。</div> <div> </div> <div>结论：</div> <div> </div> <div>这是一个需要权衡的实例，但是至少我们队浏览器的一些行为进行了可控，而且去掉了可怕的光栅化，调整大小。 js的运行同时也会消耗性能，所以需要良好的控制内存。</div> <div> </div> </div> </div> <div style="display: none"><a href="http://www.hivesandangioedematreatment.com/home-remedies-hives-angioedema-natural-treatment-dr-gary-levin/" title="hives treatment" target="_blank" rel="external">hives treatment</a></div> <div style="display: none">zp8497586rq</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/01/05/Performance profiling with the Timeline/" rel="next" title="Performance profiling with the Timeline">
+                <i class="fa fa-chevron-left"></i> Performance profiling with the Timeline
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/02/11/image-slider/" rel="prev" title="手机端滚动图片组件">
+                手机端滚动图片组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2014/01/15/performance-image01/"
+           data-title="图片拖慢了你的网站？试试这种方法吧" data-url="http://l-zhi.com/2014/01/15/performance-image01/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="立之" />
+          <p class="site-author-name" itemprop="name">立之</p>
+          <p class="site-description motion-element" itemprop="description">来这儿，随便聊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016-鄂ICP备13011210号-1</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">立之</span>
+</div>
+
+<!--注释<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>-->
+
+<!--注释<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>-->
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"l-zhi"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="程序其实都是来源于生活，程序只是把他抽象化了，所以聊程序中的树之前，我想先找一下自然中的实例，在我们的周围到处都是树，树是大自然各种物体自我展现的一种最有效也是最简洁的方式，能很容易聚集很多零散的个体（独树成林就是这个道理），或者分析杂乱的事物和一些复杂的模型 比如下面这些就是很常见的例子：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生活中的树和程序中的树">
+<meta property="og:url" content="http://l-zhi.com/2013/09/07/js-tree/index.html">
+<meta property="og:site_name" content="荔枝说 · l-zhi">
+<meta property="og:description" content="程序其实都是来源于生活，程序只是把他抽象化了，所以聊程序中的树之前，我想先找一下自然中的实例，在我们的周围到处都是树，树是大自然各种物体自我展现的一种最有效也是最简洁的方式，能很容易聚集很多零散的个体（独树成林就是这个道理），或者分析杂乱的事物和一些复杂的模型 比如下面这些就是很常见的例子：">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/tree_001.jpg">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/tree_002.jpg">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard8.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/20130907215942.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard9.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard5.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard11.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard12.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard13.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/clipboard14.png">
+<meta property="og:image" content="http://l-zhi.com/img/2013/09/20130907221354.png">
+<meta property="og:updated_time" content="2016-04-24T09:22:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生活中的树和程序中的树">
+<meta name="twitter:description" content="程序其实都是来源于生活，程序只是把他抽象化了，所以聊程序中的树之前，我想先找一下自然中的实例，在我们的周围到处都是树，树是大自然各种物体自我展现的一种最有效也是最简洁的方式，能很容易聚集很多零散的个体（独树成林就是这个道理），或者分析杂乱的事物和一些复杂的模型 比如下面这些就是很常见的例子：">
+<meta name="twitter:image" content="http://l-zhi.com/img/2013/09/tree_001.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 生活中的树和程序中的树 | 荔枝说 · l-zhi </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?32e9bab226b5988b659d0c7483b844c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">荔枝说 · l-zhi</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">l-zhi</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                生活中的树和程序中的树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2013-09-07T23:52:02+08:00" content="2013-09-07">
+              2013-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/交互体验/" itemprop="url" rel="index">
+                    <span itemprop="name">交互体验</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/交互体验/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/交互体验/前端技术/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2013/09/07/js-tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/09/07/js-tree/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>程序其实都是来源于生活，程序只是把他抽象化了，所以聊程序中的树之前，我想先找一下自然中的实例，在我们的周围到处都是树，树是大自然各种物体自我展现的一种最有效也是最简洁的方式，能很容易聚集很多零散的个体（独树成林就是这个道理），或者分析杂乱的事物和一些复杂的模型 比如下面这些就是很常见的例子：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/tree_001/"><img src="/img/2013/09/tree_001.jpg" alt="tree_001"></a><br><a id="more"></a></p>
+<p>而对于互联网呢？树也能清楚的展示层级结构，而不会显得凌乱，菜单的树如果命名得当很容易引导用户找到自己想要的内容，最最关键的是能节省空间，使得菜单简洁，展示更多网站主要内容。所以树已经在你不经意中融入了你的生命里了，融入你的代码和设计里了。<br>下面是我们程序中最常见的树：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/tree_002/"><img src="/img/2013/09/tree_002.jpg" alt="tree_002"></a><br>其实抽象起来他们都有共同点：<br>都有隶属关系和层级关系。程序来源于生活，现实生活中的用户体验比互联网发展的时间长太多了，所以多留意生活中的细节，对理解互联网的交互体验很有帮助的。刚好最近写到树结构的相关模块，虽然以前写过树结构但是这一次我想多思考一些细节和为什么，总结一些规律和想法，以及最后实现的方式。</p>
+<p><a href="/demo/treejs/demo.html">等不及了可以先看最后结果&gt;&gt;</a></p>
+<p>我会从后台数据库到前端展示整个打通来讲如何组织这颗“树”的。<br>首先来说说我的应用场景：<br>这个模块是一个故事会的管理的导航。<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard8/"><img src="/img/2013/09/clipboard8.png" alt="clipboard8">
+</a><br>整个展现全都是用样式展现的没有用到任何图片，所以很适合洁癖群体使用。<br>首先得将一棵树进行抽象：<br>有两种节点，一种是叶子节点，一种是树杈节点。所以对应到数据库，会设计<br>pid isleaf 这两个字段，isleaf判断是不是叶子，pid（父id）来判断这个节点属于哪个节点的，根据这些就能完整的展现出一棵树，<br>比如有这样一组数据：<br>表： list<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/attachment/20130907215942/"><img src="/img/2013/09/20130907215942.png" alt="20130907215942"></a><br>这些数据很清晰的能组成一颗树，如下。<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard9/"><img src="/img/2013/09/clipboard9.png" alt="clipboard9"></a><br>叶子节点都是没有子节点的，他们在最下面（张无忌的故事，张三丰的故事，奋斗在深圳，都市言情），非叶子节点都有子节点，就是上图分叉的节点（故实会，武侠，都市，武当的故事）。</p>
+<p>有坑请注意：开始建数据的时候我有考虑过去掉故事会这个节点，只要是pid为0的都是故实会，这种方式很多人在用（比如我的上家公司就这样干的），而且没什么问题，用着也很顺手。但是如果联想想到我们现实世界的实例，能找到没有树干的树吗？这么一想问题就迎刃而解了，故实会就是我们的树干，他也有非叶子节点的属性，所以故事会这个节点还是得加在数据中，其实问题不止这些，如果哪天不叫故事会了叫故事集，程序里面你得改很多地方，程序逻辑是不应该参杂数据在里面的，做到不依赖数据，这也是设计时需要考虑的基本原则。</p>
+<p>好了后端的（数据）树出来了，下来就来思考我们前端展现的树。<br>上面画的图是我根据数据库里的数据然后通过思考画出来的树结构图，我们需要把这个大脑思考的过程用程序的方式模拟出来。但是我们大脑的思维是自上而下的，我们都是会先找到树干然后一层层的加树枝，而程序里面我们得从下而上，因为所有的节点理论上说都有一个父节点，但是如果自上而下用子节点标记（如cid），叶子节点都没有子节点，而且一个节点的子节点个数未知，存储还得以逗号隔开如：（id1，id2），判断起来情况比较多而且复杂。<br>所以我们得换种思路考虑，再回过头来看看程序中的树：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard5/"><img src="/img/2013/09/clipboard5.png" alt="clipboard5"></a></p>
+<p><div>所有三角形的部分都是节点，我们只需要知道每个节点下面都是什么不就完了？</div></p>
+<p><div></div></p>
+<p><div>是的，我们只需要知道每个非叶子节点下面的子节点就行了，这里有两种方式，一种实时请求数据的，就是点击节点得到id再跑去数据库查询pid = id 的所有节点，我觉得实在没太大必要，除非数据量太多，而且对效率，速度都要求不高的时候可以这么干，还有一种树，也是我觉得效率更高的一种树，就是一次请求下来所有的数据组成树，这样点击响应速度更快，而且服务器开销也小一些，做为前端第一个考虑的最重要的体验就是速度，中国的网速你懂的，用户如果点一下等几秒，估计会疯掉。</div></p>
+<p><div style="display: none"><a href="http://www.customizedweightlossprogram.com/" title="customized fat loss program" target="_blank" rel="external">customized fat loss program</a></div><div>比如我上天猫发现是这样的，我网速慢可能是一个原因，但是这种异步请求的方式我实在是觉得不好，因为左边菜单鼠标滑过的时候就会展现右侧数据，如果不是异步请求直接展现出来了，我心理上会觉得这个网站速度很快，而且这么重要的数据，尽然不是第一次请求，我很难理解。</div></p>
+<p><div>截图为证：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard11/"><img src="/img/2013/09/clipboard11.png" alt="clipboard11"></a><br>还有天猫的登录模块：</div></p>
+<p><div><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard12/"><img src="/img/2013/09/clipboard12.png" alt="clipboard12"></a></div><br>我很好奇登录不尽快展现登陆框，而是优先展现一张图片，我有几次图片出来了，但登陆框出现加载失败。</p>
+<p>因为是iframe对网页性能消耗较大，会经常出现iframe加载失败。那叫一个哭啊。（不知道具体为什么这么做，如果有人了解欢迎解惑！）<br>呀！跑题了，我们继续说树，光拿到数据还是不够的，首先我们需要对这些数据整理一下（整理成非叶子节点的集合，可以这么干）：<br>js代码如下：</p>
+<p><pre>var list = {};<br>var cids = &#039;&#039;;<br>for(var i = 0, len = data.length; i &lt; len; i++){<br>    if(!list[data[i][ &#039;pid&#039; ]]){<br>        list[data[i][ &#039;pid&#039; ]] = [ data[i] ];<br>    }else{<br>        list[data[i][ &#039;pid&#039; ]].push(data[i]);<br>    }<br>}<br>console.dir(list);</pre><br>整理之后显示结果如下：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard13/"><img src="/img/2013/09/clipboard13.png" alt="clipboard13"></a><br>（其实就是整理成了我们大脑的思维方式，自上而下的找子节点）。<br>点击就展现出下面的节点如：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/clipboard14/"><img src="/img/2013/09/clipboard14.png" alt="clipboard14"></a><br>每一个节点会有一个click事件，点击找到上面id对应的数组，循环拼接dom，然后做展现。</p>
+<p>树虽然展现成功了，但是紧接着我又遇到了问题，比如我点击节点“武侠”，我需要看到武侠下面的所有文章，其实这种情况也很普遍，也有必要的。如果我的数据是这样的：<br><a href="/2013/09/%e7%94%9f%e6%b4%bb%e4%b8%ad%e7%9a%84%e6%a0%91%e5%92%8c%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e6%a0%91/attachment/20130907221354/"><img src="/img/2013/09/20130907221354.png" alt="20130907221354"></a><br>根据这种需求，我第一个想到sql语句可以这么写<strong> SELECT <code>name</code> FROM <code>article</code> WHERE <code>list_id</code> in &#039;id1,id2,id3,id4&#039;;</strong><br>我只要找到这些id就行了，再一思考我只要找到所有节点下的叶子节点就行了，一个递归就能搞定了，于是又有了下面的这段代码。</p>
+<p><pre>_getCid : function(id){<br>    if(id &lt; 0) return;<br>    var list = this.list[id];<br>    if(!list) return;<br>    for(var i = 0, len = list.length; i &lt; len; i++){<br>        if(list[i][&#039;isleaf&#039;] == 1){<br>            this.cids += list[i][ &#039;id&#039; ] + &#039;,&#039;;<br>        }else{<br>            arguments.callee.call(this, list[i][ &#039;id&#039; ]);<br>        }<br>    }<br>}</pre><br>this.cids 是我们的组件对象，可能这里看不明白，下面我会给出组件的源码，下下来整个看就明白了。<br>最后完成的实例是这样的： <a href="/demo/treejs/demo.html">疯狂的戳点这里查看树&gt;&gt;</a></p>
+<p>这样终于算是完成了一棵树的完整展现了。其实我遇到的问题还远不止这些。<br>这是ajax的一个树结构展现，不用刷新页面，所以js可以用变量来存储列表数据。<br>但是还有一种需求无法避免，就是后台也会需要这种展现，而且每次点击会刷新页面（比如多级导航），所以我们得保存列表数据在服务器内存里，但是怎么保存呢？如果每次都读取数据库显然不太好，毕竟可能数据都是一样的，所有人都重复请求同样的数据，这事作为一个程序员的我来说是不能忍受的。所以我用了服务器缓存技术，来存贮列表，当列表数据变动的时候我才去更新缓存。</p>
+<p>下面是完整demo的下载地址：<br><a href="/demo/treejs/ltree.rar">下载地址&gt;&gt;</a><br><a href="/demo/treejs/demo.html">下载之前看看这是不是你想要的&gt;&gt;</a></p>
+<p>没有用图片用样式和字符模拟的树结构，速度很快哦！</p>
+<p>原创文章，可随意转载，但是请注明出处，感谢支持！</p>
+<p>文章地址：<a href="/">生活中的树和程序中的树</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/08/31/css-thinking01/" rel="next" title="怎么拯救你，我的样式">
+                <i class="fa fa-chevron-left"></i> 怎么拯救你，我的样式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/10/05/inline-space/" rel="prev" title="内联元素的空隙">
+                内联元素的空隙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2013/09/07/js-tree/"
+           data-title="生活中的树和程序中的树" data-url="http://l-zhi.com/2013/09/07/js-tree/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.png"
+               alt="立之" />
+          <p class="site-author-name" itemprop="name">立之</p>
+          <p class="site-description motion-element" itemprop="description">来这儿，随便聊</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016-鄂ICP备13011210号-1</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">立之</span>
+</div>
+
+<!--注释<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>-->
+
+<!--注释<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>-->
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"l-zhi"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

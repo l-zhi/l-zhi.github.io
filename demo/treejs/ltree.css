@@ -1,0 +1,45 @@
+a{text-decoration: none; color: #333;}
+ul{margin: 0;padding: 0 0 0 20px; border-left: 1px solid #ccc; list-style: none;}
+body{font: 12px/1.5 tahoma,arial,宋体b8b\4f53;}
+ul.active{
+	display: block;
+}
+ul{
+	display: none;
+}
+.arrow{
+	border-color: transparent transparent transparent #ccc;
+	border-style: dashed dashed dashed solid;
+	border-width: 4px 0 4px 4px;
+	display: inline-block;
+	width: 0px;
+	height: 0px;
+	*vertical-align: 4px;
+}
+.node_icon{
+	background: #fff;
+	display: inline-block;
+	position: absolute;	
+	left: -22px;
+	color: #ccc;
+}
+.l_node.active .node_icon{
+	left: -24px;
+	color: #333;
+}
+.l_node.active .arrow{
+	border-color: #333 transparent transparent;
+	border-style: solid dashed dashed;
+	border-width: 4px 4px 0;
+}
+
+.l_node{
+	position: relative;
+}
+
+.sql{
+	height: 30px;
+	line-height: 30px;
+	color: #ee4444;
+}
+

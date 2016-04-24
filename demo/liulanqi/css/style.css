@@ -1,0 +1,4 @@
+.test{background-color: red; width: 100px; height: 100px;}
+pre{border: 3px solid #ccc;padding:10px; }
+.p1,.p2,.p3{width: 100px;height: 100px; margin: 20px;}
+.p1{background-color:gray;} .p2{background-color:gray;} .p3{background-color:gray}
