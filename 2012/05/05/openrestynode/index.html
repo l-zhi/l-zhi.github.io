@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="转眼来深圳有3个多月， 跟武汉相比，少了遛狗，闲逛，骂街，吃热干面的大叔大妈，取而代之的是地铁上站着参瞌睡的上班族和公司来无影去无踪的前台MM。地铁把深圳微缩成了一小坨，时间成了新的路程单位，每天大家穿梭在时间里风风火火，忙忙碌碌，跟深圳的天气一样总也不消停。 我住的楼下烧腊店有只狗，早上我出门它趴在地上吃肉，晚上我回家它趴在地上啃骨头。主人开烧腊店，这狗得多幸福，难怪每天无所事事，趴地上装死玩！">
+<meta name="description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自由的工作">
-<meta property="og:url" content="http://l-zhi.com/2013/08/10/life-001/index.html">
+<meta property="og:title" content="服务器性能测评">
+<meta property="og:url" content="http://l-zhi.com/2012/05/05/openrestynode/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="转眼来深圳有3个多月， 跟武汉相比，少了遛狗，闲逛，骂街，吃热干面的大叔大妈，取而代之的是地铁上站着参瞌睡的上班族和公司来无影去无踪的前台MM。地铁把深圳微缩成了一小坨，时间成了新的路程单位，每天大家穿梭在时间里风风火火，忙忙碌碌，跟深圳的天气一样总也不消停。 我住的楼下烧腊店有只狗，早上我出门它趴在地上吃肉，晚上我回家它趴在地上啃骨头。主人开烧腊店，这狗得多幸福，难怪每天无所事事，趴地上装死玩！">
-<meta property="og:updated_time" content="2016-04-24T03:27:20.000Z">
+<meta property="og:description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
+<meta property="og:updated_time" content="2017-05-08T08:19:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自由的工作">
-<meta name="twitter:description" content="转眼来深圳有3个多月， 跟武汉相比，少了遛狗，闲逛，骂街，吃热干面的大叔大妈，取而代之的是地铁上站着参瞌睡的上班族和公司来无影去无踪的前台MM。地铁把深圳微缩成了一小坨，时间成了新的路程单位，每天大家穿梭在时间里风风火火，忙忙碌碌，跟深圳的天气一样总也不消停。 我住的楼下烧腊店有只狗，早上我出门它趴在地上吃肉，晚上我回家它趴在地上啃骨头。主人开烧腊店，这狗得多幸福，难怪每天无所事事，趴地上装死玩！">
+<meta name="twitter:title" content="服务器性能测评">
+<meta name="twitter:description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 自由的工作 | 荔枝说 · l-zhi </title>
+  <title> 服务器性能测评 | 荔枝说 · l-zhi </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -194,7 +194,7 @@
             
             
               
-                自由的工作
+                服务器性能测评
               
             
           </h1>
@@ -206,8 +206,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2013-08-10T11:21:57+08:00" content="2013-08-10">
-              2013-08-10
+            <time itemprop="dateCreated" datetime="2012-05-05T20:07:04+08:00" content="2012-05-05">
+              2012-05-05
             </time>
           </span>
 
@@ -220,8 +220,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/原创/" itemprop="url" rel="index">
-                    <span itemprop="name">原创</span>
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
                   </a>
                 </span>
 
@@ -232,8 +232,20 @@
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/原创/我所理解的生活/" itemprop="url" rel="index">
-                    <span itemprop="name">我所理解的生活</span>
+                  <a href="/categories/前端技术/HTTP2/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP2</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/HTTP2/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
                   </a>
                 </span>
 
@@ -248,8 +260,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2013/08/10/life-001/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2013/08/10/life-001/" itemprop="commentsCount"></span>
+                <a href="/2012/05/05/openrestynode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2012/05/05/openrestynode/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -271,13 +283,92 @@
       
 
       
-        <p>转眼来深圳有3个多月， 跟武汉相比，少了遛狗，闲逛，骂街，吃热干面的大叔大妈，取而代之的是地铁上站着参瞌睡的上班族和公司来无影去无踪的前台MM。地铁把深圳微缩成了一小坨，时间成了新的路程单位，每天大家穿梭在时间里风风火火，忙忙碌碌，跟深圳的天气一样总也不消停。</p>
-<p>我住的楼下烧腊店有只狗，早上我出门它趴在地上吃肉，晚上我回家它趴在地上啃骨头。主人开烧腊店，这狗得多幸福，难怪每天无所事事，趴地上装死玩！在熙攘的下班人群中形成强烈反差，人们的鞋子几乎是贴着狗毛而过，它却岿然不动，我觉得就算有人踩到它，它也顶多嗷两下算了，应该是懒得起身的。 都说勤劳的人养懒狗，懒惰的人养疯狗，再想起武汉的那些狗，狗仗人势，每天狂吠不止，太浮躁了。</p>
-<a id="more"></a>
-<p>深圳有很多小的创业型公司，有想法有激情，再聚集几个志同道合的朋友就开始创业。但是对于我们程序员来讲这种不稳定性，高风险和低工资很难让人接受，所以很多小公司很好的项目就被扼杀在技术上，或者做一个烂的产品就草草上线，最后被淹没，或者被轻易的超越。</p>
-<p>作为一个打工的，我先来谈谈理想的工作吧，我希望我能在家办公，然后我希望我想工作的时候工作，不想工作的时候陪陪父母，旅旅游。我不喜欢被加班，也不喜欢加班了还没加班费。我希望我自己支配项目进度，心情好了加班，心情不好了改天加。我希望我的工作能换来该有的价值。</p>
-<p>我有一个设想，假如我不隶属于任何公司， 我作为独立的个体，被分时间段包给不同的公司做不同的项目，比如一月份被某公司包走做前端，我做完交项目拿钱，大家合同结束，然后我想玩一个月，然后又被某公司包走再做几个月。这样一来减小了公司的人员管理成本，二来自己也轻松自由，同时还提高了整个行业的工作效率，和自己的幸福感。而且频繁的短合同也必将平衡一个程序员的整体薪资，不像现在经常会有被低估而无奈跳槽的情况，有好的点子的小公司也不愁找不到好的技术来实施，这样一来大家都是创业者大家也都互相依赖而且低耦合。程序员的管理对公司来说也是问题，说重了扭头一句“哥们不伺候”闪了，说轻了天天跟你打哈哈，总之潇洒不羁，放浪形骸，流动性很大。程序员走的是技术而不是业务，所以很适合这种工作方式。同类的独立性更大的还有画家，摄影师，设计师，作家，他们已经有了很自由的工作方式。 作为程序员其实也可以跟他们一样。</p>
-<div style="display: none"><a href="http://www.urticariaandangioedematreatment.com/home-remedies-hives-angioedema-natural-treatment-dr-gary-levin/" title="hives treatment" target="_blank" rel="external">http://www.urticariaandangioedematreatment.com/home-remedies-hives-angioedema-natural-treatment-dr-gary-levin/</a></div><br>这种其实类似游戏中的组队模式，一个团队副本大家职业不同分工不同，自由组队打副本。当一个大型项目开启，会开启自由组队模式，可以几个人同时应聘也可以小团队应聘。我们找工作还是跟普通找工作流程一样。不一样的是 可能更频繁了，或者说更自由了。<br><br>如今社会我觉得涉及到体制的都是不靠谱，有体制有管理就会有太多的闲人和争斗，集体逛窑子的，吃喝公款的，背后拆台的，办公室玩小蜜的。效率低下，成本提高，而且现在置身于充满变数的互联网社会，事业单位，国企，传统大企业，只能难以适应各种变数，转身过慢而被抛弃。那些新新的公司才是行业发展的中坚，改变我们生活品质的不是银行而是支付宝。<br><br>沉醉在自己意淫出来的世界太久，思想如泉涌，其实我本来是想写写深圳和武汉的差别，然后谈谈理想，聊聊人生，说说深圳天空有多TMD蓝，云有多 TMD 白，泥巴有多 TMD 好玩，可一时刹不住车，跑偏了，我只能说小小的文本框束缚不住我喜欢瞎扯淡的心。<br><br>时间不早了洗洗睡~<br><br><span style="text-decoration: underline;"><span style="color: #e61831; text-decoration: underline;">原创文章，可随意转载，但是请注明出处，感谢支持！</span></span> <div style="display: none">zp8497586rq</div>
+        <p>openresty vs node 简要性能测试</p>
+<h2 id="服务器性能研究"><a href="#服务器性能研究" class="headerlink" title="服务器性能研究"></a>服务器性能研究</h2><p>条件<br>webbench -c 400 -t 1 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=53279 pages/min, 84452 bytes/sec. Requests: 883 susceed, 5 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30959 pages/min, 35793 bytes/sec. Requests: 478 susceed, 38 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=4470 pages/min, 18583 bytes/sec. Requests: 728 susceed, 17 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=35238 pages/min, 88734 bytes/sec. Requests: 5334 susceed, 539 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30924 pages/min, 51807 bytes/sec.Requests: 4215 susceed, 939 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 60 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=5339 pages/min, 20366 bytes/sec. Requests: 4767 susceed, 572 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=30998 pages/min, 75467 bytes/sec. Requests: 26554 susceed, 4444 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=27332 pages/min, 46166 bytes/sec.Requests: 22614 susceed, 4718 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + lua + lapis</td>
+<td>Speed=1950 pages/min, 3874 bytes/sec. Requests: 149 susceed, 176 failed.</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
 
@@ -294,16 +385,12 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2013/05/05/rzzsmac/" rel="next" title="rz配置">
-                <i class="fa fa-chevron-left"></i> rz配置
-              </a>
-            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2013/08/31/css-thinking01/" rel="prev" title="怎么拯救你，我的样式">
-                怎么拯救你，我的样式 <i class="fa fa-chevron-right"></i>
+              <a href="/2013/05/05/rzzsmac/" rel="prev" title="rz配置">
+                rz配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -330,8 +417,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2013/08/10/life-001/"
-           data-title="自由的工作" data-url="http://l-zhi.com/2013/08/10/life-001/">
+      <div class="ds-thread" data-thread-key="2012/05/05/openrestynode/"
+           data-title="服务器性能测评" data-url="http://l-zhi.com/2012/05/05/openrestynode/">
       </div>
     
   </div>
@@ -427,7 +514,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器性能研究"><span class="nav-number">1.</span> <span class="nav-text">服务器性能研究</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

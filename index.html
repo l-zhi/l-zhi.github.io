@@ -196,370 +196,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/05/openrestynode/" itemprop="url">
-                  服务器性能测评
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-05T20:07:04+08:00" content="2016-05-05">
-              2016-05-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/" itemprop="url" rel="index">
-                    <span itemprop="name">前端技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/HTTP2/" itemprop="url" rel="index">
-                    <span itemprop="name">HTTP2</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/HTTP2/原创/" itemprop="url" rel="index">
-                    <span itemprop="name">原创</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/05/openrestynode/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/openrestynode/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>openresty vs node 简要性能测试</p>
-<h2 id="服务器性能研究"><a href="#服务器性能研究" class="headerlink" title="服务器性能研究"></a>服务器性能研究</h2><p>条件<br>webbench -c 400 -t 1 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
-<table>
-<thead>
-<tr>
-<th>测试类型</th>
-<th>测试结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nginx + html</td>
-<td>Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.</td>
-</tr>
-<tr>
-<td>nginx + lua</td>
-<td>Speed=53279 pages/min, 84452 bytes/sec. Requests: 883 susceed, 5 failed.</td>
-</tr>
-<tr>
-<td>nginx + node</td>
-<td>Speed=30959 pages/min, 35793 bytes/sec. Requests: 478 susceed, 38 failed.</td>
-</tr>
-</tbody>
-</table>
-<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
-<table>
-<thead>
-<tr>
-<th>测试类型</th>
-<th>测试结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nginx + html</td>
-<td>Speed=4470 pages/min, 18583 bytes/sec. Requests: 728 susceed, 17 failed.</td>
-</tr>
-<tr>
-<td>nginx + lua</td>
-<td>Speed=35238 pages/min, 88734 bytes/sec. Requests: 5334 susceed, 539 failed.</td>
-</tr>
-<tr>
-<td>nginx + node</td>
-<td>Speed=30924 pages/min, 51807 bytes/sec.Requests: 4215 susceed, 939 failed.</td>
-</tr>
-</tbody>
-</table>
-<p>条件<br>webbench -c 400 -t 60 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
-<table>
-<thead>
-<tr>
-<th>测试类型</th>
-<th>测试结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nginx + html</td>
-<td>Speed=5339 pages/min, 20366 bytes/sec. Requests: 4767 susceed, 572 failed.</td>
-</tr>
-<tr>
-<td>nginx + lua</td>
-<td>Speed=30998 pages/min, 75467 bytes/sec. Requests: 26554 susceed, 4444 failed.</td>
-</tr>
-<tr>
-<td>nginx + node</td>
-<td>Speed=27332 pages/min, 46166 bytes/sec.Requests: 22614 susceed, 4718 failed.</td>
-</tr>
-</tbody>
-</table>
-<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
-<table>
-<thead>
-<tr>
-<th>测试类型</th>
-<th>测试结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nginx + lua + lapis</td>
-<td>Speed=1950 pages/min, 3874 bytes/sec. Requests: 149 susceed, 176 failed.</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/05/rzzsmac/" itemprop="url">
-                  rz配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-05T20:07:04+08:00" content="2016-05-05">
-              2016-05-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/" itemprop="url" rel="index">
-                    <span itemprop="name">前端技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/HTTP2/" itemprop="url" rel="index">
-                    <span itemprop="name">HTTP2</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/前端技术/HTTP2/原创/" itemprop="url" rel="index">
-                    <span itemprop="name">原创</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/05/rzzsmac/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/rzzsmac/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>一配置rz，方便与服务器数据传输。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/05/rzzsmac/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/05/05/h2-practice/" itemprop="url">
                   假如HTTP/2已经普及
                 </a>
@@ -1505,6 +1141,265 @@
 <p>还有一篇很有价值的文章 javascript-profile 的测试，已经有人翻译了在此就直接列出来供大家参考吧。<a href="http://blog.csdn.net/woailincon/article/details/10503869" target="_blank" rel="external">http://blog.csdn.net/woailincon/article/details/10503869</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/01/05/Performance profiling with the Timeline/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/01/05/timeline-demo-diagnosing-forced-synchronous-layouts/" itemprop="url">
+                  Timeline demo: Diagnosing forced synchronous layouts
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-05T19:34:38+08:00" content="2014-01-05">
+              2014-01-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/05/timeline-demo-diagnosing-forced-synchronous-layouts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/05/timeline-demo-diagnosing-forced-synchronous-layouts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这篇文章翻译自<a href="https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/" target="_blank" rel="external">https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/</a></p>
+<p>他是一个很小的例子，但是是通过timeline从头到尾测试发现并解决一个性能问题。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/05/timeline-demo-diagnosing-forced-synchronous-layouts/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2014/01/05/what-are-the-transparent-bars-in-chrome-devtools-timeline/" itemprop="url">
+                  Chrome DevTools' timeline
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-01-05T19:10:06+08:00" content="2014-01-05">
+              2014-01-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/01/05/what-are-the-transparent-bars-in-chrome-devtools-timeline/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/01/05/what-are-the-transparent-bars-in-chrome-devtools-timeline/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>chrome 开发者工具天天都在用，但是你真的会看么？Timeline 中的柱子是什么意思呢？为什么有的是空的有的是有颜色的呢？<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/01/05/what-are-the-transparent-bars-in-chrome-devtools-timeline/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
