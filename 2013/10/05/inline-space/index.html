@@ -57,16 +57,12 @@
 
 
 
-<meta name="description" content="问题起源于一个样式，而且所有前端都遇到过的样式：
-
-在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
+<meta name="description" content="问题起源于一个样式，而且所有前端都遇到过的样式：  在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内联元素的空隙">
 <meta property="og:url" content="http://l-zhi.com/2013/10/05/inline-space/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="问题起源于一个样式，而且所有前端都遇到过的样式：
-
-在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
+<meta property="og:description" content="问题起源于一个样式，而且所有前端都遇到过的样式：  在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
 <meta property="og:image" content="http://l-zhi.com/img/2013/10/20131005160429.jpg">
 <meta property="og:image" content="http://l-zhi.com/img/2013/10/clipboard1.png">
 <meta property="og:image" content="http://l-zhi.com/img/2013/10/clipboard2.png">
@@ -87,9 +83,7 @@
 <meta property="og:updated_time" content="2016-04-24T08:29:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内联元素的空隙">
-<meta name="twitter:description" content="问题起源于一个样式，而且所有前端都遇到过的样式：
-
-在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
+<meta name="twitter:description" content="问题起源于一个样式，而且所有前端都遇到过的样式：  在调试工具中，当鼠标滑到a标签的时候会有两像素错位，并且紧接在下面的元素也会错位（往下移动）两像素。">
 <meta name="twitter:image" content="http://l-zhi.com/img/2013/10/20131005160429.jpg">
 
 
@@ -303,11 +297,11 @@
 <p>为了睡觉踏实点，还是研究研究这多出来的间隙的问题。</p>
 <p>上栗子：</p>
 <p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/clipboard1/"><img src="/img/2013/10/clipboard1.png" alt="clipboard1"></a></p>
-<p>dom结构是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;background:red&quot;&gt;</span><br><span class="line">  &lt;img src=&quot;xxx.jpg&quot; &gt;</span><br><span class="line">  &lt;a href=&quot;##&quot; style=&quot;background:yellow&quot;&gt;hyojoo&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>dom结构是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div style=&quot;background:red&quot;&gt;</div><div class="line">  &lt;img src=&quot;xxx.jpg&quot; &gt;</div><div class="line">  &lt;a href=&quot;##&quot; style=&quot;background:yellow&quot;&gt;hyojoo&lt;/a&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <p>为了显示清楚我加了不同颜色，图中红色就是错位的2像素（ie6-7是没有颜色的，但是也有明显的空隙）。</p>
 <p>首先a标签，img 都是内联元素，所以解析方式是以文档流的方式解析的。</p>
 <p>图中的空间是位于下部，很有可能跟对齐方式有关，文档流的对齐属性为：vertical-align，而且默认值是baseline如下图：</p>
-<p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/clipboard2-2/"><img src="/img/2013/10/clipboard2.png" alt="clipboard2"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;##&quot;&gt;hyojoo&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/clipboard2-2/"><img src="/img/2013/10/clipboard2.png" alt="clipboard2"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=&quot;##&quot;&gt;hyojoo&lt;/a&gt;</div></pre></td></tr></table></figure></p>
 <p>上图为在chrome中显示的样式，a标签的underline刚好在baseline的位置上（其他浏览器解析稍有不同），如果还觉得baseline很虚幻，可以想想我们原来英语本上的四线三格，倒数第二条线就是baseline了。</p>
 <p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/attachment/20131003094307/"><img src="/img/2013/10/20131003094307.jpg" alt="20131003094307"></a></p>
 <p>像“j,q,y,w”这类字母超过了baseline，而“o，h，i等”这类字母没有baseline以下的部分，所以他们的底部就抵着是baseline。<br>“o”和“j”相比，o比j少了baseline以下的部分空间，img刚好也差了一部分空间，应该不会是巧合，肯定有原因的。会不会img解析就类似字母“o”，由于对齐方式是基于baseline的呢？<br>写个例子如下图：<br><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/clipboard3-2/"><img src="/img/2013/10/clipboard3.png" alt="clipboard3"></a></p>
@@ -337,7 +331,7 @@
 <p>尤其需要注意的是，前端做出来的页面和后台程序员交接的时候，必须说明这些点，要不然出现很多莫名其妙的问题，比如下面的例子：</p>
 <p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/clipboard7-2/"><img src="/img/2013/10/clipboard7.png" alt="clipboard7"></a></p>
 <p>这是sina微博，不惜用注释来提醒后来的程序员注意空格问题。</p>
-<p>再举个更直白点的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">	&lt;span class=&quot;red&quot;&gt;1&lt;/span&gt;</span><br><span class="line">	&lt;span class=&quot;blue&quot;&gt;2&lt;/span&gt;</span><br><span class="line">	&lt;span class=&quot;yellow&quot;&gt;3&lt;/span&gt;</span><br><span class="line">	&lt;span class=&quot;gray&quot;&gt;4&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;outer&quot;&gt;</span><br><span class="line">	&lt;span class=&quot;red&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;blue&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;yellow&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;gray&quot;&gt;4&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>再举个更直白点的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">	&lt;span class=&quot;red&quot;&gt;1&lt;/span&gt;</div><div class="line">	&lt;span class=&quot;blue&quot;&gt;2&lt;/span&gt;</div><div class="line">	&lt;span class=&quot;yellow&quot;&gt;3&lt;/span&gt;</div><div class="line">	&lt;span class=&quot;gray&quot;&gt;4&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;outer&quot;&gt;</div><div class="line">	&lt;span class=&quot;red&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;blue&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;yellow&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;gray&quot;&gt;4&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <p>上面是有空格的（回车会解析成空格），下面是没有空格的，由于为了方便查看我把outer的字体调大到200px，空格也更明显。</p>
 <p>我的任务是将上面的空格用各种方法来想办法去掉，达到和下面一致的效果，如下图：</p>
 <p><a href="http://l-zhi.com/2013/10/%e5%86%85%e8%81%94%e5%85%83%e7%b4%a0%e7%9a%84%e7%a9%ba%e9%9a%99/attachment/20131003110942/"><img src="/img/2013/10/20131003110942.png" alt="20131003110942"></a></p>

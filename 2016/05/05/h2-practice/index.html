@@ -59,7 +59,7 @@
 
 <meta name="description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="假如HTTP/2已经普及">
+<meta property="og:title" content="假如HTTP&#x2F;2已经普及">
 <meta property="og:url" content="http://l-zhi.com/2016/05/05/h2-practice/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
 <meta property="og:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
@@ -75,9 +75,9 @@
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FvwDB2Ijc9PgYC5ov7c14DXlewwR">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FiQfDsFbETYR95vJ8rRUPfrHGtqV">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/Flx6_y_f3ZCJdDKy1WaZHBhTITHd">
-<meta property="og:updated_time" content="2016-06-24T02:50:03.000Z">
+<meta property="og:updated_time" content="2017-05-08T07:39:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="假如HTTP/2已经普及">
+<meta name="twitter:title" content="假如HTTP&#x2F;2已经普及">
 <meta name="twitter:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
 <meta name="twitter:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FqFshsS87Z4RBBjVkGA80JkxMD1j">
 
@@ -335,7 +335,7 @@
 <p>[<img src="http://7xt3gj.com1.z0.glb.clouddn.com/FpT69QRgLeIs4r8wzXkS-3TXyO-m" alt="placeholder"></p>
 <p>HTTP/2 Server Push 和 普通请求相比，去掉了请求阶段，直接返回数据（Content Download），数据获取速度更快，而且push中可以嵌入逻辑，并且请求还可以进行缓存。</p>
 <p>贴一小段代码，下面的代码为请求接口的时候，主动推送zepto代码给客户端的核心代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/serverpush'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ctx, next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> zepto = fs.readFileSync(resolve(root, <span class="string">'public/js/zepto.js'</span>), &#123; encoding: <span class="string">'UTF-8'</span> &#125;)</span><br><span class="line">  <span class="keyword">var</span> html = fs.readFileSync(resolve(root, <span class="string">'public/item2_1.html'</span>), &#123; encoding: <span class="string">'UTF-8'</span> &#125;)</span><br><span class="line">  ctx.res.push(<span class="string">'/zepto.js'</span>, options, <span class="function"><span class="keyword">function</span>(<span class="params">err, stream</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) <span class="keyword">return</span>;</span><br><span class="line">      zlib.gzip(zepto,<span class="function"><span class="keyword">function</span>(<span class="params">err, buf</span>)</span>&#123;</span><br><span class="line">        stream.end(buf)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;);</span><br><span class="line">  ctx.body = html</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">router.get(<span class="string">'/serverpush'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ctx, next</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> zepto = fs.readFileSync(resolve(root, <span class="string">'public/js/zepto.js'</span>), &#123; <span class="attr">encoding</span>: <span class="string">'UTF-8'</span> &#125;)</div><div class="line">  <span class="keyword">var</span> html = fs.readFileSync(resolve(root, <span class="string">'public/item2_1.html'</span>), &#123; <span class="attr">encoding</span>: <span class="string">'UTF-8'</span> &#125;)</div><div class="line">  ctx.res.push(<span class="string">'/zepto.js'</span>, options, <span class="function"><span class="keyword">function</span>(<span class="params">err, stream</span>)</span>&#123;</div><div class="line">      <span class="keyword">if</span> (err) <span class="keyword">return</span>;</div><div class="line">      zlib.gzip(zepto,<span class="function"><span class="keyword">function</span>(<span class="params">err, buf</span>)</span>&#123;</div><div class="line">        stream.end(buf)</div><div class="line">      &#125;)</div><div class="line">  &#125;);</div><div class="line">  ctx.body = html</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p><a href="https://github.com/l-zhi/http2-example/blob/master/serve/router.js" target="_blank" rel="external">这里可以查看完整的Server Push代码</a></p>
 <p><strong>关于优先级和依赖性（Priority）</strong></p>
 <p>优先级的设置可以看下<a href="https://nghttp2.org/blog/2014/11/16/visualization-of-http-slash-2-priority/" target="_blank" rel="external">这一篇文章</a>，通过设置请求资源的Pripority，达到资源获取的优先级。</p>
@@ -388,8 +388,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/05/rzzsmac配置/" rel="prev" title="假如HTTP/2已经普及">
-                假如HTTP/2已经普及 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/05/05/rzzsmac/" rel="prev" title="rz配置">
+                rz配置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

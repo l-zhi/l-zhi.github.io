@@ -57,22 +57,16 @@
 
 
 
-<meta name="description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。 关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
+<meta name="description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器的资源加载顺序">
-<meta property="og:url" content="http://l-zhi.com/2014/04/23/resource-load/index.html">
+<meta property="og:title" content="服务器性能测评">
+<meta property="og:url" content="http://l-zhi.com/2016/05/05/openrestynode/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。 关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
-<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140420172346-300x42.png">
-<meta property="og:image" content="http://l-zhi.com/img/2014/04/2-191x300.png">
-<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140422202602-300x37.png">
-<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140423173355-300x26.png">
-<meta property="og:image" content="http://l-zhi.com/img/2014/04/QQ截图20140423172904-300x272.png">
-<meta property="og:updated_time" content="2016-04-24T09:22:16.000Z">
+<meta property="og:description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
+<meta property="og:updated_time" content="2017-05-08T08:00:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器的资源加载顺序">
-<meta name="twitter:description" content="这篇文章主要是参考了 浏览器的工作原理：新式网络浏览器幕后揭秘 然后加上自己的实际测试和理解总结出来的。 关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载">
-<meta name="twitter:image" content="http://l-zhi.com/img/2014/04/QQ截图20140420172346-300x42.png">
+<meta name="twitter:title" content="服务器性能测评">
+<meta name="twitter:description" content="openresty vs node 简要性能测试 服务器性能研究条件webbench -c 400 -t 1 http://localhost:8080/xx/    测试类型 测试结果     nginx + html Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.   nginx + lua Sp">
 
 
 
@@ -90,7 +84,7 @@
   };
 </script>
 
-  <title> 浏览器的资源加载顺序 | 荔枝说 · l-zhi </title>
+  <title> 服务器性能测评 | 荔枝说 · l-zhi </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -200,7 +194,7 @@
             
             
               
-                浏览器的资源加载顺序
+                服务器性能测评
               
             
           </h1>
@@ -212,8 +206,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-04-23T19:54:06+08:00" content="2014-04-23">
-              2014-04-23
+            <time itemprop="dateCreated" datetime="2016-05-05T20:07:04+08:00" content="2016-05-05">
+              2016-05-05
             </time>
           </span>
 
@@ -233,6 +227,30 @@
 
                 
                 
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/HTTP2/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP2</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端技术/HTTP2/原创/" itemprop="url" rel="index">
+                    <span itemprop="name">原创</span>
+                  </a>
+                </span>
+
+                
+                
 
               
             </span>
@@ -242,8 +260,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/04/23/resource-load/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/04/23/resource-load/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/openrestynode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/openrestynode/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -265,41 +283,91 @@
       
 
       
-        <p>这篇文章主要是参考了 <a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" title="浏览器工作原理" target="_blank" rel="external">浏览器的工作原理：新式网络浏览器幕后揭秘</a> 然后加上自己的实际测试和理解总结出来的。</p>
-<p>关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载<br><a id="more"></a><br>资源加载之 <strong>并行</strong></p>
-<p>下图是用chrome 的 timeline进行测试的结果：可以很明显看到资源加载是并行的</p>
-<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140420172346/"><img src="/img/2014/04/QQ截图20140420172346-300x42.png" alt="QQ截图20140420172346"></a></p>
-<p>这样提高了浏览器的资源加载效率，对于不同的浏览器，资源加载的并行数也是不一样的如下图：</p>
-<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/attachment/2/"><img src="/img/2014/04/2-191x300.png" alt="2"></a></p>
-<p>&nbsp;</p>
-<p>资源加载之 <strong>阻塞</strong></p>
-<p>js： 首先页面进行加载，碰到js并行加载，加载完成后会根据js位置顺序来执行，会阻塞页面的渲染。</p>
-<p>css：css的加载和构建render tree的时候ie和chrome 是不同的。</p>
-<p><strong>当外联样式在head部分</strong>，chrome和ie都会先加载好css，然后再生成render tree。</p>
-<p>css生成代码：</p>
-<pre><code>&lt;?php 
-  sleep(6); 
-  header (&quot;content-type:text/css; charset: utf-8&quot;); 
-  echo &apos;.p1{background-color:red;} .p2{background-color:green;} .p3{background-color:blue}&apos;; 
-?&gt;
-</code></pre><p>css我是php生成的，做了6s的延迟然后才返回css。</p>
-<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140422202602/"><img src="/img/2014/04/QQ截图20140422202602-300x37.png" alt="QQ截图20140422202602"></a></p>
-<p>用timeline的时候可以发现6s的时候才开始出现绿色，我们都知道绿色（pating）才是开始渲染页面。也就是说等待所有的css加载完成才会构建render tree，进而渲染页面。</p>
-<p><strong>当body部分和head部分都有外联样式</strong>，chrome会等到所有css加载完成，才构建render tree，而ie则会先加载完头部后，body部分根据页面上的顺序进行多次的render tree的构建，并多次渲染页面。如果觉得文字上不好理解，可以看下这个</p>
-<p>chrome 中：</p>
-<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423173355/"><img src="/img/2014/04/QQ截图20140423173355-300x26.png" alt="QQ截图20140423173355"></a></p>
-<p>&nbsp;</p>
-<p>timeline依然是6s之后开始渲染。说明chrome会拿到页面上所有的外联css之后才开始构建render tree进行页面的渲染。</p>
-<p>ie表现：</p>
-<p><a href="http://l-zhi.com/2014/04/%e6%b5%8f%e8%a7%88%e5%99%a8%e7%9a%84%e8%b5%84%e6%ba%90%e5%8a%a0%e8%bd%bd%e9%a1%ba%e5%ba%8f/qq%e6%88%aa%e5%9b%be20140423172904/"><img src="/img/2014/04/QQ截图20140423172904-300x272.png" alt="QQ截图20140423172904"></a></p>
-<p>ie中非常明显的分成两个过程，页面上的div开始是灰色然后6s左右变成了彩色。</p>
-<p>说明ie中的是先加载head中的样式，然后在body中则是直接从上到下来渲染页面的。</p>
-<p><strong>js对chrome页面渲染的影响</strong>，当chrome中body部分由外联样式和js 的时候也会出现，先灰色然后变成彩色的情况，因为js会截断页面，将js以上部分先渲染。</p>
-<p>因为js可能会对dom进行操作，所以页面上dom需要先跟已经加载好的样式进行render tree的构建并渲染到页面上。</p>
-<p>js：</p>
-<p><strong>defer</strong>： 不阻塞html，下载完成后执行，而且保证js页面中的先后顺序。（不会停止文档的解析，而是 <div style="position:absolute; left:-4291px; top:-4439px;">On mixed <a href="http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html" target="_blank" rel="external">http://monoboxstudio.com/bem/essey-on-childrens-obisity-and-tv-influence.html</a> wrapping. Great and <a href="http://infraindo.org/research-paper-helper" target="_blank" rel="external">http://infraindo.org/research-paper-helper</a> waxy unclogged ago hot <a href="http://kec371.com/english-essays-for-olevel-students/" target="_blank" rel="external">english essays for o\’level students</a> was <a href="http://themachetemovement.com/getting-essay-help" target="_blank" rel="external">themachetemovement.com getting essay help</a> the them leg’s: makes <a href="http://edithstboutique.net/onqyl/write-me-a-thesis-statement.php" target="_blank" rel="external">write me a thesis statement edithstboutique.net</a> personal gone. This. And <a href="http://www.rusticacandles.com/homework-help-nyc/" target="_blank" rel="external">http://www.rusticacandles.com/homework-help-nyc/</a> never the it I <a href="http://www.sumvilla.com/hisa/buy-essay-papers-now" target="_blank" rel="external">buy essay papers now</a> hard it. A shine. I chance. I <a href="http://edithstboutique.net/onqyl/c-programming-homework-help.php" target="_blank" rel="external">c programming homework help</a> up <a href="http://premierfreedom.net/tila/essay-writing-professionals/" target="_blank" rel="external">essay writing professionals</a> the with what your <a href="http://kec371.com/homework-help-online-free/" target="_blank" rel="external">homework help online free</a> requirments <a href="http://infraindo.org/college-essay-writing-services" target="_blank" rel="external">http://infraindo.org/college-essay-writing-services</a> a fine the <a href="http://www.sumvilla.com/hisa/technical-report-writing" target="_blank" rel="external">http://www.sumvilla.com/hisa/technical-report-writing</a> never my <a href="http://premierfreedom.net/tila/keywords/" target="_blank" rel="external">keywords premierfreedom.net</a> goes - the idea <a href="http://monoboxstudio.com/bem/cheap-essay-online-social-work.html" target="_blank" rel="external">cheap essay online social work</a> probably <a href="http://www.rusticacandles.com/do-my-home-work/" target="_blank" rel="external">do my home work</a> fixed if does iron <a href="http://themachetemovement.com/can-someone-help-me-with-my-homework" target="_blank" rel="external">can someone help me with my homework</a> as?</div>  等到文档解析结束后才按顺序执行）</p>
-<p><strong>async（chrome）</strong>：不阻塞文档解析，但是下载完了就会立即执行。</p>
-<p><strong>append :  </strong>用js append到页面中也会有先后顺序，类似defer。</p>
+        <p>openresty vs node 简要性能测试</p>
+<h2 id="服务器性能研究"><a href="#服务器性能研究" class="headerlink" title="服务器性能研究"></a>服务器性能研究</h2><p>条件<br>webbench -c 400 -t 1 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=53279 pages/min, 84452 bytes/sec. Requests: 883 susceed, 5 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30959 pages/min, 35793 bytes/sec. Requests: 478 susceed, 38 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=4470 pages/min, 18583 bytes/sec. Requests: 728 susceed, 17 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=35238 pages/min, 88734 bytes/sec. Requests: 5334 susceed, 539 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30924 pages/min, 51807 bytes/sec.Requests: 4215 susceed, 939 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 60 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=5339 pages/min, 20366 bytes/sec. Requests: 4767 susceed, 572 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=30998 pages/min, 75467 bytes/sec. Requests: 26554 susceed, 4444 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=27332 pages/min, 46166 bytes/sec.Requests: 22614 susceed, 4718 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + lua + lapis</td>
+<td>Speed=1950 pages/min, 3874 bytes/sec. Requests: 149 susceed, 176 failed.</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -317,17 +385,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/02/13/yscroll/" rel="next" title="超轻量级手机端区域滚动组件——Yscroll">
-                <i class="fa fa-chevron-left"></i> 超轻量级手机端区域滚动组件——Yscroll
+              <a href="/2016/05/05/rzzsmac/" rel="next" title="rz配置">
+                <i class="fa fa-chevron-left"></i> rz配置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/02/26/docker-quick-start/" rel="prev" title="初探Docker">
-                初探Docker <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -353,8 +417,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/04/23/resource-load/"
-           data-title="浏览器的资源加载顺序" data-url="http://l-zhi.com/2014/04/23/resource-load/">
+      <div class="ds-thread" data-thread-key="2016/05/05/openrestynode/"
+           data-title="服务器性能测评" data-url="http://l-zhi.com/2016/05/05/openrestynode/">
       </div>
     
   </div>
@@ -450,7 +514,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器性能研究"><span class="nav-number">1.</span> <span class="nav-text">服务器性能研究</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

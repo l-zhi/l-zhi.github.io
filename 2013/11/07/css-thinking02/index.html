@@ -281,7 +281,7 @@
 <p>上图红色边框的部分就是一个页面加载中html和css渲染的信息，依次为<strong>html解析、样式解析、布局、绘制</strong>四块，这四部分反应了一个页面的渲染效率。</p>
 <p>（<strong>一</strong>） <strong>Parse HTML</strong> —— 将DOM 元素和属性节点解析成DOM树。</p>
 <p>当然解析过程中效率问题也是显而易见的，比如是否有结束标签，以及嵌套是否正确，由于Parse HTML的时候会有容错机制所以如果标签结构出错需要额外的解析来进行容错。</p>
-<p>比如下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;nihao&lt;p&gt;wohao&lt;/p&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure></p>
+<p>比如下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;nihao&lt;p&gt;wohao&lt;/p&gt;&lt;/p&gt;</div></pre></td></tr></table></figure></p>
 <p>我们在chrome中解析会是这样的：</p>
 <p><a href="http://l-zhi.com/2013/11/%e6%a0%b7%e5%bc%8f%e8%af%a5%e5%a6%82%e4%bd%95%e6%9e%b6%e6%9e%84-%e6%a8%a1%e5%9d%97%e5%8c%96%e4%ba%8c/qq%e6%88%aa%e5%9b%be20131106214325/"><img src="/img/2013/11/QQ截图20131106214325.png" alt="QQ截图20131106214325"></a></p>
 <p>由于dom嵌套问题而带来的容错解析。不仅结果不对，而且存在了额外开销。同样问题还有标签使用不当，属性写法不对，因为这些都需要浏览器进行容错解析，所以比较耗时，因此性能优化中少出错和精简dom是很必要的。</p>

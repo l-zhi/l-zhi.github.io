@@ -196,8 +196,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/05/服务器性能测评/" itemprop="url">
-                  假如HTTP/2已经普及
+                <a class="post-title-link" href="/2016/05/05/openrestynode/" itemprop="url">
+                  服务器性能测评
                 </a>
               
             
@@ -264,8 +264,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/05/服务器性能测评/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/服务器性能测评/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/openrestynode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/openrestynode/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -288,12 +288,94 @@
 
       
         
-          <p>一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论<code>假如</code>HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/05/服务器性能测评/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
+            <p>openresty vs node 简要性能测试</p>
+<h2 id="服务器性能研究"><a href="#服务器性能研究" class="headerlink" title="服务器性能研究"></a>服务器性能研究</h2><p>条件<br>webbench -c 400 -t 1 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=53279 pages/min, 84452 bytes/sec. Requests: 883 susceed, 5 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30959 pages/min, 35793 bytes/sec. Requests: 478 susceed, 38 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=4470 pages/min, 18583 bytes/sec. Requests: 728 susceed, 17 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=35238 pages/min, 88734 bytes/sec. Requests: 5334 susceed, 539 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30924 pages/min, 51807 bytes/sec.Requests: 4215 susceed, 939 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 60 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=5339 pages/min, 20366 bytes/sec. Requests: 4767 susceed, 572 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=30998 pages/min, 75467 bytes/sec. Requests: 26554 susceed, 4444 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=27332 pages/min, 46166 bytes/sec.Requests: 22614 susceed, 4718 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + lua + lapis</td>
+<td>Speed=1950 pages/min, 3874 bytes/sec. Requests: 149 susceed, 176 failed.</td>
+</tr>
+</tbody>
+</table>
+
+          
         
       
     </div>
@@ -337,8 +419,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/05/rzzsmac配置/" itemprop="url">
-                  假如HTTP/2已经普及
+                <a class="post-title-link" href="/2016/05/05/rzzsmac/" itemprop="url">
+                  rz配置
                 </a>
               
             
@@ -405,8 +487,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/05/rzzsmac配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/rzzsmac配置/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/rzzsmac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/rzzsmac/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -429,9 +511,9 @@
 
       
         
-          <p>一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论<code>假如</code>HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。</p>
+          <p>一配置rz，方便与服务器数据传输。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/05/rzzsmac配置/#more" rel="contents">
+            <a class="btn" href="/2016/05/05/rzzsmac/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -914,7 +996,7 @@
 
       
         
-          <p>这篇文章主要是参考了 <a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" title="浏览器工作原理">浏览器的工作原理：新式网络浏览器幕后揭秘</a> 然后加上自己的实际测试和理解总结出来的。</p>
+          <p>这篇文章主要是参考了 <a href="http://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" title="浏览器工作原理" target="_blank" rel="external">浏览器的工作原理：新式网络浏览器幕后揭秘</a> 然后加上自己的实际测试和理解总结出来的。</p>
 <p>关于资源加载，浏览器会根据文档顺序从上往下进行加载，每当遇到外联元素，如 link，script 就会新开一个线程进行并行下载<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/04/23/resource-load/#more" rel="contents">
@@ -1290,7 +1372,7 @@
 
       
         
-          <p><a href="http://aerotwist.com/blog/one-weird-trick/">http://aerotwist.com/blog/one-weird-trick/</a><br>chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。<br>
+          <p><a href="http://aerotwist.com/blog/one-weird-trick/" target="_blank" rel="external">http://aerotwist.com/blog/one-weird-trick/</a><br>chrome计算和布局的时候会”光栅化“你页面上所有的像素。 在chrome中光栅化器也叫Skia，它会根据你的页面上的可见元素产生一系列的绘制事件，这其中就有图片（可能是image标签或者是用图片当做背景）。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/01/15/performance-image01/#more" rel="contents">
               阅读全文 &raquo;
@@ -1419,8 +1501,8 @@
 
       
         
-          <p>这篇timeline的使用教程，翻译自：<a href="https://developers.google.com/chrome-developer-tools/docs/timeline#timeline_event_reference">https://developers.google.com/chrome-developer-tools/docs/timeline#timeline_event_reference</a></p>
-<p>还有一篇很有价值的文章 javascript-profile 的测试，已经有人翻译了在此就直接列出来供大家参考吧。<a href="http://blog.csdn.net/woailincon/article/details/10503869">http://blog.csdn.net/woailincon/article/details/10503869</a></p>
+          <p>这篇timeline的使用教程，翻译自：<a href="https://developers.google.com/chrome-developer-tools/docs/timeline#timeline_event_reference" target="_blank" rel="external">https://developers.google.com/chrome-developer-tools/docs/timeline#timeline_event_reference</a></p>
+<p>还有一篇很有价值的文章 javascript-profile 的测试，已经有人翻译了在此就直接列出来供大家参考吧。<a href="http://blog.csdn.net/woailincon/article/details/10503869" target="_blank" rel="external">http://blog.csdn.net/woailincon/article/details/10503869</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/01/05/Performance profiling with the Timeline/#more" rel="contents">
               阅读全文 &raquo;
