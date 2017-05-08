@@ -60,7 +60,7 @@
 <meta name="description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="假如HTTP/2已经普及">
-<meta property="og:url" content="http://l-zhi.com/2016/05/05/h2-practice/index.html">
+<meta property="og:url" content="http://l-zhi.com/2016/05/05/服务器性能测评/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
 <meta property="og:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FqFshsS87Z4RBBjVkGA80JkxMD1j">
@@ -75,7 +75,7 @@
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FvwDB2Ijc9PgYC5ov7c14DXlewwR">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FiQfDsFbETYR95vJ8rRUPfrHGtqV">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/Flx6_y_f3ZCJdDKy1WaZHBhTITHd">
-<meta property="og:updated_time" content="2016-06-24T02:50:03.000Z">
+<meta property="og:updated_time" content="2016-08-05T08:48:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="假如HTTP/2已经普及">
 <meta name="twitter:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
@@ -273,8 +273,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/05/h2-practice/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/h2-practice/" itemprop="commentsCount"></span>
+                <a href="/2016/05/05/服务器性能测评/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/服务器性能测评/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -363,6 +363,90 @@
 <p>SPDY不是本文重点就推荐一些资料：<br><a href="https://zh.wikipedia.org/zh/SPDY" target="_blank" rel="external">SPDY介绍</a><br><a href="http://nginx.org/en/docs/http/ngx_http_spdy_module.html" target="_blank" rel="external">nginx 配置SPDY</a><br><a href="https://github.com/indutny/node-spdy" target="_blank" rel="external">node-spdy 一个node库支持HTTP/2 和 SPDY</a><br><a href="https://blog.cloudflare.com/introducing-http2/" target="_blank" rel="external">HTTP/2 is here! Goodbye SPDY? Not quite yet</a></p>
 <h2 id="本文的Demo-及-测试代码"><a href="#本文的Demo-及-测试代码" class="headerlink" title="本文的Demo 及 测试代码"></a>本文的Demo 及 测试代码</h2><p><a href="https://github.com/l-zhi/http2-example" target="_blank" rel="external">代码地址</a><br><a href="https://l-zhi.com:8081/">测试Demo</a></p>
 <h3 id="本文参考资料"><a href="#本文参考资料" class="headerlink" title="本文参考资料"></a>本文参考资料</h3><p><a href="https://nghttp2.org/blog/2014/11/16/visualization-of-http-slash-2-priority/" target="_blank" rel="external">nghttp2.org</a><br><a href="https://kinsta.com/learn/what-is-http2/" target="_blank" rel="external">很棒的介绍HTTP/2的文章</a><br><a href="http://www.softwareishard.com/har/viewer" target="_blank" rel="external">HAR Viewer 最棒的har预览服务</a><br><a href="https://imququ.com/series.html" target="_blank" rel="external">Jerry Qu 的博客</a><br><a href="https://http2.github.io/" target="_blank" rel="external">HTTP/2版本发布页</a></p>
+<h1 id="服务器性能研究"><a href="#服务器性能研究" class="headerlink" title="服务器性能研究"></a>服务器性能研究</h1><p>条件<br>webbench -c 400 -t 1 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=20159 pages/min, 34974 bytes/sec. Requests: 336 susceed, 0 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=53279 pages/min, 84452 bytes/sec. Requests: 883 susceed, 5 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30959 pages/min, 35793 bytes/sec. Requests: 478 susceed, 38 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=4470 pages/min, 18583 bytes/sec. Requests: 728 susceed, 17 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=35238 pages/min, 88734 bytes/sec. Requests: 5334 susceed, 539 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=30924 pages/min, 51807 bytes/sec.Requests: 4215 susceed, 939 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 60 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + html</td>
+<td>Speed=5339 pages/min, 20366 bytes/sec. Requests: 4767 susceed, 572 failed.</td>
+</tr>
+<tr>
+<td>nginx + lua</td>
+<td>Speed=30998 pages/min, 75467 bytes/sec. Requests: 26554 susceed, 4444 failed.</td>
+</tr>
+<tr>
+<td>nginx + node</td>
+<td>Speed=27332 pages/min, 46166 bytes/sec.Requests: 22614 susceed, 4718 failed.</td>
+</tr>
+</tbody>
+</table>
+<p>条件<br>webbench -c 400 -t 10 <a href="http://localhost:8080/xx/" target="_blank" rel="external">http://localhost:8080/xx/</a></p>
+<table>
+<thead>
+<tr>
+<th>测试类型</th>
+<th>测试结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nginx + lua + lapis</td>
+<td>Speed=1950 pages/min, 3874 bytes/sec. Requests: 149 susceed, 176 failed.</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -380,17 +464,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/24/copy-hanhan001/" rel="next" title="【转】">
-                <i class="fa fa-chevron-left"></i> 【转】
+              <a href="/2016/05/05/rzzsmac配置/" rel="next" title="假如HTTP/2已经普及">
+                <i class="fa fa-chevron-left"></i> 假如HTTP/2已经普及
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/05/rzzsmac配置/" rel="prev" title="假如HTTP/2已经普及">
-                假如HTTP/2已经普及 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -416,8 +496,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/05/h2-practice/"
-           data-title="假如HTTP/2已经普及" data-url="http://l-zhi.com/2016/05/05/h2-practice/">
+      <div class="ds-thread" data-thread-key="2016/05/05/服务器性能测评/"
+           data-title="假如HTTP/2已经普及" data-url="http://l-zhi.com/2016/05/05/服务器性能测评/">
       </div>
     
   </div>
@@ -513,7 +593,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#现状"><span class="nav-number">1.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-2已经普及"><span class="nav-number">2.</span> <span class="nav-text">HTTP/2已经普及</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-2给我们的好处"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP/2给我们的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多路复用"><span class="nav-number">2.1.1.</span> <span class="nav-text">多路复用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雪碧图（Sprite）"><span class="nav-number">2.2.</span> <span class="nav-text">雪碧图（Sprite）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分域名"><span class="nav-number">2.3.</span> <span class="nav-text">分域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口请求"><span class="nav-number">2.4.</span> <span class="nav-text">接口请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联资源"><span class="nav-number">2.5.</span> <span class="nav-text">内联资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容"><span class="nav-number">2.6.</span> <span class="nav-text">兼容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的Demo-及-测试代码"><span class="nav-number">3.</span> <span class="nav-text">本文的Demo 及 测试代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文参考资料"><span class="nav-number">3.1.</span> <span class="nav-text">本文参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#现状"><span class="nav-number">1.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-2已经普及"><span class="nav-number">2.</span> <span class="nav-text">HTTP/2已经普及</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-2给我们的好处"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP/2给我们的好处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多路复用"><span class="nav-number">2.1.1.</span> <span class="nav-text">多路复用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#雪碧图（Sprite）"><span class="nav-number">2.2.</span> <span class="nav-text">雪碧图（Sprite）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分域名"><span class="nav-number">2.3.</span> <span class="nav-text">分域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口请求"><span class="nav-number">2.4.</span> <span class="nav-text">接口请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联资源"><span class="nav-number">2.5.</span> <span class="nav-text">内联资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容"><span class="nav-number">2.6.</span> <span class="nav-text">兼容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的Demo-及-测试代码"><span class="nav-number">3.</span> <span class="nav-text">本文的Demo 及 测试代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文参考资料"><span class="nav-number">3.1.</span> <span class="nav-text">本文参考资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器性能研究"><span class="nav-number"></span> <span class="nav-text">服务器性能研究</span></a></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
