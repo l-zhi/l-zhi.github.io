@@ -57,12 +57,12 @@
 
 
 
-<meta name="description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
+<meta name="description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方才能走的更远。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="假如HTTP&#x2F;2已经普及">
 <meta property="og:url" content="http://l-zhi.com/2016/05/05/h2-practice/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
+<meta property="og:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方才能走的更远。">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FqFshsS87Z4RBBjVkGA80JkxMD1j">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FsVkpfzc6-um1kWxhdI7-TjE3dpG">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/Fneyvmj5x-SWWjAxPoNsYO_3Dvst">
@@ -75,10 +75,10 @@
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FvwDB2Ijc9PgYC5ov7c14DXlewwR">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FiQfDsFbETYR95vJ8rRUPfrHGtqV">
 <meta property="og:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/Flx6_y_f3ZCJdDKy1WaZHBhTITHd">
-<meta property="og:updated_time" content="2017-05-08T07:39:26.000Z">
+<meta property="og:updated_time" content="2017-05-08T08:49:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="假如HTTP&#x2F;2已经普及">
-<meta name="twitter:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。">
+<meta name="twitter:description" content="一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论假如HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方才能走的更远。">
 <meta name="twitter:image" content="http://7xt3gj.com1.z0.glb.clouddn.com/FqFshsS87Z4RBBjVkGA80JkxMD1j">
 
 
@@ -296,7 +296,7 @@
       
 
       
-        <p>一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论<code>假如</code>HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方我们才能走的更远。</p>
+        <p>一项新技术的来临，总是自上而下的，从标准推出到软硬件支持再到实施，然后普及，这中间总要经历漫长的更新之路。本文我们跨过慢慢长夜，直接讨论<code>假如</code>HTTP/2已经普及，我们前端跟现在会有哪些不同，也许你会觉得太操之过急，没必要这么早开始讨论，然而回看历史，各种技术总会在我们不经意间闯入我们的工作，更新我们的生活，与其措手不及不如提早部署，只有心怀远方才能走的更远。</p>
 <a id="more"></a>
 <p>如果不清楚什么是 HTTP/2 的可以先了解下，前面有一篇图文并茂的介绍HTTP/2的文章 <a href="http://aotu.io/notes/2016/03/17/http2-char/" target="_blank" rel="external">传送门</a></p>
 <h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>去年（2015年5月）HTTP/2标准正式发布，各大浏览器，服务器厂商都开始大面积支持这一标准，国内外各大应用网站也都开始纷纷踏入HTTP/2的阵营，Facebook、Google、Twitter、<a href="https://www.amazon.com/" target="_blank" rel="external">国外亚马逊</a>（部分请求）、<a href="https://www.tmall.com/" target="_blank" rel="external">天猫</a>（部分请求）、<a href="https://www.taobao.com/" target="_blank" rel="external">淘宝</a>（部分请求），还有一些小型站点比如 <a href="https://isux.tencent.com/" target="_blank" rel="external">ISUX</a> 等。</p>
