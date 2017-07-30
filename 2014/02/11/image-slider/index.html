@@ -395,7 +395,7 @@ new Slider(&apos;#slider_ad&apos;, {&apos;hasSelector&apos; : false});
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -706,7 +706,7 @@ new Slider(&apos;#slider_ad&apos;, {&apos;hasSelector&apos; : false});
 
 
 
-  
+  <!--
 
   
     
@@ -732,7 +732,7 @@ new Slider(&apos;#slider_ad&apos;, {&apos;hasSelector&apos; : false});
 
 
 
-
+-->
   
   
   
@@ -740,6 +740,18 @@ new Slider(&apos;#slider_ad&apos;, {&apos;hasSelector&apos; : false});
   
 
   
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+var gitalk = new Gitalk({
+  clientID: '7fed6e9566feba48a88d',
+  clientSecret: '4c66d25093377c50974ea964b9058df25b181fa8',
+  repo: 'git@github.com:l-zhi/l-zhi.github.io.git',
+  owner: 'l-zhi',
+  admin: ['l-zhi'],
+})
+gitalk.render('gitalk-container')
+</script>
 
 </body>
 </html>

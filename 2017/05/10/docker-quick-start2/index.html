@@ -57,21 +57,21 @@
 
 
 
-<meta name="description" content="本文旨在让大家了解什么是Docker，并带领大家体验Docker使用的整个流程。">
+<meta name="description" content="前面带领大家熟悉了Docker是什么，如果忘记了可以移步这里，这篇文章开始我们就一起打开Docker之门，全面了解Docker。">
 <meta name="keywords" content="docker,环境,部署,docker hub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初探Docker">
-<meta property="og:url" content="http://l-zhi.com/2016/02/26/docker-quick-start/index.html">
+<meta property="og:title" content="Docker 入门">
+<meta property="og:url" content="http://l-zhi.com/2017/05/10/docker-quick-start2/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="本文旨在让大家了解什么是Docker，并带领大家体验Docker使用的整个流程。">
+<meta property="og:description" content="前面带领大家熟悉了Docker是什么，如果忘记了可以移步这里，这篇文章开始我们就一起打开Docker之门，全面了解Docker。">
 <meta property="og:image" content="http://l-zhi.com/img/2016/docker/docker-filesystems-multilayer3.png">
 <meta property="og:image" content="http://l-zhi.com/img/2016/docker/dockerimages.png">
 <meta property="og:image" content="http://l-zhi.com/img/2016/docker/a569171010-test.png">
 <meta property="og:image" content="http://l-zhi.com/img/2016/docker/cmmd.png">
-<meta property="og:updated_time" content="2016-06-03T01:55:39.000Z">
+<meta property="og:updated_time" content="2017-05-11T09:50:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初探Docker">
-<meta name="twitter:description" content="本文旨在让大家了解什么是Docker，并带领大家体验Docker使用的整个流程。">
+<meta name="twitter:title" content="Docker 入门">
+<meta name="twitter:description" content="前面带领大家熟悉了Docker是什么，如果忘记了可以移步这里，这篇文章开始我们就一起打开Docker之门，全面了解Docker。">
 <meta name="twitter:image" content="http://l-zhi.com/img/2016/docker/docker-filesystems-multilayer3.png">
 
 
@@ -90,7 +90,7 @@
   };
 </script>
 
-  <title> 初探Docker | 荔枝说 · l-zhi </title>
+  <title> Docker 入门 | 荔枝说 · l-zhi </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -200,7 +200,7 @@
             
             
               
-                初探Docker
+                Docker 入门
               
             
           </h1>
@@ -212,8 +212,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-26T17:55:35+08:00" content="2016-02-26">
-              2016-02-26
+            <time itemprop="dateCreated" datetime="2017-05-10T17:55:35+08:00" content="2017-05-10">
+              2017-05-10
             </time>
           </span>
 
@@ -223,8 +223,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/02/26/docker-quick-start/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/docker-quick-start/" itemprop="commentsCount"></span>
+                <a href="/2017/05/10/docker-quick-start2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/docker-quick-start2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -246,7 +246,7 @@
       
 
       
-        <p>本文旨在让大家了解什么是Docker，并带领大家体验Docker使用的整个流程。</p>
+        <p>前面带领大家熟悉了Docker是什么，如果忘记了可以移步<a href="">这里</a>，这篇文章开始我们就一起打开Docker之门，全面了解Docker。</p>
 <a id="more"></a>
 <p>开启Docker学习之旅前，我们简单描述几个场景，应该很多人都有碰到过：</p>
 <p>小凹同学开发了一个web应用，服务器环境是: <code>centos 7</code> + <code>nginx</code> + <code>node4.6</code> + <code>mongodb3.2.3</code> 最近要上线了。</p>
@@ -261,6 +261,7 @@
 <p><img src="/img/2016/docker/docker-filesystems-multilayer3.png" alt="placehodler"> </p>
 <p>上图就是一张Docker层级图， 最下面是核心系统，文件系统等构成Dokcer底层，上面的是镜像（image），分为基础镜像和普通镜像，所有镜像可以直接启动生成一个实例（container），container我们可以理解为一个可以直接运行的虚拟机了。</p>
 <p>其中基础image 启动后生成container，然后添加一些应用如 <code>apache</code>，<code>emacs</code>，可以通过提交操作直接生成普通的image。 我们可以共享这个image到任何地方，并启动它。</p>
+<h2 id="Docker-周边"><a href="#Docker-周边" class="headerlink" title="Docker 周边"></a>Docker 周边</h2><p>shipyard</p>
 <h2 id="使用Docker"><a href="#使用Docker" class="headerlink" title="使用Docker"></a>使用Docker</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><p>Docker 可以安装在 <code>Linux</code>, <code>Mac OS</code>, <code>Windows</code> 上，详细安装步骤可以参考 <strong><a href="https://docs.docker.com/engine/installation/" target="_blank" rel="external">官方安装文档</a></strong> 。</p>
 <p><em>注：本文就不一一举例所有的安装方法，就以操作系统 <strong><a href="https://zh.wikipedia.org/wiki/CentOS" target="_blank" rel="external">centos</a></strong> 为例。</em></p>
 <p>由于docker 只支持 <code>centos6</code>以上，<code>64</code>位的版本操作系统，所以安装前可以用以下命令查看服务器系统。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ getconf LONG_BIT           //查看操作系统是多少位</div><div class="line">&gt; 64</div><div class="line">$ cat /etc/redhat-release    //查看操作系统版本</div><div class="line">&gt; CentOS Linux release 7.0.1406 (Core)</div></pre></td></tr></table></figure></p>
@@ -339,17 +340,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/04/23/resource-load/" rel="next" title="浏览器的资源加载顺序">
-                <i class="fa fa-chevron-left"></i> 浏览器的资源加载顺序
+              <a href="/2016/05/05/h2-practice/" rel="next" title="假如HTTP/2已经普及">
+                <i class="fa fa-chevron-left"></i> 假如HTTP/2已经普及
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/24/copy-hanhan001/" rel="prev" title="【转】">
-                【转】 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,8 +372,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/26/docker-quick-start/"
-           data-title="初探Docker" data-url="http://l-zhi.com/2016/02/26/docker-quick-start/">
+      <div class="ds-thread" data-thread-key="2017/05/10/docker-quick-start2/"
+           data-title="Docker 入门" data-url="http://l-zhi.com/2017/05/10/docker-quick-start2/">
       </div>
     
   </div>
@@ -472,7 +469,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Docker？"><span class="nav-number">1.</span> <span class="nav-text">什么是Docker？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Docker"><span class="nav-number">2.</span> <span class="nav-text">使用Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取基础镜像"><span class="nav-number">2.2.</span> <span class="nav-text">获取基础镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置新的镜像"><span class="nav-number">2.3.</span> <span class="nav-text">配置新的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Dockerfile-配置新的image"><span class="nav-number">2.4.</span> <span class="nav-text">通过Dockerfile 配置新的image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">2.5.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本文参考资料"><span class="nav-number">2.6.</span> <span class="nav-text">本文参考资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还想了解的"><span class="nav-number">2.7.</span> <span class="nav-text">还想了解的</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Docker？"><span class="nav-number">1.</span> <span class="nav-text">什么是Docker？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-周边"><span class="nav-number">2.</span> <span class="nav-text">Docker 周边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Docker"><span class="nav-number">3.</span> <span class="nav-text">使用Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">3.1.</span> <span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取基础镜像"><span class="nav-number">3.2.</span> <span class="nav-text">获取基础镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置新的镜像"><span class="nav-number">3.3.</span> <span class="nav-text">配置新的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Dockerfile-配置新的image"><span class="nav-number">3.4.</span> <span class="nav-text">通过Dockerfile 配置新的image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交"><span class="nav-number">3.5.</span> <span class="nav-text">提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本文参考资料"><span class="nav-number">3.6.</span> <span class="nav-text">本文参考资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还想了解的"><span class="nav-number">3.7.</span> <span class="nav-text">还想了解的</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

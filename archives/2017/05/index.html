@@ -57,16 +57,15 @@
 
 
 
-<meta name="description" content="l-zhi.tree      	 SELECT `name` FROM `article` WHERE `list_id` in &apos;&apos; 	  //数据库数据 var list = [{&apos;id&apos;:1, &apos;pid&apos;:0, &apos;name&apos;:&apos;故事会&apos;, isleaf:0}, 			{&apos;id&apos;:2, &apos;pid&apos;:1, &apos;name&apos;:&apos;武侠&apos;, isleaf:0}, 			{&apos;id&apos;:3, &apos;pi">
+<meta name="description" content="来这儿，随便聊">
 <meta property="og:type" content="website">
 <meta property="og:title" content="荔枝说 · l-zhi">
-<meta property="og:url" content="http://l-zhi.com/demo/treejs/demo.html">
+<meta property="og:url" content="http://l-zhi.com/archives/2017/05/index.html">
 <meta property="og:site_name" content="荔枝说 · l-zhi">
-<meta property="og:description" content="l-zhi.tree      	 SELECT `name` FROM `article` WHERE `list_id` in &apos;&apos; 	  //数据库数据 var list = [{&apos;id&apos;:1, &apos;pid&apos;:0, &apos;name&apos;:&apos;故事会&apos;, isleaf:0}, 			{&apos;id&apos;:2, &apos;pid&apos;:1, &apos;name&apos;:&apos;武侠&apos;, isleaf:0}, 			{&apos;id&apos;:3, &apos;pi">
-<meta property="og:updated_time" content="2013-09-29T07:01:58.000Z">
+<meta property="og:description" content="来这儿，随便聊">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="荔枝说 · l-zhi">
-<meta name="twitter:description" content="l-zhi.tree      	 SELECT `name` FROM `article` WHERE `list_id` in &apos;&apos; 	  //数据库数据 var list = [{&apos;id&apos;:1, &apos;pid&apos;:0, &apos;name&apos;:&apos;故事会&apos;, isleaf:0}, 			{&apos;id&apos;:2, &apos;pid&apos;:1, &apos;name&apos;:&apos;武侠&apos;, isleaf:0}, 			{&apos;id&apos;:3, &apos;pi">
+<meta name="twitter:description" content="来这儿，随便聊">
 
 
 
@@ -84,13 +83,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-     | 荔枝说 · l-zhi
-  
-</title>
+  <title> 归档 | 荔枝说 · l-zhi </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -121,7 +114,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -179,58 +172,66 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-      <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html;charset=utf-8">
-<meta name="viewport" content="width=device-width">
-<title>l-zhi.tree</title>
-<link media="all" rel="stylesheet" type="text/css" href="ltree.css">
-<!--script type="text/javascript" src="ltree.js"></script-->
-<script type="text/javascript" src="ltree.js"></script>
-</head>
-<body>
-	<div class="sql"> SELECT `name` FROM `article` WHERE `list_id` in '<span id="ids"></span>'</div>
-	<div id="ltree"></div>
-<script>
-//数据库数据
-var list = [{'id':1, 'pid':0, 'name':'故事会', isleaf:0},
-			{'id':2, 'pid':1, 'name':'武侠', isleaf:0},
-			{'id':3, 'pid':1, 'name':'都市', isleaf:0},
-			{'id':4, 'pid':3, 'name':'都市言情', isleaf:1},
-			{'id':5, 'pid':3, 'name':'奋斗在深圳', isleaf:1},
-			{'id':6, 'pid':2, 'name':'武当的故事', isleaf:0},
-			{'id':7, 'pid':6, 'name':'张三丰的故事', isleaf:1},
-			{'id':8, 'pid':6, 'name':'张无忌的故事', isleaf:1}];
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-
-	var t = new Tree('ltree', list);
-	//由于取到叶子节点id集合，后续操作各不相同，所以没有封装到插件里面。调用接口为getLeafId。
-	addEvent(t.el, 'click', function(e){
-		var target = e.target || event.srcElement;
-		if(target.parentNode.tagName == 'DIV'){
-			target = target.parentNode;
-		}
-		if(target.tagName == 'DIV' || target.parentNode.tagName == 'DIV'){
-			var id = getDataset(target, 'id');
-			var	isleaf = getDataset(target, 'isleaf');
-				isleaf = isleaf == '0' ? 0 : 1;
-			if(id > 0){
-				var ids = t.getLeafId(id, isleaf);
-				document.getElementById('ids').innerHTML = ids;
-			}
-		}
-	});
-</script>
-</body>
-</html>
-
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 19 篇日志。 继续努力。
+    </span>
 
     
-  </div>
+
+      
+      
+      
+
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+        </div>
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/05/10/docker-quick-start2/" itemprop="url">
+              
+                <span itemprop="name">Docker 入门</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-05-10T17:55:35+08:00"
+              content="2017-05-10" >
+          05-10
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -238,14 +239,6 @@ var list = [{'id':1, 'pid':0, 'name':'故事会', isleaf:0},
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="demo/treejs/demo.html"
-           data-title="" data-url="http://l-zhi.com/demo/treejs/demo.html">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -402,6 +395,12 @@ var list = [{'id':1, 'pid':0, 'name':'故事会', isleaf:0},
   
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   
 
