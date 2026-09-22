@@ -1,0 +1,177 @@
+{
+  "verifiedAt": "2026-09-22T09:55:32.971Z",
+  "site": "https://ai-build.cn/",
+  "releaseCommit": "72ec5ddc5851504f0ca01100dbae2ee18472ab59",
+  "workflowRun": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/35712642869",
+  "generator": "Astro v7.3.3",
+  "articles": 26,
+  "searchEntries": 20,
+  "rssItems": 20,
+  "browserChecks": "Chromium: rendering, theme toggle, Docker search (2 results), no page errors",
+  "checks": [
+    {
+      "url": "https://ai-build.cn/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2012/05/05/openrestynode/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/05/05/rzzsmac/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/08/10/life-001/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/08/31/css-thinking01/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/09/07/js-tree/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/10/05/inline-space/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/10/27/css-thinking03/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2013/11/07/css-thinking02/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/01/05/Performance%20profiling%20with%20the%20Timeline/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/01/05/timeline-demo-diagnosing-forced-synchronous-layouts/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/01/05/what-are-the-transparent-bars-in-chrome-devtools-timeline/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/01/15/performance-image01/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/02/11/image-slider/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/02/13/yscroll/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2014/04/23/resource-load/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/02/26/docker-quick-start/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/03/24/copy-hanhan001/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/04/24/copy-hanhan001/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/05/05/h2-practice/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/05/05/openrestynode/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/05/05/rzzsmac/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/05/05/rzzsmac%E9%85%8D%E7%BD%AE/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2016/05/05/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%84/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2017/05/10/docker-quick-start2/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2022/06/12/mdlzcyyhtysk/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/2022/06/12/%E9%BA%A6%E5%BD%93%E5%8A%B3%E6%97%A9%E9%A4%90%E4%B8%8E%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E6%80%9D%E8%80%83/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/_astro/Layout.Qcgfy6R0.css",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/img/2022/img_01.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/img/2016/docker/banner.png",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/demo/treejs/ltree.js",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/vendors/ua-parser-js/dist/ua-parser.min.js",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/demo/liulanqi/joy/%E5%BD%92%E6%A1%A3.zip",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/search-index.json",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/rss.xml",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/archives/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/tags/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/search/",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/sitemap.xml",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/robots.txt",
+      "status": 200
+    },
+    {
+      "url": "https://ai-build.cn/nonexistent-release-verification-page/",
+      "status": 404
+    }
+  ]
+}
