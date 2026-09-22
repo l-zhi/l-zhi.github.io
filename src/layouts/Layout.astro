@@ -1,0 +1,59 @@
+---
+import { SITE } from '../config';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; article?: boolean; date?: Date; noindex?: boolean; canonical?: string }
+const { title, description = SITE.description, article = false, date, noindex = false, canonical } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.title} · l-zhi`;
+const url = new URL(canonical || Astro.url.pathname, SITE.url).href;
+const nav = [{ href: '/archives/', label: '文章' }, { href: '/tags/', label: '标签' }, { href: '/search/', label: '搜索' }];
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    {date && <meta property="article:published_time" content={date.toISOString()} />}
+    <script is:inline>
+      try { const saved = localStorage.getItem('theme'); if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved; } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="荔枝说首页">荔枝说<span class="brand-dot">.</span></a>
+        <nav aria-label="主导航">
+          {nav.map(item => <a href={item.href} aria-current={Astro.url.pathname.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>)}
+          <button id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题" hidden><span aria-hidden="true">◐</span></button>
+        </nav>
+      </header>
+      <main id="main" tabindex="-1"><slot /></main>
+      <footer class="site-footer"><span>© {new Date().getFullYear()} {SITE.author} · 记录与分享</span><div><a href={SITE.github}>GitHub ↗</a><a href="/rss.xml">RSS ↗</a></div></footer>
+    </div>
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
+      if (button) {
+        button.hidden = false;
+        button.addEventListener('click', () => {
+          const current = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch {}
+        });
+      }
+    </script>
+  </body>
+</html>

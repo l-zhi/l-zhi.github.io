@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/posts';
+import { SITE } from '../config';
+const posts = await getPosts();
+---
+<Layout>
+  <section class="intro">
+    <span class="eyebrow">THOUGHTS, CODE & LIFE</span>
+    <h1>你好，我是立之<span class="brand-dot">。</span></h1>
+    <p>一个前端开发者的个人笔记。<br />记录技术实践，也记录日常生活里值得多想一步的事。</p>
+    <div class="intro-links"><a href="/archives/">浏览全部文章 →</a><a href={SITE.github}>GitHub ↗</a><a href="/rss.xml">订阅 RSS ↗</a></div>
+  </section>
+  <div class="section-title"><h2>最近的文字</h2><a href="/archives/">{posts.length} 篇记录 →</a></div>
+  <PostList posts={posts.slice(0, SITE.pageSize)} />
+  <nav class="pagination" aria-label="首页分页"><span>第 1 页</span><a href="/page/2/">更早的文章 →</a></nav>
+</Layout>

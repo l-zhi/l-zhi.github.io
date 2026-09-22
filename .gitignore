@@ -1,0 +1,12 @@
+/node_modules/
+/dist/
+/.astro/
+.DS_Store
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+!/public/demo/liulanqi/joy/归档.zip
+!/public/vendors/ua-parser-js/dist/
+!/public/vendors/ua-parser-js/dist/**

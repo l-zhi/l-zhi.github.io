@@ -1,0 +1,62 @@
+---
+import { render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts, formatDate } from '../lib/posts';
+import { SITE } from '../config';
+import manifest from '../../docs/migration-manifest.json';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const allPosts = await getPosts({ includeUnlisted: true });
+  const routes = new Map();
+  const add = (path: string, title: string, selected: typeof posts, page = 0, pages = 0) => routes.set(path, { params: { path }, props: { title, posts: selected, page, pages, post: null } });
+  add('archives', '所有文章', posts);
+  for (const post of allPosts) {
+    const [year, month] = formatDate(post.data.date).split('-');
+    for (const key of [year, `${year}/${month}`]) add(`archives/${key}`, `${key.replace('/', ' 年 ')} 归档`, posts.filter(p => formatDate(p.data.date).startsWith(key.replace('/', '-'))));
+    for (const tag of post.data.tags) add(`tags/${tag}`, `标签：${tag}`, posts.filter(p => p.data.tags.includes(tag)));
+    for (let i = 1; i <= post.data.categories.length; i++) {
+      const chain = post.data.categories.slice(0, i);
+      add(`categories/${chain.join('/')}`, `分类：${chain.join(' / ')}`, posts.filter(p => chain.every((c, j) => p.data.categories[j] === c)));
+    }
+  }
+  for (const legacy of manifest.listingRoutes) {
+    if (!routes.has(legacy.route) && !legacy.route.startsWith('page/')) {
+      const base = legacy.route.replace(/\/page\/\d+$/, '');
+      const selected = routes.get(base)?.props.posts || posts.filter(p => legacy.posts.includes(`/${p.data.permalink}/`));
+      add(legacy.route, `${base.startsWith('archives') ? '文章归档' : '历史分类'} · ${base.split('/').slice(1).join(' / ')}`, selected);
+    }
+  }
+  const pages = Math.ceil(posts.length / SITE.pageSize);
+  for (let page = 2; page <= pages; page++) add(`page/${page}`, '更早的文字', posts.slice((page - 1) * SITE.pageSize, page * SITE.pageSize), page, pages);
+  for (const post of allPosts) {
+    if (routes.has(post.data.permalink)) throw new Error(`Route collision: ${post.data.permalink}`);
+    routes.set(post.data.permalink, { params: { path: post.data.permalink }, props: { post, posts: [], title: post.data.title, page: 0, pages: 0 } });
+  }
+  return [...routes.values()];
+}
+const { post, posts, title, page, pages } = Astro.props;
+const rendered = post ? await render(post) : null;
+const Content = rendered?.Content;
+const headings = rendered?.headings.filter(h => h.depth === 2 || h.depth === 3) || [];
+---
+<Layout title={title} description={post?.data.description} article={!!post} date={post?.data.date} noindex={post?.data.draft || post?.data.unlisted}>
+  <div class="breadcrumb"><a href="/">首页</a> / <a href="/archives/">文章</a>{!post && ' / 列表'}</div>
+  {post && Content ? <article>
+    <header class="article-header">
+      <div class="post-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span>立之</span></div>
+      <h1>{post.data.title}</h1>
+      <div class="post-tags">{post.data.tags.map((tag: string) => <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>)}</div>
+      {post.data.draft && <p class="draft-notice">草稿预览 · 正式构建不会发布这篇文章。</p>}
+    </header>
+    {headings.length > 2 && <details class="toc"><summary>文章目录</summary><ul>{headings.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></details>}
+    <div class="prose"><Content /></div>
+    <footer class="article-end"><a href="/archives/">← 返回所有文章</a><a href="#main">回到顶部 ↑</a></footer>
+  </article> : <>
+    <h1 class="page-heading">{title}</h1>
+    <p class="page-description">{posts.length} 篇记录，关于技术、体验和生活。</p>
+    <PostList posts={posts} />
+    {page > 0 && <nav class="pagination" aria-label="文章分页"><a href={page === 2 ? '/' : `/page/${page - 1}/`}>← 上一页</a><span>{page} / {pages}</span>{page < pages && <a href={`/page/${page + 1}/`}>下一页 →</a>}</nav>}
+  </>}
+</Layout>

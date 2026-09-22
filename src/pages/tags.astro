@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPosts } from '../lib/posts';
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap(p => p.data.tags))].sort((a,b) => a.localeCompare(b, 'zh-CN'));
+---
+<Layout title="标签"><div class="breadcrumb"><a href="/">首页</a> / 标签</div><h1 class="page-heading">沿着兴趣，继续读。</h1><p class="page-description">按标签寻找相关的文字，也可以在<a href="/archives/">归档</a>里浏览全部文章。</p><div class="tag-cloud">{tags.map(tag => <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag} <span>({posts.filter(p => p.data.tags.includes(tag)).length})</span></a>)}</div></Layout>

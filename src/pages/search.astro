@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="搜索">
+  <div class="breadcrumb"><a href="/">首页</a> / 搜索</div>
+  <h1 class="page-heading">寻找一段文字</h1>
+  <p class="page-description">搜索文章标题、摘要与标签。</p>
+  <label for="search">关键词</label><input id="search" class="search-input" type="search" placeholder="试试 CSS、Docker、用户体验…" autocomplete="off" />
+  <p id="search-status" class="search-status" role="status" aria-live="polite">输入关键词开始搜索。</p>
+  <ul id="search-results" class="post-list"></ul>
+  <noscript><p>搜索需要 JavaScript。你可以直接浏览<a href="/archives/">文章归档</a>或<a href="/tags/">标签</a>。</p></noscript>
+</Layout>
+<script>
+  type Entry = { title: string; description: string; tags: string[]; url: string; date: string };
+  const input = document.querySelector<HTMLInputElement>('#search')!;
+  const results = document.querySelector<HTMLUListElement>('#search-results')!;
+  const status = document.querySelector<HTMLParagraphElement>('#search-status')!;
+  let index: Promise<Entry[]> | undefined;
+  let request = 0;
+  async function search() {
+    const current = ++request;
+    const query = input.value.trim().toLocaleLowerCase();
+    const url = new URL(location.href);
+    if (query) url.searchParams.set('q', input.value.trim()); else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+    results.replaceChildren();
+    if (!query) { status.textContent = '输入关键词开始搜索。'; return; }
+    status.textContent = '搜索中…';
+    try {
+      index ??= fetch('/search-index.json').then(response => { if (!response.ok) throw new Error('Index unavailable'); return response.json(); });
+      const entries = await index;
+      if (current !== request) return;
+      const matched = entries.filter(entry => `${entry.title} ${entry.description} ${entry.tags.join(' ')}`.toLocaleLowerCase().includes(query));
+      for (const entry of matched) {
+        const li = document.createElement('li'); const meta = document.createElement('div'); meta.className = 'post-meta'; meta.textContent = entry.date;
+        const heading = document.createElement('h2'); const link = document.createElement('a'); link.href = entry.url; link.textContent = entry.title; heading.append(link);
+        const description = document.createElement('p'); description.textContent = entry.description; li.append(meta, heading, description); results.append(li);
+      }
+      status.textContent = matched.length ? `找到 ${matched.length} 篇文章。` : '没有找到相关文章，换个关键词试试。';
+    } catch { index = undefined; if (current === request) status.textContent = '搜索暂时不可用，请重试或浏览文章归档。'; }
+  }
+  input.addEventListener('input', search);
+  input.value = new URLSearchParams(location.search).get('q') || '';
+  if (input.value) search();
+</script>
