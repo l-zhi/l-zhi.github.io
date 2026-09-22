@@ -1,8 +1,8 @@
 export const SITE = {
-  title: '荔枝说',
+  title: 'AI-build.cn',
   author: '立之',
   url: 'https://ai-build.cn',
-  description: '记录前端、技术与生活。在实践里寻找答案，在文字里保留思考。',
+  description: '我是立之，一个热爱思考，充满好奇心的 AI builder。记录技术实践，也记录日常生活里值得多想一步的事。',
   github: 'https://github.com/l-zhi',
   pageSize: 8,
 };
