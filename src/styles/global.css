@@ -9,3 +9,6 @@
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:380px){.site-header{flex-wrap:wrap;row-gap:16px}.site-header nav{width:100%;justify-content:flex-end}}
+.prose ol,.prose ul{padding-inline-start:1.6em}
+.prose li+li{margin-top:.65em}
+.prose li>p{margin:.45em 0}

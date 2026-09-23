@@ -6,8 +6,8 @@ test('home, pagination, theme persistence and search', async ({ page }) => {
   page.on('pageerror', error => errors.push(error.message));
   const entries = await (await page.request.get('/search-index.json')).json();
   await page.goto('/');
-  await expect(page.locator('.brand')).toHaveText('AI-build.cn');
-  await expect(page).toHaveTitle('AI-build.cn · l-zhi');
+  await expect(page.locator('.brand')).toHaveText('ai-build.cn');
+  await expect(page).toHaveTitle('ai-build.cn · l-zhi');
   await expect(page.locator('.intro p')).toContainText('我是立之，一个热爱思考，充满好奇心的 AI builder');
   await expect(page.locator('.post-list > li')).toHaveCount(Math.min(SITE.pageSize, entries.length));
   await page.screenshot({ path: 'docs/screenshots/home-desktop.png', fullPage: true });
