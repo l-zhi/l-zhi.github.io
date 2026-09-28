@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectRepository from '../../components/ProjectRepository.astro';
+import { projects, type Project } from '../../projects';
+export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
+interface Props { project: Project }
+const { project } = Astro.props;
+---
+<Layout title={project.name} description={project.description}>
+  <div class="breadcrumb"><a href="/projects/">← 全部 AI 项目</a></div>
+  <article>
+    <header class="project-hero">
+      <div>
+        <span class="eyebrow">{project.category}</span>
+        <h1>{project.name}</h1>
+        <p class="project-description">{project.description}</p>
+        {project.github && <div class="project-github"><ProjectRepository url={project.github} /></div>}
+      </div>
+      <a class="project-screenshot" href={project.image.src} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}界面原图（新标签页打开）`}>
+        <img src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} decoding="async" />
+      </a>
+    </header>
+    <div class="project-sections">
+      <div>
+        <section><h2>为什么做它</h2><p>{project.motivation}</p></section>
+        <section><h2>适合谁</h2><p>{project.audience}</p></section>
+        <section><h2>能做什么</h2><ul>{project.features.map(feature => <li>{feature}</li>)}</ul></section>
+      </div>
+      <div>
+        <section><h2>制作背后的记录</h2><ul class="project-related">{project.related.map(link => <li><a href={link.href}>{link.title} →</a></li>)}</ul></section>
+        <section><h2>体验方式</h2><p>{project.experience}</p>{project.github && <a href={`${project.github}#readme`} target="_blank" rel="noopener noreferrer">查看使用说明 ↗</a>}</section>
+      </div>
+    </div>
+  </article>
+</Layout>
+<style>
+  .project-hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); align-items: center; gap: 30px; padding: 6px 0 30px; }
+  h1 { font-size: clamp(28px,5vw,36px); line-height: 1.3; margin: 10px 0 18px; overflow-wrap: anywhere; }
+  .project-description { color: var(--muted); font-size: 15px; margin: 0; }
+  .project-github { margin-top: 20px; }
+  .project-screenshot { display: block; }
+  img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; background: var(--soft); border: 1px solid var(--line); border-radius: 7px; }
+  .project-sections { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 34px; border-top: 1px solid var(--line); padding-top: 28px; }
+  section { margin-bottom: 30px; }
+  h2 { font-size: 19px; margin: 0 0 12px; }
+  p, li { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0; padding-left: 20px; }
+  li + li { margin-top: 10px; }
+  .project-sections a { color: var(--accent); font-size: 14px; }
+  .project-related { padding: 0; list-style: none; }
+  @media (max-width: 620px) { .project-hero,.project-sections { grid-template-columns: minmax(0,1fr); gap: 24px; } .project-sections { gap: 0; } }
+</style>

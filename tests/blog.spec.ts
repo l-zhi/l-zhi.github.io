@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { SITE } from '../src/config';
 
+test.beforeEach(async ({ page }) => {
+  await page.route('https://hm.baidu.com/**', route => route.abort());
+});
+
 test('home, pagination, theme persistence and search', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
@@ -8,7 +12,7 @@ test('home, pagination, theme persistence and search', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.brand')).toHaveText('ai-build.cn');
   await expect(page).toHaveTitle('ai-build.cn · l-zhi');
-  await expect(page.locator('.intro p')).toContainText('我是立之，一个热爱思考，充满好奇心的 AI builder');
+  await expect(page.getByRole('heading', { name: '最近做什么' })).toBeVisible();
   await expect(page.locator('.post-list > li')).toHaveCount(Math.min(SITE.pageSize, entries.length));
   await page.screenshot({ path: 'docs/screenshots/home-desktop.png', fullPage: true });
   await page.getByRole('button', { name: '切换明暗主题' }).click();
@@ -55,10 +59,10 @@ test('article images, code, old URL, anchors and mobile widths', async ({ page }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
-test('reading and system dark mode work without JavaScript', async ({ browser }) => {
+test('reading and system dark mode work without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, colorScheme: 'dark' });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4321/2022/06/12/mdlzcyyhtysk/');
+  await page.goto(`${baseURL}/2022/06/12/mdlzcyyhtysk/`);
   await expect(page.locator('.prose')).toContainText('服务的确定性');
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(32, 38, 48)');
   await expect(page.getByRole('button', { name: '切换明暗主题' })).toBeHidden();

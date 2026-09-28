@@ -51,13 +51,24 @@ draft: true
 
 ## 调整 UI
 
+首页“最近做什么”展示紧凑的项目横栏：桌面封面为 160×110px，手机为 148×102px，空间不足时可通过滑动、方向键或箭头按钮浏览。导航“AI项目”进入 `/projects/`，每个项目有独立的静态介绍页。
+
+项目内容在 `src/projects.ts` 维护，数组顺序就是首页和列表的顺序。每项包含 `slug`、名称、分类、短介绍、详细介绍、图片、功能、体验方式和相关文章；`github` 只填写已确认的公开仓库完整地址，留空时不显示 GitHub 标签。图片路径引用 `public/` 中的资源，不需要复制到多个目录。修改 `slug` 会改变详情页地址，已有项目应保持稳定。添加项目后运行 `npm run verify` 检查页面与链接。
+
+现有五个项目依据《AI时代的「虚」与「实」》及其配图整理；pith-wiki、mcc 的公开仓库地址已核实。ai-rss 暂无确认的公开安装入口，荔枝排班暂无确认的公开体验入口，不生成虚构下载链接。荔枝头像的界面截图及功能补充来自《我是怎么用AI写小程序的？》。
+
+交互检查：`npm run test:ui`。如默认端口已被占用，可指定 `PLAYWRIGHT_PORT=4326 npm run test:ui`；浏览器自检会屏蔽百度统计请求，避免写入生产访问数据。
+
 | 文件 | 用途 |
 | --- | --- |
 | `src/config.ts` | 站名、简介、域名、GitHub、分页大小 |
 | `src/styles/global.css` | 色彩变量、明暗配色、布局与正文样式 |
 | `src/layouts/Layout.astro` | 页头导航、SEO、页脚、主题切换 |
 | `src/components/PostList.astro` | 文章列表 |
-| `src/pages/index.astro` | 首页简介 |
+| `src/pages/index.astro` | 首页项目与文章列表 |
+| `src/projects.ts` | 项目内容、封面、GitHub 地址和相关文章 |
+| `src/components/RecentProjects.astro` | 首页小图横栏及滚动交互 |
+| `src/pages/projects/` | AI 项目列表和静态详情页 |
 | `src/pages/[...path].astro` | 文章详情、归档、标签结果、历史地址 |
 
 字体使用本机字体栈，无远程字体请求。禁用 JavaScript 后文章仍可阅读，主题跟随系统；搜索页提供归档入口。

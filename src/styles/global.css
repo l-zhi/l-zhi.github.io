@@ -12,3 +12,4 @@
 .prose ol,.prose ul{padding-inline-start:1.6em}
 .prose li+li{margin-top:.65em}
 .prose li>p{margin:.45em 0}
+@media(max-width:620px){.site-header{flex-wrap:wrap;row-gap:14px}.site-header nav{width:100%;justify-content:flex-end}}

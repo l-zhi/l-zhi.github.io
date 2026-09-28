@@ -1,0 +1,84 @@
+---
+import { projects, projectUrl } from '../projects';
+---
+<section class="recent-projects" aria-labelledby="recent-projects-title">
+  <div class="recent-projects-heading">
+    <h1 id="recent-projects-title">最近做什么</h1>
+    <div class="recent-projects-actions">
+      <a href="/projects/">全部 AI 项目 ↗</a>
+      <div class="project-scroll-buttons" hidden>
+        <button type="button" data-scroll="previous" aria-label="查看前面的项目" aria-controls="recent-projects-rail">←</button>
+        <button type="button" data-scroll="next" aria-label="查看后面的项目" aria-controls="recent-projects-rail">→</button>
+      </div>
+    </div>
+  </div>
+  <ul class="project-rail" id="recent-projects-rail" tabindex="0" aria-label="最近的 AI 项目，可左右滚动">
+    {projects.map(project => (
+      <li class="project-tile">
+        <a href={projectUrl(project)} class="project-tile-link">
+          <img src={project.image.src} alt={project.image.alt} width={160} height={110} decoding="async" />
+          <h2>{project.name}</h2>
+          <p>{project.summary}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+<script>
+  const section = document.querySelector<HTMLElement>('.recent-projects');
+  if (section) {
+    const rail = section.querySelector<HTMLUListElement>('.project-rail')!;
+    const controls = section.querySelector<HTMLDivElement>('.project-scroll-buttons')!;
+    const previous = section.querySelector<HTMLButtonElement>('[data-scroll="previous"]')!;
+    const next = section.querySelector<HTMLButtonElement>('[data-scroll="next"]')!;
+    const update = () => {
+      const end = rail.scrollWidth - rail.clientWidth;
+      controls.hidden = end <= 2;
+      previous.disabled = rail.scrollLeft <= 2;
+      next.disabled = rail.scrollLeft >= end - 2;
+    };
+    const move = (direction: number) => {
+      const tile = rail.querySelector<HTMLElement>('.project-tile')!;
+      const distance = tile.offsetWidth + parseFloat(getComputedStyle(rail).columnGap);
+      rail.scrollBy({ left: direction * distance, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    rail.addEventListener('scroll', update, { passive: true });
+    rail.addEventListener('keydown', event => {
+      if (event.target !== rail || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      move(event.key === 'ArrowRight' ? 1 : -1);
+    });
+    new ResizeObserver(update).observe(rail);
+    update();
+  }
+</script>
+<style>
+  .recent-projects { margin: 0 0 24px; }
+  .recent-projects-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+  h1 { font-size: 18px; margin: 0; line-height: 1.5; }
+  .recent-projects-actions { display: flex; align-items: center; gap: 12px; }
+  .recent-projects-actions a { font-size: 12px; color: var(--muted); }
+  .project-scroll-buttons { display: flex; gap: 4px; }
+  .project-scroll-buttons[hidden] { display: none; }
+  button { width: 32px; height: 32px; background: none; border: 0; cursor: pointer; }
+  button:disabled { opacity: .3; cursor: default; }
+  .project-rail { position: relative; left: 50%; transform: translateX(-50%); width: min(900px, calc(100vw - 40px)); display: flex; gap: 20px; margin: 0; padding: 5px 6px 10px; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 6px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .project-tile { width: 160px; flex: 0 0 160px; scroll-snap-align: start; }
+  .project-tile-link { display: block; text-decoration: none; }
+  img { width: 160px; height: 110px; object-fit: cover; object-position: center; display: block; border: 1px solid var(--line); border-radius: 6px; background: var(--soft); }
+  h2 { margin: 9px 0 4px; font-size: 13px; line-height: 1.5; }
+  p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+  @media (max-width: 540px) {
+    .project-rail { width: 100%; left: auto; transform: none; gap: 16px; }
+    .project-tile { width: 148px; flex-basis: 148px; }
+    img { width: 148px; height: 102px; }
+    button { min-width: 36px; height: 44px; }
+    .recent-projects-heading { margin-bottom: 10px; }
+    .recent-projects-actions { gap: 5px; }
+    .recent-projects-actions a { font-size: 11px; }
+    h1 { font-size: 17px; }
+  }
+  @media (max-width: 380px) { .recent-projects-actions a { display: none; } }
+</style>

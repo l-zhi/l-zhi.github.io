@@ -1,0 +1,15 @@
+---
+interface Props { url: string }
+const { url } = Astro.props;
+---
+<a class="project-repository" href={url} target="_blank" rel="noopener noreferrer" aria-label={`GitHub 仓库 ${url}（新标签页打开）`}>
+  <span class="repository-label">GitHub</span>
+  <span class="repository-address">{url.replace('https://', '')}</span>
+  <span aria-hidden="true">↗</span>
+</a>
+<style>
+  .project-repository { display: inline-flex; align-items: baseline; gap: 8px; max-width: 100%; font-size: 12px; text-decoration: none; }
+  .repository-label { flex-shrink: 0; border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; color: var(--text); }
+  .repository-address { overflow-wrap: anywhere; min-width: 0; color: var(--accent); }
+  .project-repository:hover .repository-address { text-decoration: underline; }
+</style>
