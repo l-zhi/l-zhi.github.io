@@ -10,6 +10,7 @@ export interface Project {
   features: string[];
   experience: string;
   github?: string;
+  video?: { bvid: string; title: string; duration: string };
   related: { title: string; href: string }[];
 }
 
@@ -42,6 +43,7 @@ export const projects: Project[] = [
     features: ['监听本地资料变化，整理文件与日常记录。', '生成可阅读的 Markdown 知识条目，建立资料之间的联系。', '基于积累的记录整理总结，减少重复收集信息的工作。'],
     experience: '项目已公开在 GitHub，可前往仓库查看使用说明与安装方式。',
     github: 'https://github.com/l-zhi/pith-wiki',
+    video: { bvid: 'BV14WJs6aEWE', title: '硬盘里那些舍不得删的文件，被AI整理之后……', duration: '4 分 21 秒' },
     related: [makingArticle, { title: '硬盘里那些舍不得删的文件，被AI整理之后……', href: '/2026/06/02/pith-wiki-personal-knowledge/' }],
   },
   {

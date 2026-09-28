@@ -16,15 +16,19 @@ const { project } = Astro.props;
         <p class="project-description">{project.description}</p>
         {project.github && <div class="project-github"><ProjectRepository url={project.github} /></div>}
       </div>
-      <a class="project-screenshot" href={project.image.src} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}界面原图（新标签页打开）`}>
+      {project.video ? <div class="project-video">
+        <iframe src={`https://player.bilibili.com/player.html?bvid=${project.video.bvid}&page=1&autoplay=0`} title={project.video.title} loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <a href={`https://www.bilibili.com/video/${project.video.bvid}/`} target="_blank" rel="noopener noreferrer">在 B 站观看 · {project.video.duration} ↗</a>
+      </div> : <a class="project-screenshot" href={project.image.src} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}界面原图（新标签页打开）`}>
         <img src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} decoding="async" />
-      </a>
+      </a>}
     </header>
     <div class="project-sections">
       <div>
         <section><h2>为什么做它</h2><p>{project.motivation}</p></section>
         <section><h2>适合谁</h2><p>{project.audience}</p></section>
         <section><h2>能做什么</h2><ul>{project.features.map(feature => <li>{feature}</li>)}</ul></section>
+        {project.video && <section><h2>界面一览</h2><a class="project-screenshot" href={project.image.src} target="_blank" rel="noopener noreferrer" aria-label={`${project.name}界面原图（新标签页打开）`}><img src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} loading="lazy" decoding="async" /></a></section>}
       </div>
       <div>
         <section><h2>制作背后的记录</h2><ul class="project-related">{project.related.map(link => <li><a href={link.href}>{link.title} →</a></li>)}</ul></section>
@@ -39,6 +43,8 @@ const { project } = Astro.props;
   .project-description { color: var(--muted); font-size: 15px; margin: 0; }
   .project-github { margin-top: 20px; }
   .project-screenshot { display: block; }
+  .project-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 7px; background: var(--soft); }
+  .project-video > a { display: inline-block; margin-top: 6px; font-size: 12px; }
   img { display: block; width: 100%; height: auto; max-height: 340px; object-fit: contain; background: var(--soft); border: 1px solid var(--line); border-radius: 7px; }
   .project-sections { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 34px; border-top: 1px solid var(--line); padding-top: 28px; }
   section { margin-bottom: 30px; }

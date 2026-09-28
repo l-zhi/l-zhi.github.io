@@ -3,9 +3,12 @@ import { test, expect } from '@playwright/test';
 test.beforeEach(async ({ page }) => {
   // Keep local UI checks out of production analytics and independent of its network.
   await page.route('https://hm.baidu.com/**', route => route.abort());
+  await page.route('https://player.bilibili.com/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body>Video player placeholder for local layout checks</body></html>' }));
 });
 
 test('compact project rail adapts to viewport and supports buttons and keyboard', async ({ page }) => {
+  // Make scroll assertions deterministic instead of reversing an in-flight smooth animation.
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   for (const colorScheme of ['light', 'dark'] as const) {
@@ -85,4 +88,23 @@ test('projects remain readable and navigable without JavaScript', async ({ brows
   await expect(page.getByRole('heading', { name: 'mcc', exact: true })).toBeVisible();
   await expect(page.locator('.project-repository')).toBeVisible();
   await context.close();
+});
+
+test('pith-wiki embeds an opt-in video and keeps its screenshot and external fallback', async ({ page }) => {
+  await page.goto('/projects/pith-wiki/');
+  const player = page.locator('.project-video iframe');
+  await expect(player).toHaveAttribute('src', 'https://player.bilibili.com/player.html?bvid=BV14WJs6aEWE&page=1&autoplay=0');
+  await expect(player).toHaveAttribute('title', /硬盘里/);
+  await expect(player).toHaveAttribute('allowfullscreen', '');
+  await expect(page.getByRole('link', { name: '在 B 站观看 · 4 分 21 秒 ↗' })).toHaveAttribute('href', 'https://www.bilibili.com/video/BV14WJs6aEWE/');
+  await expect(page.locator('.project-sections .project-screenshot img')).toHaveAttribute('src', '/img/wechat/ae6c11825d77ba42e37d3a13.png');
+  for (const width of [1280, 390, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    const box = await player.boundingBox();
+    expect(box!.width / box!.height).toBeCloseTo(16 / 9, 1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  await page.goto('/projects/mcc/');
+  await expect(page.locator('iframe')).toHaveCount(0);
+  await expect(page.locator('.project-hero .project-screenshot')).toHaveCount(1);
 });
