@@ -1,0 +1,397 @@
+{
+  "title": "《AI 时代，Linux 又杀回来了》配图与发布核验",
+  "verifiedAt": "2026-10-04T01:54:38.228Z",
+  "verificationScope": "以下为实施代理执行的自检，不代表用户或孔明已验收。",
+  "acceptanceCriteria": [
+    "保留文章四节结构，依据参考截图核正原始发布日期，并保持已有永久地址。",
+    "六张正文配图全部保存为站内资源，位置对应原文，具有替代文字和尺寸；参考文件保持不变。",
+    "npm run verify 通过，类型检查、正式构建及站内链接和资源检查无新增错误。",
+    "桌面、手机、窄屏暗色及禁用 JavaScript 时文章可读、六张图片加载正常、无横向溢出。",
+    "文章进入首页、归档、标签、分类、搜索、RSS 和 sitemap。",
+    "仅向既有 master 分支发布相关成果；GitHub Pages 部署成功，线上正文、配图和样式与本地验收版本一致。"
+  ],
+  "publication": {
+    "article": "src/content/blog/wechat/2026-10-04-linux-and-personal-ai-agents.md",
+    "originalPublicationDate": "2026-10-03T20:52:00+08:00",
+    "publicationDateEvidence": "User-supplied WeChat screenshot: test.png",
+    "originalUrl": "https://mp.weixin.qq.com/s/00gafVk7vXENkHgL5P3JSg",
+    "permalink": "/2026/10/04/linux-and-personal-ai-agents/",
+    "images": [
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/ai-agents-official-sketch-3x1.png",
+        "source": "用户指定素材目录/images/ai-agents-official-sketch-3x1.png",
+        "method": "byte-identical copy",
+        "sha256": "d561943d151ceeaaf54613f5b1eaa33773b7bae469f1f1572a8349471726ec78"
+      },
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/openclaw-official-sketch-3x1.png",
+        "source": "用户指定素材目录/images/openclaw-official-sketch-3x1.png",
+        "method": "byte-identical copy",
+        "sha256": "5706c1f802b09058035b2f08b6a604a49a4183b881b41ff0709ca17baaf3757e"
+      },
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/openclaw-story.png",
+        "source": "用户提供的参考附件/test.png",
+        "method": "lossless rectangular extraction; no regeneration or retouching",
+        "cropXYWH": [
+          1163,
+          2816,
+          1076,
+          537
+        ],
+        "sha256": "d9482a24a10989febc04af320f6e27c3939d00879c758b56065741f949172842"
+      },
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/airport-vibe-coding.png",
+        "source": "用户提供的参考附件/test.png",
+        "method": "lossless rectangular extraction; no regeneration or retouching",
+        "cropXYWH": [
+          1163,
+          3904,
+          688,
+          290
+        ],
+        "sha256": "376020c468499ef5be845fab1a5105f067047d9813a1a7f5e4d6788fedfb7b39"
+      },
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/kongming-desktop.png",
+        "source": "用户提供的参考附件/test.png",
+        "method": "lossless rectangular extraction; no regeneration or retouching",
+        "cropXYWH": [
+          1262,
+          7842,
+          1076,
+          634
+        ],
+        "sha256": "d842545e4359a0aa5a95040429d4cb83607e3c6dcf2f11e4d8fa3a4c1edacdcb"
+      },
+      {
+        "path": "public/img/2026/linux-and-personal-ai-agents/kongming-mobile.png",
+        "source": "用户提供的参考附件/test.png",
+        "method": "lossless rectangular extraction; no regeneration or retouching",
+        "cropXYWH": [
+          1163,
+          8731,
+          416,
+          410
+        ],
+        "sha256": "1da0bbf86244f5ac55ad56f7bd88d66c329d7db1c5c9011933b222e077a715cc"
+      }
+    ]
+  },
+  "sourceVerification": {
+    "originalFilesUnchanged": true,
+    "copiedOriginalsByteIdentical": 2,
+    "screenshotExtractionsPixelIdentical": 4,
+    "referenceScreenshotSha256": "425c5d67ac769413aa5fa976585858269731b2c9142fa99293abde3277f33341"
+  },
+  "build": {
+    "command": "npm run verify",
+    "result": "passed",
+    "typeErrors": 0,
+    "typeWarnings": 0,
+    "typeHints": 0,
+    "staticPages": 157,
+    "legacyArticleUrls": 26,
+    "legacyByteIdenticalAssets": 522,
+    "legacyListingUrls": 41,
+    "internalReferences": 4120
+  },
+  "localVerification": {
+    "verifiedAt": "2026-10-04T01:52:23.878Z",
+    "static": {
+      "title": "AI 时代，Linux 又杀回来了",
+      "date": "2026-10-03",
+      "canonical": "https://ai-build.cn/2026/10/04/linux-and-personal-ai-agents/",
+      "bodySections": 4,
+      "images": 6,
+      "imageHashesMatch": true,
+      "listedIn": [
+        "index.html",
+        "archives/index.html",
+        "archives/2026/10/index.html",
+        "tags/AI Agent/index.html",
+        "tags/Linux/index.html",
+        "tags/隐私/index.html",
+        "tags/孔明/index.html",
+        "categories/荔枝AI圈/index.html"
+      ],
+      "search": true,
+      "rss": true,
+      "sitemap": true
+    },
+    "browser": [
+      {
+        "label": "desktop",
+        "viewport": [
+          1440,
+          1000
+        ],
+        "status": 200,
+        "noHorizontalOverflow": true,
+        "loadedImages": 6,
+        "pageErrors": [],
+        "badResponses": [],
+        "screenshot": "docs/screenshots/linux-agents-desktop-2026-10-04.png",
+        "scrolledAndDecodedImages": [
+          "/img/2026/linux-and-personal-ai-agents/ai-agents-official-sketch-3x1.png",
+          "/img/2026/linux-and-personal-ai-agents/openclaw-official-sketch-3x1.png",
+          "/img/2026/linux-and-personal-ai-agents/openclaw-story.png",
+          "/img/2026/linux-and-personal-ai-agents/airport-vibe-coding.png",
+          "/img/2026/linux-and-personal-ai-agents/kongming-desktop.png",
+          "/img/2026/linux-and-personal-ai-agents/kongming-mobile.png"
+        ]
+      },
+      {
+        "label": "mobile",
+        "viewport": [
+          390,
+          844
+        ],
+        "status": 200,
+        "noHorizontalOverflow": true,
+        "loadedImages": 6,
+        "pageErrors": [],
+        "badResponses": [],
+        "screenshot": "docs/screenshots/linux-agents-mobile-2026-10-04.png",
+        "scrolledAndDecodedImages": [
+          "/img/2026/linux-and-personal-ai-agents/ai-agents-official-sketch-3x1.png",
+          "/img/2026/linux-and-personal-ai-agents/openclaw-official-sketch-3x1.png",
+          "/img/2026/linux-and-personal-ai-agents/openclaw-story.png",
+          "/img/2026/linux-and-personal-ai-agents/airport-vibe-coding.png",
+          "/img/2026/linux-and-personal-ai-agents/kongming-desktop.png",
+          "/img/2026/linux-and-personal-ai-agents/kongming-mobile.png"
+        ]
+      },
+      {
+        "label": "small-mobile-dark",
+        "viewport": [
+          320,
+          740
+        ],
+        "status": 200,
+        "noHorizontalOverflow": true,
+        "loadedImages": 6,
+        "pageErrors": [],
+        "badResponses": []
+      },
+      {
+        "label": "no-javascript",
+        "viewport": [
+          390,
+          844
+        ],
+        "status": 200,
+        "noHorizontalOverflow": true,
+        "loadedImages": 6,
+        "pageErrors": [],
+        "badResponses": []
+      }
+    ]
+  },
+  "release": {
+    "repository": "l-zhi/l-zhi.github.io",
+    "branch": "master",
+    "commit": "3450cd7e28b9a8cf617ced09a4fa647058dedc5d",
+    "workflowRun": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/37169347097",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success",
+        "completedAt": "2026-10-04T01:53:47Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "completedAt": "2026-10-04T01:54:00Z"
+      }
+    ]
+  },
+  "liveVerification": {
+    "verifiedAt": "2026-10-04T01:54:38.228Z",
+    "url": "https://ai-build.cn/2026/10/04/linux-and-personal-ai-agents/",
+    "titleMatches": true,
+    "dateMatches": true,
+    "canonicalMatches": true,
+    "bodyMatchesLocal": true,
+    "bodySections": 4,
+    "images": [
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/ai-agents-official-sketch-3x1.png",
+        "sha256": "d561943d151ceeaaf54613f5b1eaa33773b7bae469f1f1572a8349471726ec78",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/openclaw-official-sketch-3x1.png",
+        "sha256": "5706c1f802b09058035b2f08b6a604a49a4183b881b41ff0709ca17baaf3757e",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/openclaw-story.png",
+        "sha256": "d9482a24a10989febc04af320f6e27c3939d00879c758b56065741f949172842",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/airport-vibe-coding.png",
+        "sha256": "376020c468499ef5be845fab1a5105f067047d9813a1a7f5e4d6788fedfb7b39",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/kongming-desktop.png",
+        "sha256": "d842545e4359a0aa5a95040429d4cb83607e3c6dcf2f11e4d8fa3a4c1edacdcb",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/kongming-mobile.png",
+        "sha256": "1da0bbf86244f5ac55ad56f7bd88d66c329d7db1c5c9011933b222e077a715cc",
+        "matchesLocal": true
+      }
+    ],
+    "surfaces": [
+      {
+        "url": "https://ai-build.cn/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/archives/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/archives/2026/10/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/tags/Linux/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/categories/荔枝AI圈/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/search-index.json",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/rss.xml",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/sitemap.xml",
+        "articleIncluded": true
+      }
+    ],
+    "stylesheetMatchesLocal": true,
+    "checks": [
+      {
+        "url": "https://ai-build.cn/2026/10/04/linux-and-personal-ai-agents/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 12043
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/kongming-mobile.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 46512
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/kongming-desktop.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 298083
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/openclaw-story.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 483089
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/airport-vibe-coding.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 252209
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/openclaw-official-sketch-3x1.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 2157710
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/linux-and-personal-ai-agents/ai-agents-official-sketch-3x1.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 2249587
+      },
+      {
+        "url": "https://ai-build.cn/search-index.json",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "bytes": 18022
+      },
+      {
+        "url": "https://ai-build.cn/sitemap.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 6995
+      },
+      {
+        "url": "https://ai-build.cn/tags/Linux/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 3493
+      },
+      {
+        "url": "https://ai-build.cn/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 13056
+      },
+      {
+        "url": "https://ai-build.cn/archives/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 28561
+      },
+      {
+        "url": "https://ai-build.cn/archives/2026/10/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 3517
+      },
+      {
+        "url": "https://ai-build.cn/categories/%E8%8D%94%E6%9E%9DAI%E5%9C%88/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 19669
+      },
+      {
+        "url": "https://ai-build.cn/rss.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 25858
+      },
+      {
+        "url": "https://ai-build.cn/_astro/Layout.CFne7gIr.css",
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 6575
+      }
+    ]
+  },
+  "retainedLimitations": [
+    "四张截图类配图从用户提供的 test.png 无损提取，清晰度受附件限制；未获得独立高清原图。",
+    "文中产品动态及公司数据争议沿用现有稿件，本次未逐项进行事实核查。",
+    "站点历史迁移记录中的 24 次外链图片引用与 90 次缺失本地引用属于既有已知限制，本次未处理。"
+  ],
+  "notes": [
+    "原稿五处缺图占位已补齐；参考附件另显示一张 OpenClaw 报道配图，现一并恢复，共六张正文配图。",
+    "发布日期依据参考附件为 2026-10-03 20:52（Asia/Shanghai）；文章永久地址继续使用既有的 /2026/10/04/linux-and-personal-ai-agents/。",
+    "正文采用既有整理稿，保留其中关于 macOS 与 Linux 区别的修正。",
+    "素材目录中的替代插画及封面未作为正文新增配图；已有无关原型及首页截图未纳入本次发布。",
+    "本地长页面截图在逐图滚动并等待图片解码后生成；线上通过 HTTP 内容和资源哈希核验。"
+  ]
+}
