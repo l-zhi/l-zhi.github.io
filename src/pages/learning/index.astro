@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { courses, courseUrl } from '../../learning';
+---
+<Layout title="学习" description="立之的学习栏目：通过课程、互动实验和实操作业，把感兴趣的事情学成能动手做的事。">
+  <h1 class="page-heading">学习</h1>
+  <p class="page-description">带着问题学习，用一次练习检验理解，再做出自己的作品。</p>
+  <ul class="course-list">
+    {courses.map(course => (
+      <li>
+        <article>
+          <div>
+            <a class="course-cover" href={courseUrl(course)} aria-label={`学习${course.title}`}>
+              <img src={course.image.src} alt={course.image.alt} width="1600" height="1067" decoding="async" />
+            </a>
+            <p class="image-credit"><a href={course.image.source}>{course.image.credit}</a></p>
+          </div>
+          <div class="course-info">
+            <span class="eyebrow">{course.category}</span>
+            <h2><a href={courseUrl(course)}>{course.title}</a></h2>
+            <p class="course-meta">{course.duration}</p>
+            <p>{course.description}</p>
+            <dl>
+              <div><dt>适合</dt><dd>{course.audience}</dd></div>
+              <div><dt>方式</dt><dd>{course.format}</dd></div>
+              <div><dt>作品</dt><dd>{course.outcome}</dd></div>
+            </dl>
+            <a class="course-start" href={courseUrl(course)}>开始学习</a>
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</Layout>
+<style>
+  .course-list { list-style: none; margin: 0; padding: 0; }
+  article { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; padding: 28px 0; border-top: 1px solid var(--line); }
+  .course-cover { display: block; }
+  img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--soft); }
+  .image-credit { margin-top: 8px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  .image-credit a { text-decoration: none; }
+  h2 { margin: 6px 0 10px; font-size: 22px; line-height: 1.5; }
+  h2 a { text-decoration: none; }
+  .course-info > p { margin: 0 0 16px; }
+  .course-meta { color: var(--muted); font-size: 14px; }
+  dl { font-size: 14px; margin: 18px 0 24px; }
+  dl div { display: grid; grid-template-columns: 2em minmax(0, 1fr); gap: 14px; margin: 8px 0; }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  .course-start { display: inline-block; padding: 8px 18px; border: 1px solid var(--accent); color: var(--accent); border-radius: 4px; text-decoration: none; }
+  .course-start:hover { background: var(--soft); }
+  @media (max-width: 620px) { article { grid-template-columns: minmax(0, 1fr); gap: 16px; } img { aspect-ratio: 16 / 9; } }
+</style>

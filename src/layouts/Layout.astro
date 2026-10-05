@@ -5,7 +5,7 @@ interface Props { title?: string; description?: string; article?: boolean; date?
 const { title, description = SITE.description, article = false, date, noindex = false, canonical } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.title} · l-zhi`;
 const url = new URL(canonical || Astro.url.pathname, SITE.url).href;
-const nav = [{ href: '/projects/', label: 'AI项目' }, { href: '/archives/', label: '文章' }, { href: '/tags/', label: '标签' }, { href: '/search/', label: '搜索' }];
+const nav = [{ href: '/projects/', label: 'AI项目' }, { href: '/archives/', label: '文章' }, { href: '/learning/', label: '学习' }, { href: '/tags/', label: '标签' }, { href: '/search/', label: '搜索' }];
 ---
 <!doctype html>
 <html lang="zh-CN">

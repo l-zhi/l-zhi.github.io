@@ -75,6 +75,14 @@ draft: true
 
 字体使用本机字体栈，无远程字体请求。禁用 JavaScript 后文章仍可阅读，主题跟随系统；搜索页提供归档入口。
 
+## 学习栏目
+
+顶部导航“学习”进入 `/learning/`。课程目录在 `src/learning.ts` 维护，列表页面位于 `src/pages/learning/index.astro`，目录中的课程地址同时加入 sitemap。
+
+Pocket 4P 摄影课程位于 `public/learning/pocket-4p/index.html`，保留原课程的 24 课、互动动画、测验、打印和本机学习进度。它是包含脚本、样式和教学照片的独立 HTML，通过 `/learning/pocket-4p/` 访问；页头和页脚可返回学习栏目。列表封面位于 `public/img/learning/pocket-4p.jpg`，图片署名和来源链接保留在列表与课程内。
+
+修改课程时编辑上述 HTML，运行 `npm run verify` 后通过仓库现有工作流发布。课程进度只保存在访问者当前浏览器，不跨设备同步，也不会随课程发布上传。
+
 ## CI/CD 与 GitHub Pages
 
 `.github/workflows/deploy.yml` 在 PR 上执行 `npm ci`、类型检查、生产构建及静态检查，并保留构建产物供下载。推送到 `master` 或 `main` 时同样检查，只有仓库默认分支可部署。手动触发也只允许默认分支进入部署任务。
