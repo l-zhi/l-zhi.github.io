@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="AI 论文简史课程封面：一条从 1943 到 2025 的时间线">
+  <rect width="1600" height="1200" fill="#14232b"/>
+  <g fill="none" stroke="#2c3e48" stroke-width="2">
+    <path d="M0 300H1600M0 600H1600M0 900H1600"/>
+    <path d="M320 0V1200M640 0V1200M960 0V1200M1280 0V1200"/>
+  </g>
+  <path d="M120 760 C 380 760, 460 640, 700 620 S 1100 420, 1480 300" fill="none" stroke="#f39f6b" stroke-width="10" stroke-linecap="round"/>
+  <g fill="#14232b" stroke="#f39f6b" stroke-width="8">
+    <circle cx="120" cy="760" r="22"/><circle cx="430" cy="705" r="22"/><circle cx="700" cy="620" r="22"/>
+    <circle cx="960" cy="520" r="22"/><circle cx="1220" cy="390" r="22"/>
+  </g>
+  <circle cx="1480" cy="300" r="34" fill="#f39f6b"/>
+  <g fill="#c9d4da" font-family="Georgia, 'Times New Roman', serif" font-size="44">
+    <text x="78" y="840">1943</text><text x="388" y="785">1986</text><text x="658" y="700">2012</text>
+    <text x="918" y="600">2017</text><text x="1178" y="470">2020</text><text x="1420" y="230">2025</text>
+  </g>
+  <text x="120" y="250" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="120" font-weight="700">Papers</text>
+  <text x="124" y="330" fill="#f39f6b" font-family="Georgia, 'Times New Roman', serif" font-size="52" letter-spacing="6">A HISTORY OF AI · 50 PAPERS</text>
+  <text x="120" y="1060" fill="#8fa3ad" font-family="Menlo, monospace" font-size="40">Attention(Q, K, V) = softmax(QKᵀ/√dₖ)V</text>
+</svg>

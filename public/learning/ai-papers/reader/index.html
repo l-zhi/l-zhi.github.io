@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>核心论文精读 · AI 论文简史 · ai-build.cn</title>
+<meta name="description" content="17 篇 AI 核心论文对照原文精读：逐步导读、术语小词典、思考题，以及逐页中文讲解。">
+<link rel="canonical" href="https://ai-build.cn/learning/ai-papers/reader/">
+<style>
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --ink:#1d1c1a; --muted:#6b675f; --line:#e3ded3;
+  --accent:#c2410c; --chip:#f1ede4; --ok:#15803d; --hl:#fff4d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141413; --surface:#1e1d1b; --ink:#ece9e2; --muted:#a19d94; --line:#33312d;
+    --accent:#fb923c; --chip:#2a2926; --ok:#4ade80; --hl:#3a2f17;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141413; --surface:#1e1d1b; --ink:#ece9e2; --muted:#a19d94; --line:#33312d;
+  --accent:#fb923c; --chip:#2a2926; --ok:#4ade80; --hl:#3a2f17;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Noto Sans SC",sans-serif;line-height:1.7;display:flex;flex-direction:column}
+.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--surface)}
+.top a{color:var(--muted);font-size:14px;text-decoration:none}
+.top a:hover{color:var(--accent)}
+.top h1{font-size:16px;margin:0 8px 0 0}
+.top select{font:inherit;font-size:14px;padding:5px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);max-width:100%;flex:1 1 260px}
+.top .nav button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.split{flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,1fr);min-height:0}
+.pdf{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:var(--chip)}
+.pdfbar{display:flex;gap:10px;align-items:center;padding:6px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);background:var(--surface)}
+.pdfbar a{color:var(--accent)}
+.pdf iframe{flex:1;width:100%;border:0;background:#fff}
+.missing{padding:32px 24px;font-size:15px}
+.missing code{background:var(--surface);padding:1px 6px;border-radius:4px}
+.guide{overflow-y:auto;padding:20px 22px 80px}
+.guide h2{font-size:22px;line-height:1.35;margin:0 0 4px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:12px 0;font-size:14.5px}
+.box h3{font-size:13px;letter-spacing:.06em;color:var(--accent);margin:0 0 6px}
+.box ul{margin:0;padding-left:18px}
+.progress{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;margin:8px 0 4px}
+.progress i{display:block;height:100%;background:var(--ok);width:0;transition:width .2s}
+.step{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;margin:10px 0;transition:background .15s}
+.step.active{border-color:var(--accent);background:var(--hl)}
+.step .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.step .no{width:24px;height:24px;border-radius:50%;background:var(--chip);display:grid;place-items:center;font-size:12.5px;font-weight:700;flex:none}
+.step.done .no{background:var(--ok);color:var(--surface)}
+.step .sec{font-weight:700;font-size:15px}
+.step .go{margin-left:auto;font:inherit;font-size:12.5px;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:2px 10px;cursor:pointer;white-space:nowrap}
+.step .go:hover{background:var(--accent);color:var(--surface)}
+.step .look{font-size:13.5px;color:var(--muted);margin:6px 0 4px}
+.step .look b{color:var(--ink)}
+.step p{margin:4px 0;font-size:14.5px}
+.step .tip{font-size:13.5px;background:var(--chip);border-radius:8px;padding:6px 10px;margin-top:6px}
+.step label{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+dt{font-weight:700;white-space:nowrap}
+dd{margin:0;color:var(--ink)}
+textarea{width:100%;min-height:110px;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);color:var(--ink);resize:vertical}
+.small{font-size:12.5px;color:var(--muted)}
+.tabs{display:flex;gap:6px;margin:0 0 14px;position:sticky;top:-20px;background:var(--bg);padding:8px 0;z-index:3;border-bottom:1px solid var(--line)}
+.tabs button{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pages{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.pages button{font:inherit;font-size:13px;min-width:38px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:3px 8px;cursor:pointer}
+.pages button.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.zhnote{border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0;padding:10px 14px;margin:10px 0}
+.zhnote b{display:block;font-size:13px;color:var(--accent);margin-bottom:2px}
+.zhnote p{margin:0;font-size:15px;line-height:1.8}
+.pnav{display:flex;justify-content:space-between;gap:8px;margin:14px 0}
+.pnav button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:5px 12px;cursor:pointer}
+.pnav button:disabled{opacity:.4;cursor:default}
+@media (max-width:900px){.tabs{top:-16px}}
+@media (max-width:900px){
+  .split{grid-template-columns:1fr;grid-template-rows:62vh auto}
+  .pdf{border-right:0;border-bottom:1px solid var(--line)}
+  .guide{padding:16px}
+  dl{grid-template-columns:1fr}
+  dt{margin-top:6px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <a href="/learning/">学习栏目</a> <a href="../">← 返回时间线</a>
+  <h1>核心论文精读</h1>
+  <select id="pick" aria-label="选择论文"></select>
+  <span class="nav"><button id="prev">上一篇</button> <button id="next">下一篇</button></span>
+</div>
+<div class="split">
+  <div class="pdf">
+    <div class="pdfbar"><span id="pageinfo">原文</span><a id="openpdf" target="_blank" rel="noopener">新窗口打开 PDF ↗</a></div>
+    <div id="pdfwrap" style="flex:1;display:flex;min-height:0"></div>
+  </div>
+  <div class="guide" id="guide"></div>
+</div>
+
+<script>window.ZH = {};</script>
+<script src="/learning/ai-papers/zh/transformer.js"></script>
+<script src="/learning/ai-papers/zh/alexnet.js"></script>
+<script src="/learning/ai-papers/zh/word2vec.js"></script>
+<script src="/learning/ai-papers/zh/bahdanau.js"></script>
+<script src="/learning/ai-papers/zh/resnet.js"></script>
+<script src="/learning/ai-papers/zh/gpt1.js"></script>
+<script src="/learning/ai-papers/zh/bert.js"></script>
+<script src="/learning/ai-papers/zh/scaling.js"></script>
+<script src="/learning/ai-papers/zh/gpt3.js"></script>
+<script src="/learning/ai-papers/zh/ddpm.js"></script>
+<script src="/learning/ai-papers/zh/cot.js"></script>
+<script src="/learning/ai-papers/zh/instructgpt.js"></script>
+<script src="/learning/ai-papers/zh/react.js"></script>
+<script src="/learning/ai-papers/zh/r1.js"></script>
+<script>
+/* 精读数据。p = PDF 页码（按下载的版本核对过）；没有 PDF 的论文 p 为空。
+   look = 去原文看什么；say = 这部分在讲什么（大白话）；tip = 读时可以注意/跳过的地方 */
+const PAPERS = [
+{id:"turing",y:1950,t:"Computing Machinery and Intelligence",zh:"计算机器与智能 · 图灵",file:"",
+ missing:"这篇发表在期刊 Mind 上，出版方网站需要订阅，所以这里不能直接显示原文。可以通过学校或图书馆账号获取，也可以直接搜索标题找到公开版本。",
+ goal:"理解“机器能否思考”这个问题是怎样被改写成一个可以检验的问题的，以及图灵在 1950 年就预见到的“学习型机器”。",
+ steps:[
+ {sec:"§1 模仿游戏",look:"开头两页",say:"图灵认为“思考”这个词没法定义，于是换了个问法：设计一个游戏，提问者隔着房间、只靠打字，分辨对面谁是人、谁是机器。如果机器能让提问者经常猜错，就说明它表现出了智能。",tip:"注意他最初的版本是“分辨男女”，后来才把其中一方换成机器。这个细节常被忽略，写文章时可以提一下。"},
+ {sec:"§3–5 什么是“机器”",look:"关于数字计算机的部分",say:"他说明这里的“机器”专指数字计算机，并提出一个关键观点：任何数字计算机原则上都能模仿其他数字计算机（通用性）。所以问题不在硬件，而在程序。",tip:"技术细节可以快速翻过。"},
+ {sec:"§6 九种反对意见",look:"全文最长、也最有趣的一节",say:"他逐条回应反对声音：神学的、“想想都可怕”的、数学局限性的、意识的、“机器做不了某件事”的、“机器只能做被告诉的事”（Lovelace 夫人的反对）等。每条回应都很机智。",tip:"推荐挑“意识”和 Lovelace 夫人两条细读。今天大家对 LLM 的质疑，几乎都能在这里找到原型。"},
+ {sec:"§7 学习机器",look:"最后一节",say:"与其直接编写一个成年人的大脑，不如造一个“儿童大脑”，然后去教育它：用奖励和惩罚，让它从经验中学习。",tip:"这一节放到今天读非常有预言感：预训练（儿童大脑）+ 强化学习（奖惩教育）正是今天 LLM 的做法。可以和 DeepSeek-R1 首尾呼应。"}],
+ terms:[["模仿游戏","即图灵测试：通过对话判断对方是人还是机器"],["数字计算机","按存储的程序一步步执行指令的机器"],["学习机器","不是事先写好全部规则，而是通过经验调整自身的机器"]],
+ qs:["今天的聊天机器人算不算通过了图灵测试？“通过”需要什么条件？","图灵对“意识”反对意见的回应，你觉得有说服力吗？"],
+ take:"图灵把哲学问题变成了工程问题，并指出了“教育机器”这条路。七十年后，LLM 正是沿着这条路走出来的。"},
+
+{id:"backprop",y:1986,t:"Learning Representations by Back-propagating Errors",zh:"反向传播 · Rumelhart, Hinton, Williams",file:"",
+ missing:"这篇发表在 Nature 上，需要订阅，所以这里不能直接显示原文。全文只有 4 页。",
+ goal:"理解两件事：多层网络为什么难训练，以及“把错误往回传”为什么能解决这个问题。还有更重要的一点：网络会在隐藏层里自己学出有意义的概念。",
+ steps:[
+ {sec:"开篇：问题是什么",look:"第一页前两段",say:"以前的学习方法只能调整直接连到输出的那层连接。中间的“隐藏单元”该代表什么，没人知道怎么让机器自己学。",tip:"抓住“隐藏单元”这个词，它就是今天说的“隐藏层”。"},
+ {sec:"方法：误差反向传播",look:"中间的公式部分",say:"先正向算出输出，再和正确答案比较得到误差，然后用微积分的链式法则，把“每个连接该为误差负多少责任”一层层往回算，按责任大小调整。",tip:"公式可以完全跳过，记住比喻就行：业绩不好，从总经理一级一级往下追责。"},
+ {sec:"例子：家族关系树",look:"两个家族的那张图",say:"给网络看两个家族（英国和意大利）的亲属关系，让它回答“X 的父亲是谁”。训练后发现，隐藏单元自己学会了表示“是哪国人”“是第几代”“属于家族哪一支”等特征。没有人教过它这些。",tip:"这是全文最精彩的地方，也是标题中“学习表示”的含义。写文章时可以把它当作“机器第一次自己发明概念”。"}],
+ terms:[["隐藏单元","网络中间层的神经元，不直接对应输入或输出"],["梯度","“往哪个方向调、调多少能让误差变小”的指示"],["表示","网络内部对事物的编码方式，比如用一组数字来表示“辈分”"]],
+ qs:["反向传播 1970 年代已有人提出，为什么直到这篇论文才流行起来？","“自己学出概念”和“人设计特征”相比，好处与风险分别是什么？"],
+ take:"反向传播让深层网络变得可训练。今天每一个大模型的每一次参数更新，用的都是它。"},
+
+{id:"alexnet",noEmbed:1,y:2012,t:"ImageNet Classification with Deep Convolutional Neural Networks",zh:"AlexNet",file:"https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf",
+ goal:"看懂“深度学习时刻”是怎么发生的：不是某个神奇的新理论，而是把已有的 CNN 做大，再配上 GPU 和大数据。",
+ steps:[
+ {p:1,sec:"摘要 + §1 引言",look:"第 1 页",say:"任务是 ImageNet：120 万张图、1000 类。作者认为物体识别需要大数据和大模型，而 CNN 的结构天然适合图像，GPU 也已经足够快。",tip:"注意引言最后一段：作者预言更快的 GPU 和更大的数据会带来更好的结果。这正是此后十年的剧本。"},
+ {p:3,sec:"§3.1 ReLU",look:"第 3 页 Figure 1",say:"用一个极简单的激活函数（负数变 0，正数原样输出）替代传统的 S 形曲线，训练速度快了好几倍。Figure 1 对比了两者达到同样效果所需的训练轮数。",tip:"想说明“简单的改动带来巨大收益”时，这是个好例子。"},
+ {p:3,sec:"§3.2 两块 GPU",look:"第 3–4 页",say:"单块 GPU（3GB 显存）放不下这个网络，于是把网络劈成两半，分别放在两块 GTX 580 上，只在某些层交换信息。",tip:"写作素材：这是用两块游戏显卡训练出来的。模型规模受硬件限制，这个主题会在后面的大模型时代反复出现。"},
+ {p:5,sec:"Figure 2 整体架构",look:"第 5 页的架构图",say:"5 个卷积层 + 3 个全连接层。图上下两路分别对应两块 GPU。输入 224×224 的图片，最后输出 1000 个类别的概率。",tip:"不用记住每层的尺寸，看清“上下两条路”就够了。"},
+ {p:5,sec:"§4 防止死记硬背",look:"第 5–6 页",say:"有 6000 万参数，很容易过拟合（只会背训练图）。两招应对：数据增强（裁剪、翻转、调颜色，相当于造出更多训练图）和 Dropout（训练时随机关掉一半神经元，逼网络不依赖少数几个神经元）。",tip:"Dropout 可以比喻成“团队里随机请假，逼每个人都能独当一面”。"},
+ {p:7,sec:"§6 结果 + Figure 3",look:"第 7 页的表和第 6 页的 Figure 3",say:"Top-5 错误率 15.3%，第二名是 26.2%。Figure 3 是第一层学到的“滤镜”：边缘、条纹、色块。这些都是网络自己学出来的。",tip:"Figure 3 可以和 1986 年反向传播“自己学出概念”相互呼应。"},
+ {p:8,sec:"Figure 4 + §7 讨论",look:"第 8 页",say:"左边是识别示例，连错误也错得合情合理；右边是“以图搜图”：网络认为相似的图片，像素上其实差别很大，说明它学到的是语义。讨论部分强调：深度很重要，去掉任何一层，性能都会下降。",tip:"“深度很重要”这句话，就是“深度学习”这个名字的注脚。"}],
+ terms:[["卷积 (CNN)","用一个小窗口在图片上滑动来提取局部特征"],["ReLU","负数变 0、正数不变的激活函数"],["过拟合","把训练数据背下来，遇到新数据就不会了"],["Dropout","训练时随机关闭部分神经元"],["Top-5 错误率","模型给出的前 5 个答案里都没有正确答案的比例"]],
+ qs:["AlexNet 的哪些技术在 1998 年的 LeNet 里就已经有了？真正新的是什么？","为什么说 GPU 是这次突破的“隐形主角”？"],
+ take:"大数据 + 大模型 + GPU 的配方被证明有效。从此 AI 进入“规模化”时代。"},
+
+{id:"word2vec",y:2013,t:"Efficient Estimation of Word Representations in Vector Space",zh:"Word2Vec",file:"https://arxiv.org/pdf/1301.3781v3",
+ goal:"理解“用一串数字表示一个词”是什么意思，以及为什么这串数字可以做“国王 − 男人 + 女人 ≈ 女王”这样的加减法。",
+ steps:[
+ {p:1,sec:"§1 引言与目标",look:"第 1–2 页",say:"传统做法把每个词当成孤立的编号，词与词之间没有“相似”的概念。目标是在数十亿词的语料上，高效地学出能体现词义相似性的向量。",tip:"注意关键词“高效”。这篇论文的贡献不只在思想，更在于把训练变得很便宜。"},
+ {p:2,sec:"King − Man + Woman",look:"第 2 页 §1.1 末尾",say:"作者提到之前的发现：用词向量做简单的加减运算，“国王”减“男人”加“女人”，最接近的结果是“女王”。说明向量空间中的“方向”编码了“性别”这样的关系。",tip:"这是全文最有名的一句，可以直接用作文章的引子。"},
+ {p:5,sec:"Figure 1 两种模型",look:"第 5 页",say:"CBOW：给出周围的词，猜中间的词。Skip-gram：给出中间的词，猜周围的词。两者都是“填空游戏”，玩得多了，词向量就自然学出来了。",tip:"背后的语言学思想是：一个词的含义，由它经常和哪些词一起出现决定。"},
+ {p:6,sec:"Table 1 类比测试",look:"第 6 页",say:"作者设计了一套“类比题”来测试向量质量，比如“雅典:希腊 = 奥斯陆:?”、“大:更大 = 小:?”，分成语义和语法两类。",tip:"表中的数字不用细看，看懂题目长什么样就行。"},
+ {p:10,sec:"Table 8 学到的关系",look:"第 10 页",say:"展示模型自动学到的各种关系：国家与首都、公司与 CEO、化学元素与符号等。全部是从无标注文本中学出来的。",tip:"可以从这张表里挑几个例子放进文章，非常直观。"}],
+ terms:[["词向量 / 嵌入","用几百个数字表示一个词，意思越相近，数字越接近"],["CBOW","用上下文去猜中间的词"],["Skip-gram","用中间的词去猜上下文"],["语料","用来训练的大量文本"]],
+ qs:["为什么“一个词只有一个向量”是个问题？（提示：苹果）","词向量里会不会学进社会偏见？比如“医生”离“男人”更近？"],
+ take:"词有了“坐标”，意义可以计算。这是 NLP 走向表示学习的第一步。"},
+
+{id:"bahdanau",y:2014,t:"Neural Machine Translation by Jointly Learning to Align and Translate",zh:"Bahdanau 注意力",file:"https://arxiv.org/pdf/1409.0473v7",
+ goal:"理解“注意力”最初是为了解决什么问题而发明的。这是读懂 Transformer 的前置知识。",
+ steps:[
+ {p:1,sec:"摘要 + §1 引言",look:"第 1–2 页",say:"当时的神经翻译把整句源文压缩成一个固定长度的向量，再从这个向量生成译文。作者怀疑这个“固定长度”就是瓶颈，句子越长，效果越差。",tip:"抓住关键词：固定长度向量（fixed-length vector）。"},
+ {p:2,sec:"§2 背景：编码器-解码器",look:"第 2 页",say:"简要介绍 Seq2Seq：编码器读入、压缩，解码器展开、生成。",tip:"已经读过 Seq2Seq 的话可以略过。"},
+ {p:3,sec:"§3 + Figure 1 对齐与翻译",look:"第 3 页",say:"新方法：解码器每生成一个词，都会给源句中的每个词打一个“相关度”分数，然后按分数加权组合，得到这一步专属的上下文。每一步看的重点都不同。",tip:"Figure 1 中从多个源词汇聚到一个输出的箭头，就是注意力。公式中的 α（权重）就是“看多少”。"},
+ {p:5,sec:"Figure 2 长句表现",look:"第 5 页",say:"横轴是句子长度，纵轴是翻译质量。旧方法随句子变长急剧下滑，新方法（RNNsearch）基本保持稳定。",tip:"这张图直接证明了引言中的猜想。"},
+ {p:6,sec:"Figure 3 对齐热力图",look:"第 6 页（必看）",say:"英语句子和法语译文之间的注意力权重，越白表示越关注。大部分沿着对角线，但在语序不同的地方（比如形容词和名词的位置）会出现交叉。模型自己学会了语序调整。",tip:"这是全文最适合放进文章的一张图：你能直接“看到”机器在看哪里。"}],
+ terms:[["编码器 / 解码器","一个负责读懂输入，一个负责生成输出"],["对齐","译文中的每个词对应源文中的哪个词"],["注意力权重 α","生成某个词时，对源句每个词关注多少"],["BLEU","衡量机器翻译与人工翻译相似度的分数"]],
+ qs:["如果不仅解码器可以“看”编码器，句子里的每个词也能互相“看”，会怎样？（这就是 Transformer 的自注意力）"],
+ take:"注意力：不要硬把所有信息压在一起，需要什么就回头去看什么。三年后，这个想法成了一切的核心。"},
+
+{id:"resnet",y:2015,t:"Deep Residual Learning for Image Recognition",zh:"ResNet 残差网络",file:"https://arxiv.org/pdf/1512.03385v1",
+ goal:"理解一个反直觉的现象（网络更深反而更差），以及一个极其简单的修复方法（加一条捷径）。",
+ steps:[
+ {p:1,sec:"Figure 1 反常现象",look:"第 1 页右侧",say:"56 层网络的训练误差和测试误差都比 20 层的高。注意，连训练误差都更高，说明不是“背得太多”（过拟合），而是根本没训练好。作者称之为“退化问题”。",tip:"先把这张图看懂，后面的一切都是为了解决它。"},
+ {p:2,sec:"Figure 2 残差块",look:"第 2 页（全文核心）",say:"在两层网络旁边加一条“捷径”，把输入原样加到输出上：输出 = F(x) + x。网络只需要学习“在 x 的基础上改多少”。如果什么都不用改，把 F 学成 0 就行，这很容易做到。",tip:"类比：修改文章时只标出改动的地方，而不是从头重写一遍。"},
+ {p:4,sec:"Figure 3 网络结构对比",look:"第 4 页",say:"三列并排：VGG-19、34 层普通网络、34 层残差网络。残差网络与普通网络的唯一区别就是那些弯曲的捷径连线。",tip:"图很长，看清“弧线”在哪里就够了。"},
+ {p:5,sec:"Figure 4 实验对比",look:"第 5 页",say:"左边普通网络：34 层比 18 层差。右边残差网络：34 层比 18 层好。同样加深，结果完全相反。",tip:"这张图是论文的“证据”。"},
+ {p:6,sec:"更深：152 层",look:"第 6 页 Table 3–5",say:"用“瓶颈”设计（Figure 5）把网络做到 152 层，ImageNet 错误率降到 3.57%，赢得 2015 年比赛。",tip:"表格的数字可以略过，记住“152 层”和“3.57%”就够了。"}],
+ terms:[["退化问题","网络加深后，连训练误差都变大的现象"],["残差","需要学习的“差值”：期望输出减去输入"],["捷径连接","跳过若干层、把输入直接加到输出上的连接"]],
+ qs:["为什么“学习差值”会比“学习完整映射”容易？","打开 Transformer 论文的 Figure 1，找找残差连接（Add & Norm）在哪里。"],
+ take:"一个 “+x” 让网络可以无限加深。今天所有大模型的每一层都带着这条捷径。"},
+
+{id:"alphago",y:2016,t:"Mastering the Game of Go with Deep Neural Networks and Tree Search",zh:"AlphaGo",file:"",
+ missing:"这篇发表在 Nature 上，需要订阅，所以这里不能直接显示原文。也推荐同时看纪录片《AlphaGo》（2017）。",
+ goal:"理解“直觉（神经网络）+ 推演（搜索）”的组合。这是理解今天推理模型“先想再答”的另一条线索。",
+ steps:[
+ {sec:"引言：为什么围棋难",look:"第一页",say:"围棋每步大约有 250 种选择，一局大约 150 步，穷举所有可能性完全不现实。传统程序只能达到业余水平。",tip:"抓住两个难点：要考虑的走法太多（宽度），要往下算的步数太深（深度）。"},
+ {sec:"Figure 1 两个网络的训练",look:"流程图",say:"① 先用人类棋谱训练“策略网络”，学会模仿高手落子（直觉）；② 让它和自己对弈，用强化学习继续提高；③ 再用自我对弈的数据训练“价值网络”，判断一个局面最终谁会赢（大局观）。",tip:"策略网络减少要考虑的“宽度”，价值网络减少要往下算的“深度”。"},
+ {sec:"蒙特卡洛树搜索",look:"搜索过程示意图",say:"下棋时，用策略网络挑出几个有希望的候选走法，往下推演；推演到一定深度时，用价值网络评估局面，再把结果回传，决定哪一步最好。",tip:"类比：职业棋手先凭直觉看几步，再在脑中对这几步深算。"},
+ {sec:"结果",look:"对战成绩部分",say:"以 5:0 击败欧洲冠军樊麾。这是计算机第一次在完整对局中击败职业棋手。几个月后又以 4:1 战胜李世石。",tip:"写作素材：第二局的“第 37 手”，人类解说员一开始以为是失误。"}],
+ terms:[["策略网络","给出“下一步下哪里”的概率"],["价值网络","评估当前局面的胜率"],["蒙特卡洛树搜索","在可能的走法中有选择地向下推演"],["自我对弈","AI 和自己下棋来产生训练数据"]],
+ qs:["推理模型“想得越久越准”，和 AlphaGo“算得越深越强”有什么相似之处？"],
+ take:"学到的直觉 + 搜索推演 > 两者中的任何一个。这一思想在 2024 年的推理模型中再次出现。"},
+
+{id:"transformer",y:2017,t:"Attention Is All You Need",zh:"Transformer",file:"https://arxiv.org/pdf/1706.03762v7",
+ goal:"看懂 Transformer 的整体结构和“自注意力”在做什么。这是理解之后所有大模型的钥匙。",
+ steps:[
+ {p:1,sec:"摘要",look:"第 1 页",say:"提出一个只用注意力、完全不用循环和卷积的新架构。翻译质量创纪录，训练时间却大幅缩短。",tip:"第 1 页顶部那段是 Google 的授权说明，不是正文。"},
+ {p:2,sec:"§1 引言：RNN 的问题",look:"第 2 页",say:"RNN 必须按顺序一个词一个词处理，第 100 个词必须等前 99 个算完，无法并行，在长句子上又慢又容易忘。",tip:"关键词：sequential（顺序的）。整篇论文要打破的就是这个限制。"},
+ {p:3,sec:"Figure 1 整体架构（必看）",look:"第 3 页",say:"左边是编码器，右边是解码器，各堆叠 N=6 层。每层有两个主要部件：多头注意力（让词之间互相看）和前馈网络（每个词各自深入加工）。每个部件外面都包着“Add & Norm”，也就是 ResNet 的残差连接。",tip:"先找出这几个方块：Embedding、Positional Encoding、Multi-Head Attention、Feed Forward、Add & Norm。"},
+ {p:3,sec:"§3.2 注意力：Q、K、V",look:"第 3–4 页",say:"每个词生成三个向量：Query（我想找什么）、Key（我能提供什么）、Value（我的实际内容）。用 Q 和所有 K 计算匹配度，按匹配度加权求和所有 V。比如“它”的 Query 会和“猫”的 Key 匹配得很好，于是从“猫”那里拿到信息。",tip:"类比图书馆：Query 是你的检索词，Key 是书脊上的标签，Value 是书的内容。"},
+ {p:4,sec:"Figure 2 多头注意力",look:"第 4 页",say:"左图：单次注意力的计算流程。右图：同时做 8 次（8 个“头”），每个头关注不同的关系，比如一个看语法、一个看指代，最后拼接起来。",tip:"公式 (1) 中除以 √d_k，只是为了让数值不至于太大，可以跳过。"},
+ {p:6,sec:"§3.5 位置编码",look:"第 6 页",say:"注意力本身不知道词的先后顺序（“狗咬人”和“人咬狗”在它看来一样），所以给每个位置加一个独特的“位置信号”（用正弦波生成）。",tip:"一个很重要但容易被忽略的设计。"},
+ {p:6,sec:"§4 为什么用自注意力 + Table 1",look:"第 6–7 页",say:"Table 1 比较了三种结构：自注意力中任意两个词之间只隔一步，可以完全并行；代价是计算量随句子长度呈平方增长。",tip:"这个“平方代价”就是后来 FlashAttention、Mamba 想要解决的问题。"},
+ {p:8,sec:"§6 结果 + Table 2",look:"第 8 页",say:"英德、英法翻译都刷新纪录，训练成本只有之前最好模型的一小部分（8 块 GPU 训练 3.5 天）。",tip:""},
+ {p:13,sec:"附录：注意力可视化",look:"第 13–15 页 Figure 3–5",say:"注意力头真的学到了有意义的模式：Figure 3 中“making”关注到远处的“more difficult”；Figure 4 中代词“its”关注到它指代的名词。",tip:"这几张图很适合放进文章，直观地展示“机器在看什么”。"}],
+ terms:[["自注意力","句子中每个词都去看所有其他词，并决定各看多少"],["Q / K / V","查询、键、值：检索什么、凭什么匹配、取回什么"],["多头","并行做多组注意力，各自关注不同的关系"],["位置编码","告诉模型每个词在第几个位置"],["编码器 / 解码器","GPT 只用右半边（解码器），BERT 只用左半边（编码器）"]],
+ qs:["为什么“能并行”对之后训练超大模型如此关键？","GPT 只用了解码器，BERT 只用了编码器，它们分别丢掉了什么、保留了什么？"],
+ take:"自注意力 + 残差 + 并行化 = 一个可以无限扩大的通用架构。之后的 AI 史，很大程度上就是“把 Transformer 做大”的历史。"},
+
+{id:"gpt1",y:2018,t:"Improving Language Understanding by Generative Pre-Training",zh:"GPT-1",file:"https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf",
+ goal:"理解“预训练 + 微调”两阶段范式，以及 GPT 系列一以贯之的目标：预测下一个词。",
+ steps:[
+ {p:1,sec:"§1 引言",look:"第 1–2 页",say:"带标注的数据稀缺，无标注的文本却很多。问题是：如何先从无标注文本中学到通用的语言能力，再迁移到具体任务上？",tip:""},
+ {p:3,sec:"§3.1 无监督预训练",look:"第 3 页",say:"让 Transformer（只用解码器部分）读大量书籍（BooksCorpus，约 7000 本书），任务只有一个：根据前面的词，预测下一个词。",tip:"公式 (1) 用数学写的就是“预测下一个词”这件事。"},
+ {p:3,sec:"§3.2 有监督微调",look:"第 3–4 页",say:"在预训练好的模型上，加一个很小的输出层，再用少量标注数据针对具体任务（如判断两句话是否矛盾）做训练。",tip:""},
+ {p:4,sec:"Figure 1（必看）",look:"第 4 页",say:"左边：12 层 Transformer 解码器。右边：如何把不同任务（分类、蕴含、相似度、多选）都改写成一串文本输入，用分隔符连接。模型结构不用改，只需要改输入格式。",tip:"这种“把任务改写成文本”的思想，后来发展成了 GPT-3 的提示（Prompt）。"},
+ {p:7,sec:"§5 分析 + Figure 2",look:"第 7 页",say:"右图显示：即使不做微调，随着预训练进行，模型在多个任务上的零样本表现也在稳步提升。说明预训练本身就在学习“做任务”。",tip:"这条曲线是 GPT-2、GPT-3 的种子：如果不用微调呢？"}],
+ terms:[["预训练","在大量无标注数据上学习通用能力"],["微调","用少量标注数据针对具体任务继续训练"],["语言模型","根据前文预测下一个词的模型"],["零样本","不给任何示例就直接做任务"]],
+ qs:["“预测下一个词”这么简单的任务，为什么能学到理解语言的能力？"],
+ take:"GPT 路线的起点：先读万卷书，再学具体手艺。“预测下一个词”这个目标从此再没变过。"},
+
+{id:"bert",y:2018,t:"BERT: Pre-training of Deep Bidirectional Transformers",zh:"BERT",file:"https://arxiv.org/pdf/1810.04805v2",
+ goal:"理解“双向”的含义，以及“完形填空”式的预训练方法。并和 GPT 对比，理解两条路线的分岔。",
+ steps:[
+ {p:1,sec:"§1 引言",look:"第 1–2 页",say:"作者认为 GPT 只能从左往右看，这限制了理解能力。比如判断一个词的意思，后文往往和前文一样重要。",tip:""},
+ {p:3,sec:"Figure 1 流程",look:"第 3 页",say:"左边是预训练（在无标注文本上），右边是微调（同一个模型分别适配问答、分类等任务）。",tip:""},
+ {p:4,sec:"§3.1 两个预训练任务",look:"第 4 页",say:"① 遮词预测（MLM）：随机遮住 15% 的词，让模型根据两边的上下文猜出来。② 下一句预测（NSP）：给两句话，判断第二句是不是第一句的下文。",tip:"MLM 就是完形填空。NSP 后来被证明作用不大，可以略读。"},
+ {p:5,sec:"Figure 2 输入表示",look:"第 5 页",say:"每个词的输入 = 词本身的向量 + 属于第几句的向量 + 位置向量，三者相加。",tip:"细节，可以快速浏览。"},
+ {p:6,sec:"结果 Table 1",look:"第 6 页",say:"在 GLUE（一组语言理解任务）上全面超越之前的所有方法，包括 GPT。",tip:""},
+ {p:13,sec:"Figure 3 三者对比（必看）",look:"第 13 页附录",say:"并排画出了 BERT（双向，每个词能看两边）、GPT（单向，只能看左边）和 ELMo（两个单向拼接）。",tip:"这张图是写“编码器路线 vs 解码器路线”最好的配图。"}],
+ terms:[["双向","理解一个词时同时看它的左边和右边"],["MLM 遮词预测","即完形填空式训练"],["GLUE","一组语言理解测试的合集"],["编码器路线","擅长理解，不擅长生成；BERT 是代表"]],
+ qs:["BERT 在 2018–2020 年比 GPT 更流行，为什么最终是 GPT 路线胜出？（提示：生成能力、规模化）"],
+ take:"双向理解让 BERT 统治了 NLP 两年。但“会理解不会写”，让它在生成式 AI 时代让位于 GPT。"},
+
+{id:"scaling",y:2020,t:"Scaling Laws for Neural Language Models",zh:"规模定律",file:"https://arxiv.org/pdf/2001.08361v1",
+ goal:"理解 AI 行业疯狂堆算力的“理论依据”：性能可以按规模预测。",
+ steps:[
+ {p:2,sec:"§1.1 要点总结",look:"第 2–3 页（直接读这几条）",say:"作者把结论列成几条要点：性能主要取决于规模（参数量 N、数据量 D、算力 C），和网络的具体形状关系不大；三者分别与性能呈平滑的幂律关系；大模型更“省数据”。",tip:"这几页就是全文精华，后面的章节都是论证。"},
+ {p:3,sec:"Figure 1（必看）",look:"第 3 页",say:"三张图分别对应算力、数据量、参数量。横轴是对数坐标，纵轴是测试损失（越低越好）。三条几乎笔直的线：每增加 10 倍资源，损失就按固定比例下降。",tip:"“对数坐标上的直线”就是幂律。可以把它比作 AI 的“摩尔定律”。"},
+ {p:4,sec:"Figure 2–3 大模型更省数据",look:"第 4 页",say:"Figure 2：大模型达到同样效果所需的数据更少。Figure 3：算力增加时，大部分应该花在扩大模型上，其次才是数据。",tip:"注意：这个“多加参数”的结论，后来被 Chinchilla 修正了。"},
+ {p:8,sec:"Figure 5 形状不重要",look:"第 8 页",say:"总参数量固定时，网络是“宽而浅”还是“窄而深”，性能差别很小。",tip:"含义：与其纠结架构细节，不如直接做大。"},
+ {p:18,sec:"§8 讨论",look:"第 18 页",say:"作者讨论了这些规律的意义和局限，并推测更大的模型会继续沿着这条曲线前进。",tip:"写文章时可以点出：GPT-3 就是这一推测的验证。"}],
+ terms:[["损失 (loss)","模型预测下一个词时出错的程度，越低越好"],["幂律","一个量随另一个量按固定比例变化，在对数图上是直线"],["参数量 N","模型中可学习数字的个数"],["算力 C","训练消耗的总计算量"]],
+ qs:["如果性能可以“买”到，AI 竞争会变成什么样？","这条直线会永远延续下去吗？"],
+ take:"规模定律把 AI 从“炼丹”变成了“工程”：投入多少算力，大致能换来多少性能。"},
+
+{id:"gpt3",y:2020,t:"Language Models are Few-Shot Learners",zh:"GPT-3",file:"https://arxiv.org/pdf/2005.14165v4",
+ goal:"理解“上下文学习”（在提示中给例子）这个新范式，以及规模带来的能力提升。全文 75 页，只读前 10 页和几个精选部分即可。",
+ steps:[
+ {p:3,sec:"§1 引言 + Figure 1.1",look:"第 3 页",say:"微调需要为每个任务准备数据，人类却只需几个例子或一句说明就能学会新任务。Figure 1.1 把预训练描述为“外循环”（学习通用技能），把读提示中的例子描述为“内循环”（现场学会当前任务）。",tip:""},
+ {p:4,sec:"Figure 1.2 越大越会学",look:"第 4 页",say:"横轴是提示中示例的数量，三条线分别对应三种模型大小。最大的模型从示例中获益最多，小模型几乎不会“现学现用”。",tip:"这是“涌现”最早的直观证据之一。"},
+ {p:7,sec:"Figure 2.1（必看）",look:"第 7 页",say:"用“英译法”的例子对比四种用法：零样本（只给任务说明）、单样本（给 1 个例子）、少样本（给几个例子），以及传统的微调（改模型参数）。前三种都不改模型，只改输入。",tip:"这张图就是“提示工程”的起点，非常适合放进文章。"},
+ {p:8,sec:"Table 2.1–2.2 规模与数据",look:"第 8–9 页",say:"8 个模型，从 1.25 亿到 1750 亿参数。训练数据以过滤后的网页数据为主，还包括书籍和维基百科。",tip:"记住“1750 亿”这个数字就行。"},
+ {p:25,sec:"§3.9.4 新闻生成",look:"第 25–28 页",say:"让人类判断一篇短新闻是人写的还是 GPT-3 写的，准确率只比瞎猜高一点。Figure 3.14 是最难分辨的一篇。",tip:"很好的写作素材：机器写作第一次“以假乱真”。"},
+ {p:33,sec:"§5 局限 + §6 影响",look:"第 33–39 页",say:"作者坦承：长文本会出现重复和自相矛盾，常识推理不足，可能被滥用，存在偏见，能耗很高。",tip:"这些问题后来分别由 InstructGPT（对齐）、CoT（推理）、RAG（知识）等工作去解决，可以作为文章的过渡。"}],
+ terms:[["上下文学习","不改参数，只靠提示中的示例学会新任务"],["少样本 / 零样本","提示中给几个例子 / 不给例子"],["涌现","模型达到一定规模后才突然出现的能力"],["提示 (Prompt)","输入给模型的文字，包括说明和示例"]],
+ qs:["GPT-3 很强，为什么普通人直到 ChatGPT 出现才感受到？（提示：它不听指令）"],
+ take:"足够大的模型可以“现学现用”。提示取代微调，成为使用 AI 的新方式。"},
+
+{id:"ddpm",y:2020,t:"Denoising Diffusion Probabilistic Models",zh:"DDPM 扩散模型",file:"https://arxiv.org/pdf/2006.11239v2",
+ goal:"理解“从噪声中一步步去噪生成图片”的思想。数学部分可以完全跳过，只看图和文字说明。",
+ steps:[
+ {p:1,sec:"Figure 1 + 引言",look:"第 1 页",say:"先看生成效果：逼真的人脸和场景。引言指出，扩散模型的思想此前已有人提出，但从未生成过高质量图片。这篇论文第一次做到了。",tip:""},
+ {p:2,sec:"Figure 2 核心过程（必看）",look:"第 2 页",say:"从右往左看是“前向过程”：在清晰图片上一步步加噪点，直到变成纯噪声。从左往右看是“反向过程”：模型学习每一步怎么去掉一点噪声。生成时，从纯噪声开始，反复去噪约 1000 步。",tip:"类比：把墨水滴进清水里会慢慢扩散；如果能学会“倒放”，就能从一杯浑水里还原出那滴墨水。"},
+ {p:4,sec:"§3.4 简化的训练目标",look:"第 4 页",say:"作者发现，最终的训练目标可以简化成一件很简单的事：给定一张加了噪声的图，让模型预测“加进去的噪声是什么”。",tip:"这是论文最重要的技术洞察，但只需记住这句话，不用看公式。"},
+ {p:6,sec:"Figure 3–4 生成样例",look:"第 6 页",say:"生成的教堂和卧室图片，质量与当时最好的 GAN 相当。",tip:""},
+ {p:7,sec:"Figure 6 逐步生成",look:"第 7 页",say:"展示同一张图从噪声到清晰的过程：先出现大致轮廓和颜色，然后才是细节。",tip:"这和画家的工作方式很像：先铺大色块，再画细节。"}],
+ terms:[["前向过程","逐步加噪声，直到变成纯噪声"],["反向过程","逐步去噪声，从噪声生成图片"],["去噪","预测并去掉噪声"],["FID","衡量生成图片质量的分数，越低越好"]],
+ qs:["为什么“慢慢去噪 1000 步”比 GAN 的“一步生成”更稳定？","这个思想后来是怎样用到视频生成上的？"],
+ take:"生成 = 学会倒放“加噪”过程。这个想法成了 Stable Diffusion、Midjourney、Sora 的共同基础。"},
+
+{id:"cot",y:2022,t:"Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",zh:"思维链 CoT",file:"https://arxiv.org/pdf/2201.11903v6",
+ goal:"理解“让模型写出推理步骤”为什么有效，以及这种能力为什么只在大模型身上出现。",
+ steps:[
+ {p:1,sec:"Figure 1（必看）",look:"第 1 页",say:"同一道数学应用题。左边：示例中只给答案，模型答错。右边：示例中写出解题步骤，模型就模仿着一步步推理，最后答对。唯一的区别就是示例的写法。",tip:"这张图可以原样作为文章配图，一看就懂。"},
+ {p:2,sec:"§2 什么是思维链",look:"第 2–3 页",say:"作者列出了思维链的几个优点：把复杂问题拆成多步；让人可以看到模型是怎么想的、在哪里出错；适用于任何人类能用语言推理的任务；只需要改提示，不用训练。",tip:""},
+ {p:4,sec:"Figure 3 各种任务示例",look:"第 4 页",say:"展示了数学、常识、符号推理等不同类型任务的思维链示例。",tip:"可以挑一两个例子放进文章。"},
+ {p:5,sec:"Figure 4 规模才有效（必看）",look:"第 5 页",say:"横轴是模型大小。小模型用思维链几乎没有帮助，甚至更差；超过约 1000 亿参数后，效果急剧上升。",tip:"这就是“涌现”：推理能力只在足够大的模型上出现。"},
+ {p:6,sec:"§3.3 消融实验",look:"第 6 页 Figure 5",say:"作者检验了几种替代方案：只写公式、只多输出一些无意义的字（多给“思考时间”）、先给答案再写推理。都不如真正的思维链。",tip:"结论：起作用的是“用自然语言一步步推理”本身，而不只是多说了几个字。"},
+ {p:8,sec:"§6 讨论",look:"第 8 页",say:"作者谨慎地指出：模型看起来在推理，但还不能确定它是否真的“在推理”；推理链也可能是错的。",tip:"这一问题至今仍有争议，可以作为文章的思考点。"}],
+ terms:[["思维链","在答案之前写出中间推理步骤"],["提示示例","提示中给出的“题目-解答”样例"],["消融实验","去掉某个组成部分，看效果变化，以判断它是否关键"],["GSM8K","小学数学应用题测试集"]],
+ qs:["如果不用在提示中给示例，而是训练模型“天生就会先想再答”，会怎样？（这就是 o1 / R1）"],
+ take:"让大模型“写出解题步骤”就能大幅提升推理能力。推理模型的故事从这里开始。"},
+
+{id:"instructgpt",y:2022,t:"Training Language Models to Follow Instructions with Human Feedback",zh:"InstructGPT / RLHF",file:"https://arxiv.org/pdf/2203.02155v1",
+ goal:"看懂 ChatGPT 背后的训练方法：如何把一个只会续写的模型，变成一个听话、有用的助手。",
+ steps:[
+ {p:1,sec:"§1 引言：未对齐",look:"第 1–2 页",say:"语言模型的训练目标是“预测网上文本的下一个词”，而不是“有帮助地、诚实地、安全地执行用户的指令”。这两个目标并不一致，所以 GPT-3 会编造事实、答非所问。",tip:"关键词：misaligned（未对齐）。"},
+ {p:2,sec:"Figure 1 关键结果",look:"第 2 页",say:"人类评价：13 亿参数的 InstructGPT，比 1750 亿参数的 GPT-3 更受欢迎。",tip:"小 100 倍的模型反而更好。写作时可以强调：对齐比规模更重要。"},
+ {p:3,sec:"Figure 2 三步法（必看）",look:"第 3 页",say:"第一步：标注员写出示范答案，让模型模仿（监督微调 SFT）。第二步：模型对同一个问题生成多个回答，标注员排序，训练一个“打分员”（奖励模型 RM）。第三步：模型不断生成回答、由打分员打分，用 PPO 强化学习去追求高分。",tip:"这张图就是 ChatGPT 的“出生证明”，务必看懂。"},
+ {p:6,sec:"§3.2 数据从哪来",look:"第 6 页 Table 1–2",say:"提示主要来自 OpenAI API 用户的真实请求：生成、开放问答、头脑风暴、聊天、改写等。",tip:"真实用户需求驱动训练，这也是 OpenAI 的数据优势之一。"},
+ {p:13,sec:"Figure 6 更诚实",look:"第 13 页",say:"在 TruthfulQA（测试是否会说假话）上，InstructGPT 比 GPT-3 更真实。",tip:""},
+ {p:15,sec:"Figure 8–9 定性例子",look:"第 15–16 页",say:"Figure 8：只在少量例子上训练过，但它能推广到其他语言和代码问题。Figure 9：它仍会犯错，比如接受问题中错误的前提。",tip:""},
+ {p:19,sec:"§5.3 局限",look:"第 19 页",say:"模型对齐的是“这群标注员和研究者”的偏好，不代表所有人。“对齐到谁的价值观”是一个开放问题。",tip:"写文章时可以从这里引出 Constitutional AI。"}],
+ terms:[["对齐","让模型的行为符合人类意图和价值观"],["SFT 监督微调","模仿人类写的示范答案"],["奖励模型","学会像人类一样给回答打分的模型"],["RLHF","基于人类反馈的强化学习"],["PPO","第三步用到的强化学习算法"]],
+ qs:["为什么排序（A 比 B 好）比直接打分（A 得 7 分）更容易让人类标注得一致？","“讨好打分员”会不会带来新问题？（提示：奖励作弊、阿谀奉承）"],
+ take:"三步 RLHF 让模型从“会续写”变成“会帮忙”。ChatGPT 就此诞生。"},
+
+{id:"react",y:2022,t:"ReAct: Synergizing Reasoning and Acting in Language Models",zh:"ReAct",file:"https://arxiv.org/pdf/2210.03629v3",
+ goal:"理解 AI Agent 的基本循环：思考 → 行动 → 观察。这是理解今天所有 Agent 产品的起点。",
+ steps:[
+ {p:1,sec:"§1 引言",look:"第 1 页",say:"人做事时，思考和行动是交织在一起的：做饭时想到“盐用完了”，就去买盐，然后继续做。而当时的模型要么只想不做（CoT），要么只做不想（直接调用工具）。",tip:"作者用了一个厨房的例子，读起来很有画面感。"},
+ {p:2,sec:"Figure 1（必看）",look:"第 2 页",say:"上半部分是问答任务的对比：(a) 直接回答，错误；(b) 思维链，只靠记忆推理，出现幻觉；(c) 只行动，搜索了但不会总结；(d) ReAct，交替地“想一步、搜一下、看结果、再想”，最终答对。下半部分是在文字游戏中找物品的例子。",tip:"把 (b)、(c)、(d) 对照着看，就能明白为什么“想”和“做”缺一不可。"},
+ {p:3,sec:"§2 方法",look:"第 3 页",say:"做法非常简单：在提示中给几个例子，示范 Thought（想法）、Action（动作，比如 search[关键词]）、Observation（工具返回的结果）交替出现的格式。模型就会照着这个格式工作。",tip:"没有新模型、没有新训练，只是一种新的提示格式。"},
+ {p:6,sec:"Table 2 成功与失败",look:"第 6 页",say:"分析了 ReAct 和 CoT 各自成功和失败的原因：CoT 的主要问题是幻觉（编造事实）；ReAct 更依赖事实，但有时会被搜索结果带偏，或陷入重复。",tip:"最好的方案是两者结合：内部知识和外部搜索互补。"},
+ {p:7,sec:"§4 决策任务",look:"第 7–8 页",say:"在 ALFWorld（文字版家务游戏）和网购任务中，ReAct 大幅超过只行动的方法。",tip:""}],
+ terms:[["Agent 智能体","能自主决定并执行一系列动作来完成目标的 AI"],["Thought / Action / Observation","想法 / 动作 / 观察结果，三者循环"],["幻觉","模型编造出不存在的事实"],["工具调用","模型调用搜索、计算器、代码执行等外部能力"]],
+ qs:["对照你用过的 AI 编程助手或 AI 搜索，找一找其中的 Thought/Action/Observation 循环。","Agent 陷入循环、反复做同一件事，该怎么解决？（可以参考 Reflexion）"],
+ take:"“边想边做”让语言模型第一次成为能与世界交互的智能体。今天的 Agent 都在运行这个循环。"},
+
+{id:"r1",y:2025,t:"DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL",zh:"DeepSeek-R1",file:"https://arxiv.org/pdf/2501.12948v2",
+ goal:"理解推理模型是怎么“练”出来的：不教它怎么想，只告诉它答案对不对，让它自己学会深度思考。（这里链接的是 arXiv 第 2 版，共 86 页，含补充材料，结构与最早的版本不同。）",
+ steps:[
+ {p:1,sec:"§1 引言",look:"第 1–2 页",say:"以往提升推理能力依赖大量人工写的推理示范，成本高，也会把模型限制在人类的思维方式里。作者想验证：只用强化学习，不给任何推理示范，模型能不能自己学会推理？",tip:""},
+ {p:2,sec:"§2.1 GRPO",look:"第 2 页（数学可跳过）",say:"使用的强化学习算法：同一道题让模型回答一组答案，用组内平均分作为基准，比平均分好的就鼓励，差的就抑制。",tip:"详细原理在第 15 页 Figure 3，那里有 PPO 与 GRPO 的对比图。"},
+ {p:3,sec:"§2.2 奖励设计 + Table 1",look:"第 3 页",say:"奖励非常简单，完全由规则判定：答案正确就加分（数学题对答案、代码跑测试），格式正确（思考过程写在 <think> 标签里）也加分。Table 1 是给 R1-Zero 的提示模板，只要求“先思考再回答”，不教具体怎么思考。",tip:"关键点：不用神经网络打分，避免模型“钻打分员的空子”。"},
+ {p:4,sec:"Figure 1（必看）",look:"第 4 页",say:"(a) 训练过程中数学竞赛 AIME 的准确率持续上升。(b) 平均回答长度持续变长：没有人要求，模型自己学会了“多想一会儿”。",tip:"(b) 图是全文最动人的结果：思考时间是模型自己“长”出来的。"},
+ {p:5,sec:"Table 2 顿悟时刻（必看）",look:"第 5 页",say:"训练中途，模型在解题时突然停下来，说“等等，这是个值得注意的顿悟”，然后回头重新检查。这种反思行为同样是自发出现的。",tip:"非常适合放进文章，可以与图灵 1950 年的“学习机器”首尾呼应。"},
+ {p:6,sec:"Figure 2 R1 的多阶段流程",look:"第 6 页",say:"R1-Zero 推理强，但输出可读性差、会中英混杂。正式版 R1 增加了几个阶段：先用少量人工整理的示范“冷启动”，再做强化学习，然后用拒绝采样生成数据再次微调，最后做一轮面向通用场景的强化学习。",tip:"写作时注意区分：“纯 RL 自学推理”说的是 R1-Zero；R1 用了少量示范数据。"},
+ {p:9,sec:"Table 3 各阶段效果",look:"第 9 页",say:"对比每个训练阶段后模型在数学、代码、通用任务上的表现，可以看到各阶段分别起到什么作用。",tip:""},
+ {p:10,sec:"§6 结论与局限",look:"第 10–11 页",say:"局限包括：简单问题也会“想太多”；可读性和语言混杂；奖励规则可能被钻空子（奖励作弊）；目前主要适用于有明确对错的任务。",tip:"“没有标准答案的任务怎么用 RL”是推理模型下一步的核心问题。"}],
+ terms:[["推理模型","回答前先生成一长段思考过程的模型"],["R1-Zero","不用任何示范、只用强化学习训练出的版本"],["规则奖励","用程序判定对错，而不是用另一个模型打分"],["冷启动","在强化学习前先用少量高质量示范打基础"],["奖励作弊","模型找到拿高分的漏洞，而不是真正完成任务"]],
+ qs:["R1 的方法和 AlphaGo 的“自我对弈”有什么相似之处？","没有标准答案的任务（写作、规划）怎么给奖励？"],
+ take:"只要奖励“答对”，模型就能自己学会深度思考与自我反思。从 CoT 到 RL，推理能力从“被提示出来”变成了“自己长出来”。"}
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const store = {
+  get(k,d){ try{ const v = localStorage.getItem(k); return v===null ? d : JSON.parse(v); }catch(_){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} }
+};
+const pick = $("pick");
+PAPERS.forEach((p,i) => pick.insertAdjacentHTML("beforeend", `<option value="${p.id}">${p.y} · ${esc(p.zh)}${p.missing?"（原文需订阅）":""}</option>`));
+
+let cur = null;
+function showPdf(page){
+  const w = $("pdfwrap");
+  w.innerHTML = "";
+  const src = cur.file + (page ? "#page=" + page : "");
+  if(cur.noEmbed){
+    w.innerHTML = `<div class="missing"><b>原文网站不允许嵌入显示</b><p>请点击上方“新窗口打开 PDF”，在新窗口中翻到第 ${page||1} 页，与右边的讲解对照阅读。</p></div>`;
+    $("openpdf").href = src; $("openpdf").style.display = "";
+    $("pageinfo").textContent = page ? `原文 · 第 ${page} 页（新窗口）` : "原文";
+    return;
+  }
+  const f = document.createElement("iframe");
+  f.title = cur.t; f.src = src;
+  w.appendChild(f);
+  $("openpdf").href = src; $("openpdf").style.display = "";
+  $("pageinfo").textContent = page ? `原文 · 第 ${page} 页` : "原文";
+}
+function showMissing(){
+  $("pdfwrap").innerHTML = `<div class="missing"><b>这篇原文需要订阅，无法在这里显示</b><p>${esc(cur.missing)}</p><p class="small">右边的精读笔记可以单独阅读。</p></div>`;
+  $("openpdf").removeAttribute("href"); $("openpdf").style.display = "none";
+  $("pageinfo").textContent = "原文（未下载）";
+}
+function renderZh(Z, page, jump){
+  const pages = Object.keys(Z).map(Number).sort((a,b) => a-b);
+  if(!Z[page]) page = pages[0];
+  store.set("zhpage:"+cur.id, page);
+  const i = pages.indexOf(page);
+  const box = $("tab-zh");
+  box.innerHTML = `
+    <div class="box small">逐页对照：点页码，左边原文跳到同一页，这里显示这一页每段在讲什么。内容是中文意译和讲解，不是逐字翻译，公式和表格只说明它的作用。没有页码按钮的页面（附录、参考文献、纯实验表格）暂无讲解。</div>
+    <div class="pages">${pages.map(p => `<button data-p="${p}" class="${p===page?"on":""}">p.${p}</button>`).join("")}</div>
+    <h3 style="margin:6px 0 2px;font-size:16px">第 ${page} 页</h3>
+    ${Z[page].map(([h, t]) => `<div class="zhnote"><b>${esc(h)}</b><p>${esc(t)}</p></div>`).join("")}
+    <div class="pnav">
+      <button data-p="${pages[i-1]||""}" ${i>0?"":"disabled"}>← 上一页 ${i>0?"p."+pages[i-1]:""}</button>
+      <button data-p="${pages[i+1]||""}" ${i<pages.length-1?"":"disabled"}>下一页 ${i<pages.length-1?"p."+pages[i+1]:""} →</button>
+    </div>
+    <div class="box small"><b style="color:var(--accent)">想看整篇逐句翻译？</b> 可以在浏览器里装一个支持 PDF 双语对照的翻译插件（例如“沉浸式翻译”），再用左上方“新窗口打开 PDF”打开原文，就能得到中英对照的全文。机器翻译的术语可能不准，可以对照这里的讲解来读。</div>`;
+  box.querySelectorAll("button[data-p]").forEach(b => b.onclick = () => {
+    const p = +b.dataset.p; if(!p) return;
+    renderZh(Z, p, true);
+    $("guide").scrollTop = 0;
+  });
+  if(jump && !cur.missing) showPdf(page);
+}
+function render(id){
+  cur = PAPERS.find(p => p.id === id) || PAPERS[0];
+  pick.value = cur.id;
+  try{ history.replaceState(null,"","?p="+cur.id); }catch(_){}
+  store.set("lastPaper", cur.id);
+  const done = store.get("done:"+cur.id, {});
+  const g = $("guide");
+  const Z = (window.ZH || {})[cur.id];
+  const tab = Z ? store.get("tab", "guide") : "guide";
+  g.innerHTML = `
+    <h2>${esc(cur.t)}</h2>
+    <div class="sub">${cur.y} · ${esc(cur.zh)}</div>
+    <div class="tabs">
+      <button data-tab="guide" aria-pressed="${tab==="guide"}">📖 精读导读</button>
+      <button data-tab="zh" aria-pressed="${tab==="zh"}" ${Z?"":"disabled title=\"这篇暂无逐页中文讲解\""}>🈶 逐页中文讲解${Z?"":"（暂无）"}</button>
+    </div>
+    <div id="tab-zh" ${tab==="zh"?"":"hidden"}></div>
+    <div id="tab-guide" ${tab==="guide"?"":"hidden"}>
+    <div class="box"><h3>精读目标</h3>${esc(cur.goal)}</div>
+    <div class="small">进度 <span id="pct"></span></div>
+    <div class="progress"><i id="bar"></i></div>
+    ${cur.steps.map((s,i) => `
+      <div class="step${done[i]?" done":""}" data-i="${i}">
+        <div class="head"><span class="no">${i+1}</span><span class="sec">${esc(s.sec)}</span>
+          ${s.p ? `<button class="go" data-p="${s.p}">对照原文 p.${s.p} →</button>` : ""}</div>
+        <div class="look"><b>看哪里：</b>${esc(s.look)}</div>
+        <p>${esc(s.say)}</p>
+        ${s.tip ? `<div class="tip">💡 ${esc(s.tip)}</div>` : ""}
+        <label><input type="checkbox" ${done[i]?"checked":""}> 这部分读完了</label>
+      </div>`).join("")}
+    <div class="box"><h3>术语小词典</h3><dl>${cur.terms.map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>
+    <div class="box"><h3>读完想一想</h3><ul>${cur.qs.map(q => `<li>${esc(q)}</li>`).join("")}</ul></div>
+    <div class="box"><h3>一句话带走</h3>${esc(cur.take)}</div>
+    <div class="box"><h3>我的笔记</h3><textarea id="note" placeholder="写下你的理解、疑问或想放进文章的句子（只保存在这个浏览器里）"></textarea></div>
+    </div>`;
+  g.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+    if(b.disabled) return;
+    const t = b.dataset.tab; store.set("tab", t);
+    g.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    $("tab-zh").hidden = t !== "zh"; $("tab-guide").hidden = t !== "guide";
+  });
+  if(Z) renderZh(Z, store.get("zhpage:"+cur.id, +Object.keys(Z)[0]), false);
+  g.scrollTop = 0;
+  const note = $("note");
+  note.value = store.get("note:"+cur.id, "");
+  note.oninput = () => store.set("note:"+cur.id, note.value);
+  const upd = () => {
+    const d = store.get("done:"+cur.id, {});
+    const n = cur.steps.filter((_,i) => d[i]).length;
+    $("pct").textContent = `${n} / ${cur.steps.length}`;
+    $("bar").style.width = (100*n/cur.steps.length) + "%";
+  };
+  g.querySelectorAll(".step").forEach(el => {
+    const i = +el.dataset.i;
+    el.querySelector("input").onchange = e => {
+      const d = store.get("done:"+cur.id, {});
+      d[i] = e.target.checked; store.set("done:"+cur.id, d);
+      el.classList.toggle("done", e.target.checked); upd();
+    };
+    const b = el.querySelector(".go");
+    if(b) b.onclick = () => {
+      g.querySelectorAll(".step.active").forEach(x => x.classList.remove("active"));
+      el.classList.add("active");
+      if(!cur.missing) showPdf(+b.dataset.p);
+      if(Z && Z[+b.dataset.p]) renderZh(Z, +b.dataset.p, false);
+    };
+  });
+  upd();
+  if(cur.missing) showMissing(); else showPdf(tab === "zh" && Z ? store.get("zhpage:"+cur.id, +Object.keys(Z)[0]) : (cur.steps[0].p || 1));
+}
+pick.onchange = () => render(pick.value);
+const step = d => { const i = PAPERS.findIndex(p => p.id === cur.id); render(PAPERS[(i + d + PAPERS.length) % PAPERS.length].id); };
+$("prev").onclick = () => step(-1);
+$("next").onclick = () => step(1);
+const qid = () => new URLSearchParams(location.search).get("p") || location.hash.slice(1);
+window.addEventListener("popstate", () => { const id = qid(); if(id && id !== cur.id) render(id); });
+render(qid() || store.get("lastPaper", PAPERS[0].id));
+</script>
+</body>
+</html>

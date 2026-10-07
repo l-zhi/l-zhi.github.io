@@ -81,6 +81,8 @@ draft: true
 
 Pocket 4P 摄影课程位于 `public/learning/pocket-4p/index.html`，保留原课程的 24 课、互动动画、测验、打印和本机学习进度。它是包含脚本、样式和教学照片的独立 HTML，通过 `/learning/pocket-4p/` 访问；页头和页脚可返回学习栏目。列表封面位于 `public/img/learning/pocket-4p.jpg`，图片署名和来源链接保留在列表与课程内。
 
+AI 论文简史课程位于 `public/learning/ai-papers/`：`index.html` 是 50 篇论文的时间线和快速解读，`reader/index.html` 是 17 篇核心论文的对照精读页（地址 `/learning/ai-papers/reader/?p=transformer`），`zh/*.js` 是逐页中文讲解数据，每篇一个文件。精读页的页码按链接中固定版本号的 arXiv PDF 核对；论文 PDF 一律链接 arXiv、会议或作者公开版本，不转存到仓库。NeurIPS 站点禁止嵌入，AlexNet 改为新窗口打开。列表封面为原创 SVG `public/img/learning/ai-papers.svg`。
+
 修改课程时编辑上述 HTML，运行 `npm run verify` 后通过仓库现有工作流发布。课程进度只保存在访问者当前浏览器，不跨设备同步，也不会随课程发布上传。
 
 ## CI/CD 与 GitHub Pages
