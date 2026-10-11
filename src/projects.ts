@@ -20,8 +20,19 @@ const makingArticle = {
 };
 
 // 首页顺序和项目列表共用此数组。只填写确认过的公开入口；不填写 github 则不显示仓库标签。
-// 文案与截图依据 makingArticle；荔枝头像界面来自其开发记录。
+// 文案与截图依据各项目的制作记录；孔明来自 AI 团队管理文章，其余主要依据 makingArticle。
 export const projects: Project[] = [
+  {
+    slug: 'kongming', name: '孔明 Kongming', category: 'macOS AI 工具',
+    summary: '统一调度电脑里的 AI 团队',
+    description: '在 Mac 上统一查看多个 AI 的状态、额度和任务，分配工作、核对交付，也能通过手机随时派活和查看进度。',
+    image: { src: '/img/2026/kongming-ai-agent-manager/08-desktop-workspace.png', alt: '孔明桌面工作空间：AI 对话、任务列表和交付文件', width: 1080, height: 644 },
+    motivation: '电脑里装了十几个 AI，反复切换窗口、记住任务交给了谁、分配各家的额度，都成了额外的工作。我做了孔明，让它从菜单栏监工逐步变成负责调度和验收的军师。',
+    audience: '同时使用多个 AI 编程工具，希望集中管理任务、额度和交付的开发者。',
+    features: ['查看本机 AI 的运行状态、任务进度及部分工具的剩余额度。', '根据任务自动选择执行者，也能通过三国人物别名指定 AI。', '同一项目的写任务串行执行，减少多个 AI 同时修改文件的冲突。', '检查交付文件并执行项目配置的验证命令，核对任务是否完成。', '通过手机网页端派活、查看进度和验收结果。', '阻止 Mac 进入空闲睡眠，让任务在锁屏后继续运行。'],
+    experience: '目前用于我的日常工作。可以先阅读制作记录，了解从菜单栏面板到桌面工作空间、手机端的演进。',
+    related: [{ title: '电脑里住了十几个AI，我请了个「孔明」来管它们', href: '/2026/10/11/kongming-ai-agent-manager/' }],
+  },
   {
     slug: 'ai-rss', name: 'ai-rss', category: 'Chrome 插件',
     summary: '用中文读一手 AI 动态',

@@ -18,7 +18,7 @@ test('compact project rail adapts to viewport and supports buttons and keyboard'
       await page.goto('/');
       await expect(page.locator('.site-header nav a').first()).toHaveText('AI项目');
       await expect(page.locator('.intro')).toHaveCount(0);
-      await expect(page.locator('.project-tile h2')).toHaveText(['ai-rss', 'pith-wiki', 'mcc', '荔枝头像', '荔枝排班']);
+      await expect(page.locator('.project-tile h2')).toHaveText(['孔明 Kongming', 'ai-rss', 'pith-wiki', 'mcc', '荔枝头像', '荔枝排班']);
       await expect(page.locator('.post-list > li')).toHaveCount(8);
       await expect.poll(() => page.locator('.project-tile img').evaluateAll(images => images.every(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0))).toBe(true);
       const bounds = await page.locator('.project-tile img').first().boundingBox();
@@ -54,9 +54,9 @@ test('project index, details, GitHub addresses and sitemap connect correctly', a
   await expect(page.locator('.project-repository')).toHaveAttribute('href', 'https://github.com/l-zhi/pith-wiki');
   await expect(page.locator('.project-repository')).toHaveAttribute('rel', 'noopener noreferrer');
   await page.getByRole('link', { name: '← 全部 AI 项目' }).click();
-  await expect(page.locator('.project-list > li')).toHaveCount(5);
+  await expect(page.locator('.project-list > li')).toHaveCount(6);
   await expect(page.locator('.site-header a[aria-current="page"]')).toHaveText('AI项目');
-  const paths = ['/projects/', '/projects/ai-rss/', '/projects/pith-wiki/', '/projects/mcc/', '/projects/lizhi-avatar/', '/projects/lizhi-shifts/'];
+  const paths = ['/projects/', '/projects/kongming/', '/projects/ai-rss/', '/projects/pith-wiki/', '/projects/mcc/', '/projects/lizhi-avatar/', '/projects/lizhi-shifts/'];
   const sitemap = await (await page.request.get('/sitemap.xml')).text();
   for (const path of paths) {
     expect(sitemap).toContain(`https://ai-build.cn${path}`);
@@ -71,20 +71,26 @@ test('project index, details, GitHub addresses and sitemap connect correctly', a
   await expect(page.locator('.project-repository')).toHaveAttribute('href', 'https://github.com/l-zhi/mcc');
   await page.getByRole('link', { name: 'AI时代的「虚」与「实」 →' }).click();
   await expect(page.locator('.prose')).toContainText('ai-rss');
-  for (const slug of ['ai-rss', 'lizhi-avatar', 'lizhi-shifts']) {
+  for (const slug of ['kongming', 'ai-rss', 'lizhi-avatar', 'lizhi-shifts']) {
     await page.goto(`/projects/${slug}/`);
     await expect(page.locator('.project-repository')).toHaveCount(0);
   }
-  expect((await (await page.request.get('/search-index.json')).json()).length).toBe(54);
+  await page.goto('/projects/kongming/');
+  await page.getByRole('link', { name: '电脑里住了十几个AI，我请了个「孔明」来管它们 →' }).click();
+  await expect(page).toHaveURL(/\/2026\/10\/11\/kongming-ai-agent-manager\/$/);
+  await expect(page.locator('.prose')).toContainText('菜单栏里的一把羽扇');
+  expect(await (await page.request.get('/search-index.json')).json()).toEqual(expect.arrayContaining([
+    expect.objectContaining({ url: '/2026/10/11/kongming-ai-agent-manager/' }),
+  ]));
 });
 
 test('projects remain readable and navigable without JavaScript', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 }, colorScheme: 'dark' });
   const page = await context.newPage();
   await page.goto(`${baseURL}/`);
-  await expect(page.locator('.project-tile-link')).toHaveCount(5);
+  await expect(page.locator('.project-tile-link')).toHaveCount(6);
   await expect(page.locator('.project-scroll-buttons')).toBeHidden();
-  await page.locator('.project-tile-link').nth(2).click();
+  await page.locator('.project-tile-link[href="/projects/mcc/"]').click();
   await expect(page.getByRole('heading', { name: 'mcc', exact: true })).toBeVisible();
   await expect(page.locator('.project-repository')).toBeVisible();
   await context.close();
