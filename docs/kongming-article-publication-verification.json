@@ -1,0 +1,709 @@
+{
+  "title": "《电脑里住了十几个AI，我请了个「孔明」来管它们》同步与发布核验",
+  "verificationScope": "以下为实施代理执行的自检，不代表用户或孔明已验收。",
+  "acceptanceCriteria": [
+    "保留原文标题、2026-10-11 20:48（北京时间）发布日期、五节正文及全部配图顺序；原始 Markdown 不改动。",
+    "十五张配图保存为站内资源，保持下载文件字节一致，设置准确尺寸和替代文字。",
+    "npm run verify 通过，类型检查、生产构建、站内链接及资源检查无新增错误。",
+    "桌面、手机、320px 窄屏暗色及禁用 JavaScript 时文章可读，十五张图片全部加载，目录可用且无横向溢出。",
+    "文章进入首页、归档、标签、分类、搜索、RSS 和 sitemap；搜索可以打开该文章。",
+    "仅提交本次文章及相关资源、核验记录到既有 master 分支；GitHub Pages 部署成功，线上正文、图片和样式与本地版本一致。"
+  ],
+  "publication": {
+    "article": "src/content/blog/wechat/2026-10-11-kongming-ai-agent-manager.md",
+    "sourceDocument": "电脑里住了十几个AI，我请了个「孔明」来管它们.md",
+    "sourceSha256": "846dc40be2da3f259aca1ea50e0dcb22daa8009941436570e202cfc75651f364",
+    "originalPublicationDate": "2026-10-11T20:48:00+08:00",
+    "publicationDateEvidence": "用户指定原稿的署名行",
+    "permalink": "/2026/10/11/kongming-ai-agent-manager/",
+    "images": [
+      {
+        "index": 1,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QmEtKYbQBR13anqaEZ53s2JxUjMSUcEZHCmqHxDcteaFxSMonnT4O8OleanxfRuQ3jILUJe3wTzgnRsLjlApvdgAs3J5KrRWY/640?wx_fmt=png&from=appmsg&watermark=1&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=0",
+        "sourceAlt": "images/kongming-article/01-ai-household.png",
+        "filename": "01-ai-household.webp",
+        "alt": "电脑里各有所长的 AI 员工",
+        "width": 1080,
+        "height": 608,
+        "format": "WEBP",
+        "contentType": "image/webp",
+        "status": 200,
+        "bytes": 205876,
+        "sha256": "68fc3f1f74b1c8fade81ef89dec6e784ce7689717acece39a7c39102a3138eef",
+        "path": "public/img/2026/kongming-ai-agent-manager/01-ai-household.webp"
+      },
+      {
+        "index": 2,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9T8aR7aicDAIib9sAWnJYL8CZS0fW9ice0xnIn9w5UR30Fafpnex1rLnv7aOHuxo6NT2RjFpJKtezcdjib2csjvbrgb9wP13V9TYYU/640?wx_fmt=png&from=appmsg&watermark=1&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=1",
+        "sourceAlt": "images/kongming-article/02-memory-fragments.png",
+        "filename": "02-memory-fragments.webp",
+        "alt": "多个 AI 窗口与分散的任务记忆",
+        "width": 1080,
+        "height": 608,
+        "format": "WEBP",
+        "contentType": "image/webp",
+        "status": 200,
+        "bytes": 146564,
+        "sha256": "4128236d2d083f13abd15561c9af85f81d22816af60a94641d56daa8b598cdd6",
+        "path": "public/img/2026/kongming-ai-agent-manager/02-memory-fragments.webp"
+      },
+      {
+        "index": 3,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9SpqPZpQZDmoeuSKIlgcFBX7aV2cXUODACib6kgo3jUYQGOrZ5r8QB6k2kiayyWuSrZSez5Z0u2ibX869Z415yvOszcus44h1jhms/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=2",
+        "sourceAlt": "图片",
+        "filename": "03-ai-babysitter.jpg",
+        "alt": "原文配图：一名男子困惑地看着自己的双手",
+        "width": 1080,
+        "height": 608,
+        "format": "JPEG",
+        "contentType": "image/jpeg",
+        "status": 200,
+        "bytes": 56436,
+        "sha256": "e6e413ad5b9851d9e90e2cb56cad423037057191ab5a68c9c7c78fb86d3d597d",
+        "path": "public/img/2026/kongming-ai-agent-manager/03-ai-babysitter.jpg"
+      },
+      {
+        "index": 4,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9S3Ts1lC4UMKIqwee4pic8PMUkqBIAJnLhU8L4U2SndKwLiaYhsSv4sRpTc6zMKLdQGG25bhe0icWqrUQEr1R7FY01VAtcea7qBDI/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=3",
+        "sourceAlt": "图片",
+        "filename": "04-token-quota.jpg",
+        "alt": "AI 工具的 Token 额度使用困境",
+        "width": 1080,
+        "height": 432,
+        "format": "JPEG",
+        "contentType": "image/jpeg",
+        "status": 200,
+        "bytes": 22565,
+        "sha256": "2b0a757aea3fa31e4650164b658325b37f79bfa6d15000cea156f665a71cb789",
+        "path": "public/img/2026/kongming-ai-agent-manager/04-token-quota.jpg"
+      },
+      {
+        "index": 5,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9RtOCPoHlc3zPEBxoXmAKYh92qC6hmws8vNocWiawmoeGr2GFhGuKVxeSFUoRgeqRQmcjCSrTNcC1yBEJLOkjCeTBVYHibhVwL7M/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=4",
+        "sourceAlt": "images/kongming-article/03-menubar-feather.png",
+        "filename": "05-menubar-feather.png",
+        "alt": "孔明菜单栏面板与羽扇图标的设计插画",
+        "width": 1080,
+        "height": 608,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 1321327,
+        "sha256": "87f2733148a68b7c37916db5e833cb9bd4c700d80a22d424b1d331743673e378",
+        "path": "public/img/2026/kongming-ai-agent-manager/05-menubar-feather.png"
+      },
+      {
+        "index": 6,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9RE6icFQWSPkacmC1WscNTFytkTZeQKMZOMvlbp4QTe0qicHoPID17bYKPxW3XcmKwOs36eMUEkQ9S3AQ3zTcRLAt4t5m0QH7Q4Y/640?wx_fmt=jpeg&watermark=1#imgIndex=5",
+        "sourceAlt": "图片",
+        "filename": "06-menubar-panel.jpg",
+        "alt": "孔明第一版的菜单栏状态面板",
+        "width": 724,
+        "height": 637,
+        "format": "JPEG",
+        "contentType": "image/jpeg",
+        "status": 200,
+        "bytes": 37924,
+        "sha256": "657ab4701192ea0763116db095125f81ecb5b4bf9129c11a8605bc5cf410bfcd",
+        "path": "public/img/2026/kongming-ai-agent-manager/06-menubar-panel.jpg"
+      },
+      {
+        "index": 7,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9TcDRsPz8Gzn7r1YGianNdib0zXqib2bTicXRgCp8t1YpXPmF7htFqZMjGtT11gMdQYZr7ic6TKZZG3blSZf1Aa2BCNT17LJ6caSsMw/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=6",
+        "sourceAlt": "images/kongming-article/04-kongming-dispatch.png",
+        "filename": "07-kongming-dispatch.png",
+        "alt": "孔明为不同 AI 调兵遣将",
+        "width": 1080,
+        "height": 608,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 1381443,
+        "sha256": "2161a7a54b9afd6ec39d3dad755b5533c0d209d4f292c0515a4f9a09e233102a",
+        "path": "public/img/2026/kongming-ai-agent-manager/07-kongming-dispatch.png"
+      },
+      {
+        "index": 8,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QETUGFSIvbF1r5uWzEkric1XFEsFrLqm1nBPuDgaicuBp1ibyFvrSu9BgJbvw3aElkPKcrtZ7BgDwtU2T4ch6rGRMIxuD1l0MfhY/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=7",
+        "sourceAlt": "图片",
+        "filename": "08-desktop-workspace.png",
+        "alt": "孔明桌面工作空间与任务列表",
+        "width": 1080,
+        "height": 644,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 310005,
+        "sha256": "d26fa1b3e4a82df26f02572b697062a01964f14edb01bfc750c915ff95b84031",
+        "path": "public/img/2026/kongming-ai-agent-manager/08-desktop-workspace.png"
+      },
+      {
+        "index": 9,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QYuzRtVHhO49NqteTRYXOmTjs2hnVkfh5L9F3zoCcs5GMG7yVL2LA25tNHbNLHNZpGFFVq4lNTmAQMA1snpnBicQaK4FKDzczA/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=8",
+        "sourceAlt": "图片",
+        "filename": "09-agent-team.png",
+        "alt": "以三国人物命名的 AI 团队配置",
+        "width": 468,
+        "height": 790,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 77108,
+        "sha256": "69e7098bd8c037cbd21fa188220bf010f085167627f587a5fc2112c63aabddb4",
+        "path": "public/img/2026/kongming-ai-agent-manager/09-agent-team.png"
+      },
+      {
+        "index": 10,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QEakmg91ESiccpd1ibzby92E638icVlkyAoVicOraicTSq4TokFlOXhyF7N4ad7vhNEdj8a1dLbpaicpC2Zt6SvqvmTibQhibAC6gpHOM/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=9",
+        "sourceAlt": "images/kongming-article/05-routing-performance.png",
+        "filename": "10-routing-performance.png",
+        "alt": "任务路由的速度与性能对比插画",
+        "width": 1080,
+        "height": 608,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 1223582,
+        "sha256": "bf577fbd572106a7769e92887345f25e287188656a41041c769bc843ff38a89e",
+        "path": "public/img/2026/kongming-ai-agent-manager/10-routing-performance.png"
+      },
+      {
+        "index": 11,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9T8bUzSG2WfficRpicqIpeQePamYuBbkoribsM9P5eKB6OjDvkuv3AXWVbCxew23NGf4KZLLAhzjUGRGic57icKCSRP5l7uQS814yME/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=10",
+        "sourceAlt": "图片",
+        "filename": "11-jev-model.png",
+        "alt": "传统决策与 Jev 决策的任务路由耗时对比",
+        "width": 1080,
+        "height": 558,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 125543,
+        "sha256": "cde43b44dc8c69a5ab2b6d52194a3abe6dfa09230caef26e80356c25b79cd55b",
+        "path": "public/img/2026/kongming-ai-agent-manager/11-jev-model.png"
+      },
+      {
+        "index": 12,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QXfMajRrrpTDXw8z97Y0CqTXIIzMumyIDKlub6HIlhbEY2YP3rTeuicmpGVrDx7OFiaEcCaCu1ogVWMGUHk25HYRmXeMv77Dh0A/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=11",
+        "sourceAlt": "图片",
+        "filename": "12-jev-usage.png",
+        "alt": "Jev 路由测试的用量与费用截图",
+        "width": 1080,
+        "height": 565,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 54103,
+        "sha256": "3e1a67ea2e01d66bf3b77a7d99353ed9ee410327e2795969449ef29a8ace1990",
+        "path": "public/img/2026/kongming-ai-agent-manager/12-jev-usage.png"
+      },
+      {
+        "index": 13,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9TvKzmgn5icIiaCDA90ZQmCOdVfXwRdyWSbXrFEo7IP8osIuiapicaMA1HcSHRysvFGWBibDL0G5cOJaYbemaDcHCMy4vYsC8GWibw1s/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=12",
+        "sourceAlt": "images/kongming-article/06-mobile-poolside.png",
+        "filename": "13-mobile-poolside.png",
+        "alt": "泳池旁通过手机使用孔明的场景",
+        "width": 1080,
+        "height": 608,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 1682679,
+        "sha256": "0ce352f15b19a79c5ea087659d04f72fd7d34388c49aaa688c44f962f675cbc3",
+        "path": "public/img/2026/kongming-ai-agent-manager/13-mobile-poolside.png"
+      },
+      {
+        "index": 14,
+        "sourceUrl": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9QE5OGibgDfXBYGJ0AfgdGGfGq9w6j5EFR9vaf1fmiavKZTmhIFju9DJR0b3uHWaaBtFfETKXLDH06YWTtPSPYs0TVGEqhc0EQ8c/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=13",
+        "sourceAlt": "图片",
+        "filename": "14-mobile-workspace.png",
+        "alt": "孔明手机网页端界面",
+        "width": 868,
+        "height": 756,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 135856,
+        "sha256": "1ccf1c52d8c48e2e5ce300f2abdd09ec42e28705b558e7814bc61083161aea66",
+        "path": "public/img/2026/kongming-ai-agent-manager/14-mobile-workspace.png"
+      },
+      {
+        "index": 15,
+        "sourceUrl": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9SZRxDd6TFfyBc8Yz5oP2g7RBib8k78yqs9ekYGos1XmM841BJXBgfNS4tszLbUyZibMQxiaL7uxcicOOfvtiaEI5Kic0EVkM9jS84Wo/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=14",
+        "sourceAlt": "图片",
+        "filename": "15-conversation-frequency.png",
+        "alt": "使用孔明的对话频率统计",
+        "width": 1080,
+        "height": 409,
+        "format": "PNG",
+        "contentType": "image/png",
+        "status": 200,
+        "bytes": 100473,
+        "sha256": "f3b800a2c4aa21b91e20ce16bd8a9039cc96f979676e6ef8cf9a55d4b2976c30",
+        "path": "public/img/2026/kongming-ai-agent-manager/15-conversation-frequency.png"
+      }
+    ]
+  },
+  "sourceVerification": {
+    "originalFileUnchanged": true,
+    "bodyTextPreservedAfterDocumentedFormatting": true,
+    "copiedDownloadsByteIdentical": 15
+  },
+  "editorialChanges": [
+    "使用文件名作为文章标题，将原稿署名行的时间写入 frontmatter；保留文末作者介绍及个人观点提示。",
+    "第一节改为二级标题，第二个 02 修正为 03，形成 01—05 的连续编号。",
+    "替换微信图片链接为站内路径，补充具体替代文字、宽高及延迟加载设置，整理列表内图片缩进。",
+    "移除微信导航文字“AI 实践 · 目录”；其余正文按原稿保留。"
+  ],
+  "build": {
+    "command": "npm run verify",
+    "result": "passed",
+    "typeErrors": 0,
+    "typeWarnings": 0,
+    "typeHints": 0,
+    "staticPages": 159,
+    "legacyArticleUrls": 26,
+    "legacyByteIdenticalAssets": 522,
+    "legacyListingUrls": 41,
+    "internalReferences": 4400
+  },
+  "localVerification": {
+    "verifiedAt": "2026-10-11T15:19:58.534Z",
+    "static": {
+      "title": "电脑里住了十几个AI，我请了个「孔明」来管它们",
+      "date": "2026-10-11T20:48:00+08:00",
+      "canonical": "https://ai-build.cn/2026/10/11/kongming-ai-agent-manager/",
+      "bodySections": 5,
+      "subsection": 1,
+      "renderedBodyTextMatches": true,
+      "images": 15,
+      "imageHashesMatch": true,
+      "listedIn": [
+        "index.html",
+        "archives/index.html",
+        "archives/2026/10/index.html",
+        "tags/AI Agent/index.html",
+        "tags/孔明/index.html",
+        "tags/AI 编程/index.html",
+        "categories/荔枝AI圈/index.html"
+      ],
+      "search": true,
+      "rss": true,
+      "sitemap": true
+    },
+    "browser": [
+      {
+        "label": "desktop",
+        "viewport": {
+          "width": 1440,
+          "height": 1000
+        },
+        "status": 200,
+        "loadedImages": 15,
+        "noHorizontalOverflow": true,
+        "tocWorks": true,
+        "pageErrors": [],
+        "badResponses": [],
+        "screenshot": "docs/screenshots/kongming-article-desktop-2026-10-11.png"
+      },
+      {
+        "label": "mobile",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "status": 200,
+        "loadedImages": 15,
+        "noHorizontalOverflow": true,
+        "tocWorks": true,
+        "pageErrors": [],
+        "badResponses": [],
+        "screenshot": "docs/screenshots/kongming-article-mobile-2026-10-11.png",
+        "searchInteraction": true
+      },
+      {
+        "label": "small-mobile-dark",
+        "viewport": {
+          "width": 320,
+          "height": 740
+        },
+        "status": 200,
+        "loadedImages": 15,
+        "noHorizontalOverflow": true,
+        "tocWorks": true,
+        "pageErrors": [],
+        "badResponses": []
+      },
+      {
+        "label": "no-javascript",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "status": 200,
+        "loadedImages": 15,
+        "noHorizontalOverflow": true,
+        "tocWorks": true,
+        "pageErrors": [],
+        "badResponses": []
+      }
+    ]
+  },
+  "visualReview": {
+    "inspected": "十五张原稿配图的缩略图总览，以及桌面顶部、手机顶部和手机列表内配图的浏览器截图",
+    "result": "图片位置、标题换行及列表排版正常"
+  },
+  "release": {
+    "repository": "l-zhi/l-zhi.github.io",
+    "branch": "master",
+    "commit": "cb234ea442655b79e62492a5c5c5acf5de3d4828",
+    "workflowRun": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/38151010286",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success",
+        "completedAt": "2026-10-11T15:23:18Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "completedAt": "2026-10-11T15:23:31Z"
+      }
+    ]
+  },
+  "liveVerification": {
+    "verifiedAt": "2026-10-11T15:24:50.943Z",
+    "url": "https://ai-build.cn/2026/10/11/kongming-ai-agent-manager/",
+    "titleMatches": true,
+    "dateMatches": true,
+    "canonicalMatches": true,
+    "bodyMatchesLocal": true,
+    "bodySections": 5,
+    "images": [
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/01-ai-household.webp",
+        "sha256": "68fc3f1f74b1c8fade81ef89dec6e784ce7689717acece39a7c39102a3138eef",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/02-memory-fragments.webp",
+        "sha256": "4128236d2d083f13abd15561c9af85f81d22816af60a94641d56daa8b598cdd6",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/03-ai-babysitter.jpg",
+        "sha256": "e6e413ad5b9851d9e90e2cb56cad423037057191ab5a68c9c7c78fb86d3d597d",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/04-token-quota.jpg",
+        "sha256": "2b0a757aea3fa31e4650164b658325b37f79bfa6d15000cea156f665a71cb789",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/05-menubar-feather.png",
+        "sha256": "87f2733148a68b7c37916db5e833cb9bd4c700d80a22d424b1d331743673e378",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/06-menubar-panel.jpg",
+        "sha256": "657ab4701192ea0763116db095125f81ecb5b4bf9129c11a8605bc5cf410bfcd",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/07-kongming-dispatch.png",
+        "sha256": "2161a7a54b9afd6ec39d3dad755b5533c0d209d4f292c0515a4f9a09e233102a",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/08-desktop-workspace.png",
+        "sha256": "d26fa1b3e4a82df26f02572b697062a01964f14edb01bfc750c915ff95b84031",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/09-agent-team.png",
+        "sha256": "69e7098bd8c037cbd21fa188220bf010f085167627f587a5fc2112c63aabddb4",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/10-routing-performance.png",
+        "sha256": "bf577fbd572106a7769e92887345f25e287188656a41041c769bc843ff38a89e",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/11-jev-model.png",
+        "sha256": "cde43b44dc8c69a5ab2b6d52194a3abe6dfa09230caef26e80356c25b79cd55b",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/12-jev-usage.png",
+        "sha256": "3e1a67ea2e01d66bf3b77a7d99353ed9ee410327e2795969449ef29a8ace1990",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/13-mobile-poolside.png",
+        "sha256": "0ce352f15b19a79c5ea087659d04f72fd7d34388c49aaa688c44f962f675cbc3",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/14-mobile-workspace.png",
+        "sha256": "1ccf1c52d8c48e2e5ce300f2abdd09ec42e28705b558e7814bc61083161aea66",
+        "matchesLocal": true
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/15-conversation-frequency.png",
+        "sha256": "f3b800a2c4aa21b91e20ce16bd8a9039cc96f979676e6ef8cf9a55d4b2976c30",
+        "matchesLocal": true
+      }
+    ],
+    "surfaces": [
+      {
+        "url": "https://ai-build.cn/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/archives/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/archives/2026/10/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/tags/AI%20Agent/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/tags/%E5%AD%94%E6%98%8E/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/tags/AI%20%E7%BC%96%E7%A8%8B/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/categories/%E8%8D%94%E6%9E%9DAI%E5%9C%88/",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/search-index.json",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/rss.xml",
+        "articleIncluded": true
+      },
+      {
+        "url": "https://ai-build.cn/sitemap.xml",
+        "articleIncluded": true
+      }
+    ],
+    "stylesheetMatchesLocal": true,
+    "checks": [
+      {
+        "url": "https://ai-build.cn/2026/10/11/kongming-ai-agent-manager/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 14404
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/02-memory-fragments.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 146564
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/04-token-quota.jpg",
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 22565
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/01-ai-household.webp",
+        "status": 200,
+        "contentType": "image/webp",
+        "bytes": 205876
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/03-ai-babysitter.jpg",
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 56436
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/05-menubar-feather.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 1321327
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/09-agent-team.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 77108
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/08-desktop-workspace.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 310005
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/06-menubar-panel.jpg",
+        "status": 200,
+        "contentType": "image/jpeg",
+        "bytes": 37924
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/10-routing-performance.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 1223582
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/07-kongming-dispatch.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 1381443
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/14-mobile-workspace.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 135856
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/12-jev-usage.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 54103
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/15-conversation-frequency.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 100473
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/11-jev-model.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 125543
+      },
+      {
+        "url": "https://ai-build.cn/img/2026/kongming-ai-agent-manager/13-mobile-poolside.png",
+        "status": 200,
+        "contentType": "image/png",
+        "bytes": 1682679
+      },
+      {
+        "url": "https://ai-build.cn/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 13218
+      },
+      {
+        "url": "https://ai-build.cn/tags/AI%20Agent/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 6787
+      },
+      {
+        "url": "https://ai-build.cn/archives/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 29140
+      },
+      {
+        "url": "https://ai-build.cn/tags/%E5%AD%94%E6%98%8E/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 4101
+      },
+      {
+        "url": "https://ai-build.cn/archives/2026/10/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 4096
+      },
+      {
+        "url": "https://ai-build.cn/tags/AI%20%E7%BC%96%E7%A8%8B/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 9789
+      },
+      {
+        "url": "https://ai-build.cn/sitemap.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 7247
+      },
+      {
+        "url": "https://ai-build.cn/categories/%E8%8D%94%E6%9E%9DAI%E5%9C%88/",
+        "status": 200,
+        "contentType": "text/html;",
+        "bytes": 20248
+      },
+      {
+        "url": "https://ai-build.cn/rss.xml",
+        "status": 200,
+        "contentType": "application/xml",
+        "bytes": 26330
+      },
+      {
+        "url": "https://ai-build.cn/search-index.json",
+        "status": 200,
+        "contentType": "application/json;",
+        "bytes": 18370
+      },
+      {
+        "url": "https://ai-build.cn/_astro/Layout.CFne7gIr.css",
+        "status": 200,
+        "contentType": "text/css;",
+        "bytes": 6575
+      }
+    ]
+  },
+  "scopeNotes": [
+    "文中性能、费用和产品体验数据按作者原稿同步；本次未另行事实核查或复测。",
+    "全站静态检查报告的 24 条外链图片引用和 90 条缺失本地引用是仓库既有历史限制；本篇文章十五张图片均为可用站内资源。",
+    "工作区已有 docs/prototypes/ 及 docs/screenshots/homepage-2026-10-01.png 保持原样，不纳入本次提交。",
+    "临时核验脚本、下载缓存及 dist/ 构建产物未纳入版本管理。",
+    "首次推送因 HTTP 408 失败，核对远端未更新后使用仅作用于该命令的 HTTP/1.1 和 postBuffer 设置重试成功；没有修改全局 Git 配置。"
+  ],
+  "verifiedAt": "2026-10-11T15:25:13.326992+00:00",
+  "acceptanceResults": [
+    {
+      "criterion": 1,
+      "status": "passed",
+      "evidence": "原稿 SHA-256 未变；正文经明确的标题、图片和微信导航适配后文本比对一致，渲染正文与 Markdown 一致，五节编号连续，标题和时间已核对。"
+    },
+    {
+      "criterion": 2,
+      "status": "passed",
+      "evidence": "十五张原稿配图均下载并解码成功；源文件、构建产物和线上文件 SHA-256 一致，顺序、替代文字及宽高与清单一致。"
+    },
+    {
+      "criterion": 3,
+      "status": "passed",
+      "evidence": "npm run verify 通过：0 errors、0 warnings、0 hints；159 个静态页面、4,400 条站内引用；GitHub Actions build 同样成功。"
+    },
+    {
+      "criterion": 4,
+      "status": "passed",
+      "evidence": "四种浏览器场景每种均加载十五张图片，无横向溢出、页面脚本错误和本地失败资源响应；目录可展开，静态检查已核对目录锚点。"
+    },
+    {
+      "criterion": 5,
+      "status": "passed",
+      "evidence": "本地和线上十个收录入口均包含文章；手机浏览器输入“孔明”搜索可打开文章。"
+    },
+    {
+      "criterion": 6,
+      "status": "passed",
+      "evidence": "发布提交 cb234ea442655b79e62492a5c5c5acf5de3d4828 已推送 master；Actions build/deploy 均成功；线上 27 次 HTTP 检查全部返回 200，正文和样式与本地一致。"
+    }
+  ],
+  "unfinished": []
+}
