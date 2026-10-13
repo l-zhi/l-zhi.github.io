@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PostList from '../components/PostList.astro';
+import ArticleVideo from '../components/ArticleVideo.astro';
 import { getPosts, formatDate } from '../lib/posts';
 import { SITE } from '../config';
 import manifest from '../../docs/migration-manifest.json';
@@ -51,6 +52,7 @@ const headings = rendered?.headings.filter(h => h.depth === 2 || h.depth === 3) 
       {post.data.draft && <p class="draft-notice">草稿预览 · 正式构建不会发布这篇文章。</p>}
     </header>
     {headings.length > 2 && <details class="toc"><summary>文章目录</summary><ul>{headings.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul></details>}
+    {post.data.video && <ArticleVideo video={post.data.video} />}
     <div class="prose"><Content /></div>
     <footer class="article-end"><a href="/archives/">← 返回所有文章</a><a href="#main">回到顶部 ↑</a></footer>
   </article> : <>

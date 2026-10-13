@@ -5,6 +5,11 @@ description: "从云端个人 Agent 到本地运行的孔明，聊聊 Linux 为�
 permalink: "2026/10/04/linux-and-personal-ai-agents"
 tags: ["AI Agent", "Linux", "隐私", "孔明"]
 categories: ["荔枝AI圈"]
+video:
+  bvid: "BV1cnpZ6sEpb"
+  title: "AI时代，Linux 又杀回来了"
+  duration: "7:50"
+  poster: "/img/2026/linux-and-personal-ai-agents/bilibili-cover.jpg"
 draft: false
 unlisted: false
 ---
