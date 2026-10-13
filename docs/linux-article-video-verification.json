@@ -1,0 +1,232 @@
+{
+  "title": "Linux 文章视频嵌入与首页播放入口核验",
+  "verifiedAt": "2026-10-13T06:06:53.358754+00:00",
+  "verificationScope": "实施代理自检，不代表用户或孔明已验收。",
+  "acceptanceCriteria": [
+    "指定 B 站视频位于目标文章目录下方、正文之前，默认不自动播放，并保留原站入口。",
+    "首页对应文章显示小封面和时长，点击即可在当前页面播放；关闭弹窗后停止播放。",
+    "原有文章正文、六张配图、日期和永久地址保持不变。",
+    "桌面和手机宽度下布局正常，支持键盘操作与焦点返回，禁用 JavaScript 时保留原站链接。",
+    "类型检查、生产构建、静态链接及相关界面测试通过。",
+    "部署到既有 master 分支的 GitHub Pages；线上两处视频均可起播，正文、封面、脚本和样式与本地版本一致。"
+  ],
+  "video": {
+    "url": "https://www.bilibili.com/video/BV1cnpZ6sEpb/",
+    "title": "AI时代，Linux 又杀回来了",
+    "bvid": "BV1cnpZ6sEpb",
+    "durationSeconds": 470,
+    "metadataSource": "https://api.bilibili.com/x/web-interface/view?bvid=BV1cnpZ6sEpb",
+    "poster": "public/img/2026/linux-and-personal-ai-agents/bilibili-cover.jpg",
+    "posterSource": "https://i1.hdslb.com/bfs/archive/3e748bd47627e4cd7d800f7dc48791ca8e8bf291.jpg",
+    "posterDimensions": [
+      1920,
+      1080
+    ],
+    "posterSha256": "a37713973b23ef7e2171a0b50285b19d034d85f186df2ba16cd65bd1e4a7c45e"
+  },
+  "sourceVerification": {
+    "article": "src/content/blog/wechat/2026-10-04-linux-and-personal-ai-agents.md",
+    "baselineCommit": "76f65c760d257523cab4b6c7eb934ac963ee0e36",
+    "bodyUnchanged": true,
+    "bodySha256": "e3b319695f95136a4f8af452cc9bb7e55a618dd756d0342ac4364507993c7a25",
+    "bodyImages": 6,
+    "mainSections": 4,
+    "date": "2026-10-03T20:52:00+08:00",
+    "permalink": "/2026/10/04/linux-and-personal-ai-agents/"
+  },
+  "build": {
+    "command": "npm run verify",
+    "result": "passed",
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0,
+    "staticPages": 160,
+    "internalReferences": 4423
+  },
+  "uiTests": {
+    "command": "PLAYWRIGHT_PORT=4341 npx playwright test tests/article-video.spec.ts tests/projects.spec.ts",
+    "passed": 7,
+    "failed": 0,
+    "newVideoTests": 3,
+    "existingProjectTests": 4,
+    "videoWidths": [
+      1440,
+      390,
+      320
+    ],
+    "colorSchemes": [
+      "light",
+      "dark"
+    ],
+    "thirdPartyPlayerStubbed": true,
+    "checked": [
+      "视频在正文之前且保持 16:9",
+      "首页点击前不加载播放器",
+      "Enter 打开，Esc、关闭按钮和点击遮罩关闭",
+      "关闭后移除 iframe、恢复页面滚动和焦点",
+      "手机宽度无横向溢出",
+      "禁用 JavaScript 时原站链接仍可打开",
+      "项目列表、详情页和已有项目视频回归"
+    ]
+  },
+  "visualReview": {
+    "result": "passed",
+    "reviewed": [
+      "桌面首页缩略图",
+      "手机首页缩略图",
+      "桌面播放弹窗",
+      "桌面文章播放器",
+      "手机文章播放器"
+    ]
+  },
+  "localRealPlayerVerification": {
+    "homepage": {
+      "checkedAt": "2026-10-13T05:58:09.549Z",
+      "playerUrl": "https://player.bilibili.com/player.html?bvid=BV1cnpZ6sEpb&page=1&autoplay=1",
+      "ready": true,
+      "advancing": true,
+      "states": [
+        {
+          "duration": 470,
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 2.013176
+        }
+      ],
+      "bodyText": "AI时代，Linux 又杀回来了\n鸡眨眼\n关注\n2\n0\n分享\n更多\n00:02 / 07:50\n一起去哔哩哔哩发送弹幕吧！\n自动\n倍速\n进入哔哩哔哩，观看更高清",
+      "failures": []
+    },
+    "article": {
+      "initial": {
+        "duration": 470,
+        "paused": true,
+        "currentTime": 0,
+        "readyState": 4
+      },
+      "played": {
+        "duration": 470,
+        "paused": false,
+        "currentTime": 2.015626,
+        "readyState": 4
+      },
+      "url": "https://player.bilibili.com/player.html?bvid=BV1cnpZ6sEpb&page=1&autoplay=0",
+      "checkedAt": "2026-10-13T06:01:05.260Z"
+    }
+  },
+  "deployment": {
+    "branch": "master",
+    "commit": "f4576dc01f5ea2c1e5e9c9c8efcc3237f7f619e2",
+    "workflowRun": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/38354475378",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success",
+        "completedAt": "2026-10-13T06:02:29Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "completedAt": "2026-10-13T06:02:44Z"
+      }
+    ]
+  },
+  "liveVerification": {
+    "checkedAt": "2026-10-13T06:05:12.285Z",
+    "checks": [
+      {
+        "path": "/2026/10/04/linux-and-personal-ai-agents/",
+        "status": 200,
+        "bytes": 15573
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 20970
+      },
+      {
+        "path": "/img/2026/linux-and-personal-ai-agents/bilibili-cover.jpg",
+        "status": 200,
+        "bytes": 357543
+      },
+      {
+        "path": "/_astro/Layout.CFne7gIr.css",
+        "status": 200,
+        "bytes": 6575
+      }
+    ],
+    "articleBodyMatchesBuild": true,
+    "previewMatchesBuild": true,
+    "posterHashMatches": true,
+    "scriptAndStyleHashesMatch": true,
+    "playback": [
+      {
+        "mode": "home-dialog",
+        "initial": {
+          "duration": 470,
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 0.969423
+        },
+        "playing": {
+          "duration": 470,
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 2.984122
+        },
+        "closedAndPlayerRemoved": true
+      },
+      {
+        "mode": "article-embed",
+        "initial": {
+          "duration": 470,
+          "readyState": 4,
+          "paused": true,
+          "currentTime": 0
+        },
+        "playing": {
+          "duration": 470,
+          "readyState": 4,
+          "paused": false,
+          "currentTime": 2.016411
+        },
+        "noAutoplay": true
+      }
+    ],
+    "inlineScriptsAndStylesMatch": true
+  },
+  "verificationNotes": [
+    "真实播放器核验未使用占位响应；在本地及线上观察到 duration=470、readyState=4、paused=false，且播放时间推进超过 2 秒。未完整播放全片。",
+    "首次文章播放探测点击画面未触发播放而超时；改为等待并点击 B 站实际播放按钮后复测通过。",
+    "首次线上文章导航等待 load 事件超时；改为等待 DOM 就绪、播放器控件和实际播放进度后复测通过。",
+    "播放器清晰度及其内部控制由 B 站提供。",
+    "既有 docs/prototypes/ 与 docs/screenshots/homepage-2026-10-01.png 未纳入本次变更。"
+  ],
+  "acceptanceResults": [
+    {
+      "criterion": 1,
+      "status": "passed"
+    },
+    {
+      "criterion": 2,
+      "status": "passed"
+    },
+    {
+      "criterion": 3,
+      "status": "passed"
+    },
+    {
+      "criterion": 4,
+      "status": "passed"
+    },
+    {
+      "criterion": 5,
+      "status": "passed"
+    },
+    {
+      "criterion": 6,
+      "status": "passed"
+    }
+  ],
+  "unfinished": []
+}
