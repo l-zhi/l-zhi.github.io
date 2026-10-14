@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { SITE } from '../src/config';
 
 test.beforeEach(async ({ page }) => {
-  await page.route('https://hm.baidu.com/**', route => route.abort());
+  await page.route(/https:\/\/(?:hm\.baidu\.com|www\.googletagmanager\.com|(?:[a-z0-9-]+\.)?google-analytics\.com)\//, route => route.abort());
 });
 
 test('home, pagination, theme persistence and search', async ({ page }) => {

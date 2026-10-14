@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   // Keep local UI checks out of production analytics and independent of its network.
-  await page.route('https://hm.baidu.com/**', route => route.abort());
+  await page.route(/https:\/\/(?:hm\.baidu\.com|www\.googletagmanager\.com|(?:[a-z0-9-]+\.)?google-analytics\.com)\//, route => route.abort());
   await page.route('https://player.bilibili.com/**', route => route.fulfill({ contentType: 'text/html', body: '<html><body>Video player placeholder for local layout checks</body></html>' }));
 });
 

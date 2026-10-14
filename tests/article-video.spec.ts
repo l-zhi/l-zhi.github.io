@@ -5,7 +5,7 @@ const original = 'https://www.bilibili.com/video/BV1cnpZ6sEpb/';
 const player = 'https://player.bilibili.com/player.html?bvid=BV1cnpZ6sEpb&page=1&autoplay=';
 
 test.beforeEach(async ({ page }) => {
-  await page.route('https://hm.baidu.com/**', route => route.abort());
+  await page.route(/https:\/\/(?:hm\.baidu\.com|www\.googletagmanager\.com|(?:[a-z0-9-]+\.)?google-analytics\.com)\//, route => route.abort());
   // Check our layout and controls independently of the third-party player network.
   await page.route('https://player.bilibili.com/**', route => route.fulfill({ contentType: 'text/html', body: '<title>Bilibili player stub</title>' }));
 });
@@ -89,7 +89,7 @@ test('home preview opens on demand, supports keyboard and stops playback on ever
 
 test('without JavaScript, video links and the article embed remain available', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
-  await context.route('https://hm.baidu.com/**', route => route.abort());
+  await context.route(/https:\/\/(?:hm\.baidu\.com|www\.googletagmanager\.com|(?:[a-z0-9-]+\.)?google-analytics\.com)\//, route => route.abort());
   await context.route('https://player.bilibili.com/**', route => route.fulfill({ contentType: 'text/html', body: '<title>Bilibili player stub</title>' }));
   await context.route(original, route => route.fulfill({ contentType: 'text/html', body: '<title>Bilibili fallback stub</title>' }));
   const page = await context.newPage();

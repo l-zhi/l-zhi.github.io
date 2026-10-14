@@ -61,7 +61,7 @@ draft: true
 
 项目可选填 `video: { bvid, title, duration }` 嵌入 B 站视频。详情页在介绍右侧显示 16:9 播放器，手机上排列在介绍下方；默认不自动播放，并保留“在 B 站观看”链接。原截图移至“能做什么”下方。未配置视频的项目保持原有布局；播放器与清晰度由 B 站提供，视频不可用时可尝试原站链接。
 
-交互检查：`npm run test:ui`。如默认端口已被占用，可指定 `PLAYWRIGHT_PORT=4326 npm run test:ui`；浏览器自检会屏蔽百度统计请求，避免写入生产访问数据。
+交互检查：`npm run test:ui`。如默认端口已被占用，可指定 `PLAYWRIGHT_PORT=4326 npm run test:ui`；浏览器自检会屏蔽百度和 Google 统计请求，避免写入生产访问数据。
 
 | 文件 | 用途 |
 | --- | --- |
@@ -86,6 +86,10 @@ Pocket 4P 摄影课程位于 `public/learning/pocket-4p/index.html`，保留原�
 AI 论文简史课程位于 `public/learning/ai-papers/`：`index.html` 是 50 篇论文的时间线和快速解读，`reader/index.html` 是 17 篇核心论文的对照精读页（地址 `/learning/ai-papers/reader/?p=transformer`），`zh/*.js` 是逐页中文讲解数据，每篇一个文件。精读页的页码按链接中固定版本号的 arXiv PDF 核对；论文 PDF 一律链接 arXiv、会议或作者公开版本，不转存到仓库。NeurIPS 站点禁止嵌入，AlexNet 改为新窗口打开。列表封面为原创 SVG `public/img/learning/ai-papers.svg`。
 
 修改课程时编辑上述 HTML，运行 `npm run verify` 后通过仓库现有工作流发布。课程进度只保存在访问者当前浏览器，不跨设备同步，也不会随课程发布上传。
+
+## 访问统计
+
+Google Analytics 4 使用统计 ID `G-NCB1DFRP0H`，在公共模板 `src/layouts/Layout.astro` 中加载，覆盖首页、文章、项目和其他主站页面。三个独立课程 HTML（`public/learning/pocket-4p/index.html`、`public/learning/ai-papers/index.html`、`public/learning/ai-papers/reader/index.html`）也接入同一统计 ID。原有百度统计保留。
 
 ## CI/CD 与 GitHub Pages
 
