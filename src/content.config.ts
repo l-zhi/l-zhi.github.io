@@ -6,6 +6,7 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string().min(1),
+    author: z.string().min(1).optional(),
     date: z.coerce.date(),
     description: z.string().min(1),
     permalink: z.string().regex(/^[^/?#]+(?:\/[^/?#]+)*$/).refine(value => !value.split('/').some(part => ['.', '..'].includes(part)), 'Invalid path'),

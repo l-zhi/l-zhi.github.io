@@ -46,7 +46,7 @@ const headings = rendered?.headings.filter(h => h.depth === 2 || h.depth === 3) 
   <div class="breadcrumb"><a href="/">首页</a> / <a href="/archives/">文章</a>{!post && ' / 列表'}</div>
   {post && Content ? <article>
     <header class="article-header">
-      <div class="post-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span>立之</span></div>
+      <div class="post-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span>{post.data.author ?? SITE.author}</span></div>
       <h1>{post.data.title}</h1>
       <div class="post-tags">{post.data.tags.map((tag: string) => <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>)}</div>
       {post.data.draft && <p class="draft-notice">草稿预览 · 正式构建不会发布这篇文章。</p>}

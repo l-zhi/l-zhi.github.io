@@ -43,6 +43,7 @@ draft: true
 
 - 图片放在 `public/img/年份/文章名/`，正文引用 `![说明](/img/年份/文章名/example.png)`。
 - 代码使用带语言名称的 fenced code block，构建时由 Shiki 高亮。
+- `author` 可填写原文署名；未填写时使用站点默认作者。
 - `permalink` 决定永久地址，不带首尾斜线；发布后保持不变。日期使用 ISO 格式并明确时区。
 - 本地审阅后改为 `draft: false`。生产构建不会生成草稿页面，也不会将草稿加入归档、标签、搜索、RSS 和 sitemap。
 - 不要在草稿中放机密内容：Markdown 本身仍属于 Git 仓库，公开仓库的源码可见。
