@@ -1,0 +1,461 @@
+{
+  "title": "AI 这么强，可惜大多数人都不会用",
+  "verificationOwner": "实施代理自检；不代表用户或孔明已验收。",
+  "verifiedAt": "2026-10-28T10:50:45.424Z",
+  "article": {
+    "sourceSha256": "ef6b7e68564561ecffe2655d0c66851fa434a1f86872ec21072969f878574b50",
+    "title": "AI 这么强，可惜大多数人都不会用",
+    "date": "2026-10-28T18:45:54+08:00",
+    "output": "src/content/blog/wechat/2026-10-28-ai-usage-gap-and-unknowns.md",
+    "images": [
+      {
+        "index": 1,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/01-ai-awareness-funnel.png",
+        "alt": "图 1　四层人，看到四个 AI。数据来源：Andrej Karpathy",
+        "width": 1360,
+        "height": 872,
+        "bytes": 264104,
+        "sha256": "b1c8f18d209869f4ae101675ab48b0a166bac4c63273b90a78a548d00e7b6b4d"
+      },
+      {
+        "index": 2,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/02-map-and-territory.png",
+        "alt": "图 2　地图不是领土，中间的落差就是「未知」",
+        "width": 1360,
+        "height": 524,
+        "bytes": 80061,
+        "sha256": "3bd24f43ee9aa9a171e8f27702fbb52a5c06ad6769cd6474027258bbe2cd2d65"
+      },
+      {
+        "index": 3,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/03-travel-hidden-context.png",
+        "alt": "图 3　你没说的，AI 只能按「一般人怎么玩」去猜",
+        "width": 1360,
+        "height": 612,
+        "bytes": 107241,
+        "sha256": "d33a9c76248079832b96bdca1c67da5d79575d4785e586d0d6e9171a95cc883b"
+      },
+      {
+        "index": 4,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/04-knowledge-sharing-quadrants.png",
+        "alt": "图 4　第一张图：这件事，谁知道？它决定分工",
+        "width": 1360,
+        "height": 732,
+        "bytes": 102680,
+        "sha256": "a3d237f89eb9a898d77c9ebb48a9b1a365f11072e526a441c26ecac8b09947da"
+      },
+      {
+        "index": 5,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/05-known-and-unknown-quadrants.png",
+        "alt": "图 5　第二张图：你知道自己不知道吗？它决定方法",
+        "width": 1360,
+        "height": 736,
+        "bytes": 181230,
+        "sha256": "9aa52a368a260cfc99723a97bf9d0f9d9335dfe535fa32359a69a023c2c14887"
+      },
+      {
+        "index": 6,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/06-confidence-and-hallucinations.png",
+        "alt": "图 6　同一套 4000 多道事实题的表现。来源：OpenAI，2025",
+        "width": 1360,
+        "height": 560,
+        "bytes": 226326,
+        "sha256": "0376c1c8c36ccf1b2d940bb9f05f837bbb314912ff71ad62aedb5aa0868baf40"
+      },
+      {
+        "index": 7,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/07-expertise-and-judgment.png",
+        "alt": "图 7　在你不懂的领域，「真知道」和「在编」长得一模一样",
+        "width": 1360,
+        "height": 776,
+        "bytes": 179211,
+        "sha256": "75071a19d8457593a9f4af981dcc2382f0c5d14472d1f501ac48418e4d0f5473"
+      },
+      {
+        "index": 8,
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/08-ai-productivity-studies.png",
+        "alt": "图 8　来源：哈佛商学院工作论文 24-013；METR，2025",
+        "width": 1360,
+        "height": 612,
+        "bytes": 83364,
+        "sha256": "fc6694a00e2b8f801f6ba5e407c0bea04a4eb5ed28d8e8f09d66aed82c53c3ec"
+      }
+    ],
+    "sourceFilename": "AI 这么强，可惜大多数人都不会用_排版_手绘极简(hand-drawn).html",
+    "publicationDateBasis": "原稿未注明发布日期，按本次发布日期 2026-10-28（北京时间）收录。",
+    "url": "https://ai-build.cn/2026/10/28/ai-usage-gap-and-unknowns/"
+  },
+  "acceptanceCriteria": [
+    "标题、正文、标题层级、5 条提示引用、流程表与 6 条参考资料完整同步，原始 HTML 保持不变。",
+    "8 张内嵌配图按原顺序保存为站内图片，图注保留，源文件、构建产物和线上图片字节一致。",
+    "文章以正式发布状态进入首页、归档、标签、分类、搜索、RSS 和 sitemap。",
+    "类型检查、生产构建、静态链接及资源检查通过，不引入新的站内坏链。",
+    "桌面和手机、明暗模式及禁用 JavaScript 场景可正常阅读；无横向溢出、图片加载失败或页面脚本错误。",
+    "仅提交本次文章及核验成果，推送既有 master 分支，GitHub Pages 自动部署成功，线上正文与本地构建一致。"
+  ],
+  "acceptanceResults": [
+    {
+      "criterion": 1,
+      "status": "passed",
+      "evidence": "去除公众号复制按钮、列表装饰符和空白后，原稿与最终渲染正文的 6262 个字符逐字一致；50 处加粗、7 处正文换行、16 个 H2/H3（含参考资料）、5 条提示引用、3 列 8 行流程表及 6 条参考均已核对。原稿 SHA-256 未变。"
+    },
+    {
+      "criterion": 2,
+      "status": "passed",
+      "evidence": "8 张 PNG 直接解码原稿内嵌数据，未压缩或重绘；源数据、本地文件、dist 产物和线上响应 SHA-256 逐张一致。"
+    },
+    {
+      "criterion": 3,
+      "status": "passed",
+      "evidence": "本地与线上 10 个收录入口均含本篇文章；首页第一条即为新文章；浏览器搜索“AI 这么强”可打开文章。"
+    },
+    {
+      "criterion": 4,
+      "status": "passed",
+      "evidence": "npm run verify 通过：0 errors、0 warnings、0 hints，172 个静态页面、4815 条站内引用检查通过；git diff --cached --check 通过；Actions 验证构建成功。"
+    },
+    {
+      "criterion": 5,
+      "status": "passed",
+      "evidence": "本地及线上各 4 种 Chromium 场景通过：1440px 桌面浅色、390px 手机浅色、320px 手机深色、1280px 桌面禁用 JavaScript 深色。各场景均有 8 张图片成功解码、16 个有效目录锚点，无横向溢出、页面脚本错误或同源失败资源响应；桌面、手机图片及表格截图已人工查看。"
+    },
+    {
+      "criterion": 6,
+      "status": "passed",
+      "evidence": "发布提交 b770802b09d458dc1bd7593619f7bef8f2a99811 已推送 master；Actions 40674993833 的 build/deploy 均 success。线上文章与 8 张图片均返回 200，正文 HTML 与本地构建一致。工作区原有 docs/prototypes/ 与 docs/screenshots/homepage-2026-10-01.png 未纳入提交。"
+    }
+  ],
+  "contentVerification": {
+    "bodyMatches": true,
+    "nonWhitespaceCharacters": 6262,
+    "strongElements": 50,
+    "headings": 16,
+    "images": 8,
+    "tableRows": 8,
+    "sourceUnchanged": true
+  },
+  "build": {
+    "command": "npm run verify",
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0,
+    "staticPages": 172,
+    "internalReferences": 4815,
+    "legacyArticlesChecked": 26,
+    "legacyAssetsChecked": 522,
+    "legacyListingRoutesChecked": 41
+  },
+  "localBrowser": {
+    "base": "http://127.0.0.1:4332",
+    "checkedAt": "2026-10-28T10:47:31.313Z",
+    "scenarios": [
+      {
+        "scenario": "desktop-light",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "mobile-light",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "mobile-dark",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "desktop-no-js",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      }
+    ],
+    "homepageFirst": true,
+    "searchOpensArticle": true,
+    "collections": [
+      {
+        "path": "/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/2026/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/2026/10/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/tags/AI/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/tags/个人实践/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/categories/荔枝AI圈/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/search-index.json",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/rss.xml",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": 200,
+        "articleIncluded": true
+      }
+    ]
+  },
+  "liveBrowser": {
+    "base": "https://ai-build.cn",
+    "checkedAt": "2026-10-28T10:50:10.491Z",
+    "scenarios": [
+      {
+        "scenario": "desktop-light",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "mobile-light",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "mobile-dark",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      },
+      {
+        "scenario": "desktop-no-js",
+        "status": 200,
+        "imagesLoaded": 8,
+        "tableRows": 8,
+        "headings": 16,
+        "overflow": false,
+        "errors": [],
+        "failedResources": []
+      }
+    ],
+    "homepageFirst": true,
+    "searchOpensArticle": true,
+    "collections": [
+      {
+        "path": "/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/2026/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/archives/2026/10/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/tags/AI/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/tags/个人实践/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/categories/荔枝AI圈/",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/search-index.json",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/rss.xml",
+        "status": 200,
+        "articleIncluded": true
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": 200,
+        "articleIncluded": true
+      }
+    ]
+  },
+  "liveContent": {
+    "checkedAt": "2026-10-28T10:49:36.256Z",
+    "url": "https://ai-build.cn/2026/10/28/ai-usage-gap-and-unknowns/",
+    "status": 200,
+    "bodyHtmlMatchesBuild": true,
+    "titleMatches": true,
+    "canonicalMatches": true,
+    "sourceUnchanged": true,
+    "assets": [
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/01-ai-awareness-funnel.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/01-ai-awareness-funnel.png",
+        "status": 200,
+        "bytes": 264104,
+        "sha256": "b1c8f18d209869f4ae101675ab48b0a166bac4c63273b90a78a548d00e7b6b4d",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/02-map-and-territory.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/02-map-and-territory.png",
+        "status": 200,
+        "bytes": 80061,
+        "sha256": "3bd24f43ee9aa9a171e8f27702fbb52a5c06ad6769cd6474027258bbe2cd2d65",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/03-travel-hidden-context.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/03-travel-hidden-context.png",
+        "status": 200,
+        "bytes": 107241,
+        "sha256": "d33a9c76248079832b96bdca1c67da5d79575d4785e586d0d6e9171a95cc883b",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/04-knowledge-sharing-quadrants.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/04-knowledge-sharing-quadrants.png",
+        "status": 200,
+        "bytes": 102680,
+        "sha256": "a3d237f89eb9a898d77c9ebb48a9b1a365f11072e526a441c26ecac8b09947da",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/05-known-and-unknown-quadrants.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/05-known-and-unknown-quadrants.png",
+        "status": 200,
+        "bytes": 181230,
+        "sha256": "9aa52a368a260cfc99723a97bf9d0f9d9335dfe535fa32359a69a023c2c14887",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/06-confidence-and-hallucinations.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/06-confidence-and-hallucinations.png",
+        "status": 200,
+        "bytes": 226326,
+        "sha256": "0376c1c8c36ccf1b2d940bb9f05f837bbb314912ff71ad62aedb5aa0868baf40",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/07-expertise-and-judgment.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/07-expertise-and-judgment.png",
+        "status": 200,
+        "bytes": 179211,
+        "sha256": "75071a19d8457593a9f4af981dcc2382f0c5d14472d1f501ac48418e4d0f5473",
+        "matchesSourceAndBuild": true
+      },
+      {
+        "path": "public/img/2026/ai-usage-gap-and-unknowns/08-ai-productivity-studies.png",
+        "url": "https://ai-build.cn/img/2026/ai-usage-gap-and-unknowns/08-ai-productivity-studies.png",
+        "status": 200,
+        "bytes": 83364,
+        "sha256": "fc6694a00e2b8f801f6ba5e407c0bea04a4eb5ed28d8e8f09d66aed82c53c3ec",
+        "matchesSourceAndBuild": true
+      }
+    ]
+  },
+  "deployment": {
+    "repository": "l-zhi/l-zhi.github.io",
+    "branch": "master",
+    "environment": "github-pages",
+    "runId": 40674993833,
+    "commit": "b770802b09d458dc1bd7593619f7bef8f2a99811",
+    "url": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/40674993833",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success",
+        "startedAt": "2026-10-28T10:48:19Z",
+        "completedAt": "2026-10-28T10:49:05Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "startedAt": "2026-10-28T10:49:10Z",
+        "completedAt": "2026-10-28T10:49:23Z"
+      }
+    ]
+  },
+  "screenshots": [
+    "docs/screenshots/ai-usage-gap-live-desktop.png",
+    "docs/screenshots/ai-usage-gap-live-mobile-image.png",
+    "docs/screenshots/ai-usage-gap-live-mobile-table.png"
+  ],
+  "scopeNotes": [
+    "仅同步作者原稿，未另行核查原文数据与论断。",
+    "公众号专用复制按钮、脚本与固定配色未导入，正文使用站点统一样式。",
+    "CI 提示旧版 Actions 的 Node.js 20 运行时弃用及 ubuntu-latest 镜像迁移；本次构建部署成功，未改动工作流。",
+    "本报告与线上截图作为发布后核验文档，以 [skip ci] 提交，不改变已部署站点内容。"
+  ],
+  "unfinished": [
+    "本篇同步与发布无未完成项；全站既有的 24 处外链图片引用、90 处缺失本地引用及 PHP demo 限制保持原状。"
+  ]
+}
