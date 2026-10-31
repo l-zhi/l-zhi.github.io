@@ -1,0 +1,352 @@
+{
+  "title": "AI 使用差距文章与首页视频嵌入核验",
+  "verifiedAt": "2026-10-31T06:04:40.602418+00:00",
+  "verificationScope": "赵云（实施代理）本地及线上自检，不代表孔明或用户已验收。用户本轮已明确授权提交、推送和部署。",
+  "acceptanceCriteria": [
+    "目标文章目录之后、正文之前嵌入 BV1QFxy63EKJ，保持 16:9，默认暂停，并保留 B 站原视频链接。",
+    "首页对应文章显示本地封面和 8:23 时长，点击打开播放弹窗，关闭移除播放器；与 Linux 文章入口共存且切换正确。",
+    "文章正文、8 张原配图、日期、永久地址及其他原有元数据保持不变。",
+    "1440、390、320 像素宽度下布局不横向溢出；首页明暗模式、键盘操作、焦点返回和禁用 JavaScript 回退正常。",
+    "类型检查、生产构建、静态资源检查和相关界面测试通过；真实 B 站播放器在文章页及首页均能起播。",
+    "仅将本次视频嵌入、首页播放入口及相应验证文件提交并推送到 origin/master，不包含既有无关未跟踪文件或 dist。",
+    "发布提交对应的 GitHub Actions build 和 deploy 均成功，部署到既有 GitHub Pages 线上环境。",
+    "线上文章和首页包含正确视频且可起播，正文、封面及脚本样式与本地构建一致，原配图和 Linux 视频入口正常。"
+  ],
+  "video": {
+    "url": "https://www.bilibili.com/video/BV1QFxy63EKJ/",
+    "bvid": "BV1QFxy63EKJ",
+    "title": "AI 这么强，可惜大多数人都不会用",
+    "durationSeconds": 503,
+    "duration": "8:23",
+    "metadataSource": "https://api.bilibili.com/x/web-interface/view?bvid=BV1QFxy63EKJ",
+    "poster": "public/img/2026/ai-usage-gap-and-unknowns/bilibili-cover.jpg",
+    "posterSource": "https://i2.hdslb.com/bfs/archive/29888ae046b411fe583a57b32a7e02b0c1a2a08d.jpg",
+    "posterDimensions": [
+      1586,
+      892
+    ],
+    "posterBytes": 178898,
+    "posterSha256": "dd1959a88dd5c7f9b34be7aba5a75ebfc02591a9d0117f3df3340bb3e216b122"
+  },
+  "sourceVerification": {
+    "article": "src/content/blog/wechat/2026-10-28-ai-usage-gap-and-unknowns.md",
+    "baselineCommit": "9cb9eaa4aed9ae5e699f56948f6ac8e6480a62a3",
+    "bodyUnchanged": true,
+    "otherMetadataUnchanged": true,
+    "bodyImages": 8,
+    "mainSections": 8,
+    "bodySha256": "f235dc8e5e1249d22f1867d00f9faad6f0fb90f3dcae9fe8e0668e6867671f8b",
+    "sharedComponentsChanged": false,
+    "existingUntrackedFilesUntouched": [
+      "docs/prototypes/",
+      "docs/screenshots/homepage-2026-10-01.png"
+    ]
+  },
+  "build": {
+    "command": "npm run verify",
+    "result": "passed",
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0,
+    "staticPages": 172,
+    "internalReferences": 4816
+  },
+  "uiTests": {
+    "command": "PLAYWRIGHT_PORT=4347 npx playwright test tests/article-video.spec.ts",
+    "passed": 6,
+    "failed": 0,
+    "thirdPartyPlayerStubbed": true,
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "homeColorSchemes": [
+      "light",
+      "dark"
+    ],
+    "checked": [
+      "两篇文章正确嵌入并默认暂停",
+      "首页点击前无播放器请求",
+      "封面与时长正确",
+      "新视频与 Linux 视频切换无串用",
+      "Enter 打开，Escape、关闭按钮和遮罩关闭",
+      "关闭移除 iframe，恢复滚动与焦点",
+      "禁用 JavaScript 的原站回退",
+      "正文结构和配图数量",
+      "无页面脚本错误"
+    ]
+  },
+  "localRealPlayerVerification": {
+    "checkedAt": "2026-10-31T05:59:04.284Z",
+    "playerStubbed": false,
+    "screenshots": [
+      "docs/screenshots/ai-usage-gap-video-article-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-article-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-home-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-home-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-dialog-mobile.png"
+    ],
+    "article": {
+      "initial": {
+        "duration": 503,
+        "readyState": 4,
+        "paused": true,
+        "currentTime": 0
+      },
+      "images": [
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/01-ai-awareness-funnel.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/02-map-and-territory.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/03-travel-hidden-context.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/04-knowledge-sharing-quadrants.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/05-known-and-unknown-quadrants.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/06-confidence-and-hallucinations.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/07-expertise-and-judgment.png",
+          "width": 1360
+        },
+        {
+          "src": "/img/2026/ai-usage-gap-and-unknowns/08-ai-productivity-studies.png",
+          "width": 1360
+        }
+      ],
+      "playing": {
+        "duration": 503,
+        "readyState": 4,
+        "paused": false,
+        "currentTime": 2.834548
+      }
+    },
+    "homepage": {
+      "initial": {
+        "duration": null,
+        "readyState": 0,
+        "paused": true,
+        "currentTime": 0
+      },
+      "playing": {
+        "duration": 503,
+        "readyState": 4,
+        "paused": false,
+        "currentTime": 2.076389
+      },
+      "closedAndPlayerRemoved": true,
+      "closeCheckNote": "首次即时读取发生在 dialog close 事件处理前；等待弹窗关闭及 iframe 移除后复测通过。"
+    }
+  },
+  "visualReview": {
+    "result": "passed",
+    "screenshots": [
+      "docs/screenshots/ai-usage-gap-video-article-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-article-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-home-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-home-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-dialog-mobile.png"
+    ],
+    "notes": "已逐张查看桌面和手机首页、文章播放器及手机弹窗截图，布局与原有组件一致，无遮挡或横向溢出。"
+  },
+  "deployment": {
+    "performed": true,
+    "branch": "master",
+    "repository": "https://github.com/l-zhi/l-zhi.github.io",
+    "commit": "815e48303fdbb5556e1ec592b83d6a695d10a853",
+    "workflowRun": "https://github.com/l-zhi/l-zhi.github.io/actions/runs/41174979734",
+    "runId": 41174979734,
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build",
+        "conclusion": "success",
+        "startedAt": "2026-10-31T06:02:55Z",
+        "completedAt": "2026-10-31T06:03:34Z"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success",
+        "startedAt": "2026-10-31T06:03:38Z",
+        "completedAt": "2026-10-31T06:03:49Z"
+      }
+    ],
+    "homepage": "https://ai-build.cn/",
+    "article": "https://ai-build.cn/2026/10/28/ai-usage-gap-and-unknowns/",
+    "documentationCommitPolicy": "部署后的核验记录和线上截图使用 [skip ci] 文档提交，避免重复部署相同站点。"
+  },
+  "acceptanceResults": [
+    {
+      "criterion": 1,
+      "status": "passed"
+    },
+    {
+      "criterion": 2,
+      "status": "passed"
+    },
+    {
+      "criterion": 3,
+      "status": "passed"
+    },
+    {
+      "criterion": 4,
+      "status": "passed"
+    },
+    {
+      "criterion": 5,
+      "status": "passed"
+    },
+    {
+      "criterion": 6,
+      "status": "passed"
+    },
+    {
+      "criterion": 7,
+      "status": "passed"
+    },
+    {
+      "criterion": 8,
+      "status": "passed"
+    }
+  ],
+  "unfinished": [
+    "真实播放器仅验证短时起播，未完整播放 8 分 23 秒全片；长期可用性与清晰度由 B 站提供。",
+    "仓库既有 24 处外链图片引用、90 处缺失本地引用及 PHP demo 限制仍保留，本次未处理。"
+  ],
+  "releasePreflight": {
+    "result": "passed",
+    "buildCommand": "npm run verify",
+    "uiCommand": "PLAYWRIGHT_PORT=4347 npx playwright test tests/article-video.spec.ts",
+    "uiPassed": 6,
+    "uiFailed": 0,
+    "buildErrors": 0,
+    "buildWarnings": 0,
+    "buildHints": 0,
+    "sourceCommitFiles": 8,
+    "bodyComparedToPreviousCommit": true,
+    "unrelatedFilesExcluded": true
+  },
+  "liveVerification": {
+    "checkedAt": "2026-10-31T06:04:02.363Z",
+    "baseURL": "https://ai-build.cn",
+    "playerStubbed": false,
+    "http": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/2026/10/28/ai-usage-gap-and-unknowns/",
+        "status": 200
+      },
+      {
+        "path": "/img/2026/ai-usage-gap-and-unknowns/bilibili-cover.jpg",
+        "status": 200,
+        "sha256": "dd1959a88dd5c7f9b34be7aba5a75ebfc02591a9d0117f3df3340bb3e216b122",
+        "matchesBuild": true
+      },
+      {
+        "path": "/_astro/Layout.CFne7gIr.css",
+        "status": 200,
+        "sha256": "8558dc1a362ec3de9527713d63cda1d1716b6bf4e6ffd872def7762503773da9",
+        "matchesBuild": true
+      }
+    ],
+    "screenshots": [
+      "docs/screenshots/ai-usage-gap-video-live-home-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-live-home-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-live-article-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-live-article-mobile.png"
+    ],
+    "errors": [],
+    "homePreviewMatchesBuild": true,
+    "homePlayback": {
+      "duration": 503,
+      "readyState": 4,
+      "paused": false,
+      "currentTime": 2.872787
+    },
+    "homeClosedAndPlayerRemoved": true,
+    "linuxPreviewSwitchPassed": true,
+    "articleBodyAndEmbedMatchBuild": true,
+    "articleInitial": {
+      "duration": 503,
+      "readyState": 4,
+      "paused": true,
+      "currentTime": 0
+    },
+    "articlePlayback": {
+      "duration": 503,
+      "readyState": 4,
+      "paused": false,
+      "currentTime": 2.814629
+    },
+    "bodyImages": [
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/01-ai-awareness-funnel.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/02-map-and-territory.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/03-travel-hidden-context.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/04-knowledge-sharing-quadrants.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/05-known-and-unknown-quadrants.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/06-confidence-and-hallucinations.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/07-expertise-and-judgment.png",
+        "width": 1360
+      },
+      {
+        "src": "/img/2026/ai-usage-gap-and-unknowns/08-ai-productivity-studies.png",
+        "width": 1360
+      }
+    ],
+    "inlineScriptsAndStylesMatch": true,
+    "pageErrors": [],
+    "result": "passed"
+  },
+  "liveVisualReview": {
+    "result": "passed",
+    "screenshots": [
+      "docs/screenshots/ai-usage-gap-video-live-home-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-live-home-mobile.png",
+      "docs/screenshots/ai-usage-gap-video-live-article-desktop.png",
+      "docs/screenshots/ai-usage-gap-video-live-article-mobile.png"
+    ],
+    "notes": "已逐张查看线上桌面和手机首页及文章截图，视频和封面显示正常。"
+  },
+  "verificationNotes": [
+    "本轮重新执行本地构建及 6 项界面测试，全部通过。",
+    "线上真实播放器未使用占位响应；文章初始 paused=true、currentTime=0；文章与首页均观察到 duration=503、readyState=4、paused=false，播放进度超过 2 秒。未完整播放全片。",
+    "线上首页及文章返回 HTTP 200；正文与播放器标记匹配本地构建，封面和样式 SHA-256 一致，内联脚本和样式一致。",
+    "GitHub Actions 提示既有 action 的 Node.js 20 运行时弃用及 ubuntu-latest 镜像迁移，未影响本次构建和部署；本次未调整工作流。"
+  ]
+}
