@@ -5,6 +5,11 @@ description: "同一个AI，有人拿它查天气、写拜年短信，有人拿�
 permalink: "2026/10/28/ai-usage-gap-and-unknowns"
 tags: ["AI", "个人实践"]
 categories: ["荔枝AI圈"]
+video:
+  bvid: "BV1QFxy63EKJ"
+  title: "AI 这么强，可惜大多数人都不会用"
+  duration: "8:23"
+  poster: "/img/2026/ai-usage-gap-and-unknowns/bilibili-cover.jpg"
 draft: false
 ---
 
