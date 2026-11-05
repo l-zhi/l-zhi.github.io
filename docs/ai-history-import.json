@@ -1,0 +1,307 @@
+{
+  "title": "一张照片、一盘围棋、一个对话框：AI 是怎么突然开窍的？",
+  "sourceFile": "一张照片、一盘围棋、一个对话框：AI 是怎么突然开窍的？.html",
+  "sourceSha256": "b2dd0f4f6ee9b54df8369cbcbbc94760dc77b943ec5cbb014bb096d273981fee",
+  "sourceUnchanged": true,
+  "date": "2026-11-05T17:54:00+08:00",
+  "dateBasis": "附件中的 publish_time",
+  "contentFile": "src/content/blog/wechat/2026-11-05-ai-history-photo-go-chat.md",
+  "route": "/2026/11/05/ai-history-photo-go-chat/",
+  "formatting": [
+    "将公众号样式段落转换为8个二级标题和6个三级标题",
+    "恢复有序列表、引用及16条参考文献",
+    "去除关注卡片、作者关注提示和END装饰；未导入网页脚本与临时访问参数",
+    "27张正文图片本地化并保留顺序，补充图片尺寸和替代文字"
+  ],
+  "textCheck": {
+    "method": "比较原文与构建正文，忽略空白、标点、排版编号及上述移除的公众号装饰",
+    "normalizedCharacters": 8192,
+    "equal": true
+  },
+  "assets": [
+    {
+      "number": 1,
+      "path": "public/img/2026/ai-history-photo-go-chat/01.webp",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9TlqngHWlheCwktnHw0AJpPuJw2oLHZibiahxpYrHr9wqjxy9hTlk3K7Xd1Ed1u8yQ0wFTo38s8OnrPJic1mibMTPibC2ibFQfW4F5f8/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=0",
+      "sha256": "c4391b788391348fad29000e0f8de57dbfa940b6e6438448e468bbe8c2d1859b",
+      "bytes": 55808,
+      "width": 900,
+      "height": 659,
+      "alt": "AlphaGo与李世石的首尔对局"
+    },
+    {
+      "number": 2,
+      "path": "public/img/2026/ai-history-photo-go-chat/02.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9TEut3AXRiaw8WRB5PmSVfRiaSJBBKX7smoNhIyACib5SsOzS9GRibqB2icezBkiahz5AzqyjryWOlSbZcLBMJegUibG4cSyHoCtdibRKg/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=1",
+      "sha256": "78b2c14181fbff4851730187885e3c0ad91af3ffdb0e46e6b2c4e5361172a7c1",
+      "bytes": 30484,
+      "width": 596,
+      "height": 335,
+      "alt": "第二局第37手棋局示意"
+    },
+    {
+      "number": 3,
+      "path": "public/img/2026/ai-history-photo-go-chat/03.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9TWFgdzhQ8F3xoYNPng711Fpiac73BXONc7m4A3Czia4YI1slHibCnHsh0SXkmpP6XdGBqcDWJN5JSkL8ev0nMpMwboZVpD1PiaPho/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=2",
+      "sha256": "a37f92e09219377612a286ed82d9a864ae3448c742dd0e2480fab8c24b6f1db6",
+      "bytes": 184238,
+      "width": 1080,
+      "height": 540,
+      "alt": "图1：AI为何能走出超出人类直觉的一步棋"
+    },
+    {
+      "number": 4,
+      "path": "public/img/2026/ai-history-photo-go-chat/04.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9ScnmRmv7LXGicZ6f7aMLg8fxbm8scc99KxiaVgCib2tnOPoibrjpDP2yxwB6tZBPIMaO6sWGjRywTR0pzACNKF2pM2ggTib90Gg6GY/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=3",
+      "sha256": "a29298090eaa458aca7727568349967abb667fc62163f280b3c1bbdc78d97217",
+      "bytes": 39935,
+      "width": 1080,
+      "height": 608,
+      "alt": "艾伦·图灵"
+    },
+    {
+      "number": 5,
+      "path": "public/img/2026/ai-history-photo-go-chat/05.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9RuHWfsrHC05fHk1cvTwXEypuVlHicl7hvdWyMHQ5vgz3ydtxUcFBt31hWzak15Yia8rblq2HemnRXdicUJ10ndoW0ygcBaBVlib4A/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=4",
+      "sha256": "763718dadb10a827a69296155ce8186d419c3e243fcd437f00196f03bcf0a77f",
+      "bytes": 110712,
+      "width": 960,
+      "height": 720,
+      "alt": "达特茅斯人工智能研究的历史配图"
+    },
+    {
+      "number": 6,
+      "path": "public/img/2026/ai-history-photo-go-chat/06.png",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9TibB2gJK9KWDbIuawlERic1HWgxFbdQLTlVicovPJ6PdnJLSTiahhgVSumYviaxUnnTnjVkCd9X4NUcVicntvSIVxFnUAQY8RK8zmIY/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=5",
+      "sha256": "e3ae95109766fee49be65f4d7bfab4f37fb17b4a2951b6e985dd9f7c53bac067",
+      "bytes": 245679,
+      "width": 1080,
+      "height": 572,
+      "alt": "图2：规则驱动人工智能的发展"
+    },
+    {
+      "number": 7,
+      "path": "public/img/2026/ai-history-photo-go-chat/07.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9SZdURTmqzgXfDfrmnj1NshHzsYgEWpeIAJnU0DAIhlVZZT8lhvdBA2hvsoyAH4oibpTdgAMJpecv92UfTATrbPn4as0fqsJEL8/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=6",
+      "sha256": "a6abc5007ab361e76d94ee8fe2fedf31e1db3886e5e2dace36621d6522f4695c",
+      "bytes": 746378,
+      "width": 1080,
+      "height": 466,
+      "alt": "照片中的猫"
+    },
+    {
+      "number": 8,
+      "path": "public/img/2026/ai-history-photo-go-chat/08.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9RexDOQU91uM0kuc7dtCvCRWtwHJhZP1uPHmFxPYoWocuAtic7MPkQU553uRp40SibbpDsEXFjS18frE81v4wRNLIfLool6mibFhU/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=7",
+      "sha256": "187770309e615a00a04bf48782cad176bf77f4f5d813b102f8259481d975aacb",
+      "bytes": 41378,
+      "width": 735,
+      "height": 493,
+      "alt": "沃尔特·皮茨与沃伦·麦卡洛克"
+    },
+    {
+      "number": 9,
+      "path": "public/img/2026/ai-history-photo-go-chat/09.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9Qv2ExeuppLXVbzW7e1XrO9cho1IDH8JwQoPToBxEE6ibXm4LRdPMvalYfYeefLjM6JvSI7ibGb2lJqcTouV3j36sheIe75gf104/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=8",
+      "sha256": "ccfcd087aad9bb7d54d284678f22bb3c50b456fde32df9ce7d1040706bf4b850",
+      "bytes": 36343,
+      "width": 543,
+      "height": 450,
+      "alt": "罗森布拉特与感知机"
+    },
+    {
+      "number": 10,
+      "path": "public/img/2026/ai-history-photo-go-chat/10.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9QJzhTicbuAS3tjVM0a6mFwCrYpne2t5cE9rb91ZRgYx0Mw590yF0Ljc5BsMlybIoDagTQXBBF7pp7E38Eq6iaujXiaEoicCoPdu98/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=9",
+      "sha256": "13ea1ae160b5dca363b5f2f5388aca004449de7cb692539313e2a864082d2058",
+      "bytes": 15820,
+      "width": 739,
+      "height": 415,
+      "alt": "杰弗里·辛顿"
+    },
+    {
+      "number": 11,
+      "path": "public/img/2026/ai-history-photo-go-chat/11.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9SzdKJLzY7HzMpXMhfKH8Y2P5xoUtAUJyaibMj8xNs8nIft1SddYmia4Cp0uOTrsPlIQZW9j46Geno8nucFJGpwOzp5JaY2Ggvd4/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=10",
+      "sha256": "17be154836bfe7ae311930499c1f0f25bbaee437527e5d31a8af23851a591095",
+      "bytes": 113314,
+      "width": 1080,
+      "height": 540,
+      "alt": "李飞飞"
+    },
+    {
+      "number": 12,
+      "path": "public/img/2026/ai-history-photo-go-chat/12.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QrpFjKWqGEk85MakkzYDMxcwNtRYacea3LZWTDqL59PrEd4Hw0dNaUptmR4RJAdwU2TaVEDics6RClW2YDbtV1nFykEvvOlDXk/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=11",
+      "sha256": "50f7338a0929e1c8e9dbd8e7fa5843eeac3e956bec0d80821a2381d268c77763",
+      "bytes": 221516,
+      "width": 1080,
+      "height": 572,
+      "alt": "图3：ImageNet与图像识别"
+    },
+    {
+      "number": 13,
+      "path": "public/img/2026/ai-history-photo-go-chat/13.png",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9Qia681fYiaGNc689zGyFiazxhZApicWaAY1b4sF6ujRSOKjQHv3c0BHRkiaaXx9ZGvT5fcA3OwUKCKYRZcHMlz7YgjibYCCT7Um3fUk/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=12",
+      "sha256": "b928be66d781d630868af9f6e30560a6f6481b9fa36d1af920fde6a58594212e",
+      "bytes": 684439,
+      "width": 1080,
+      "height": 388,
+      "alt": "AlexNet相关配图"
+    },
+    {
+      "number": 14,
+      "path": "public/img/2026/ai-history-photo-go-chat/14.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9SkiaCoQRef6BBMDDPaLatSBfwrVxQibGZDlIgdcrJfBic2lBWD1xxuPuDkYh1iaFQYRdkFSmQicmU6YZrJnML9Tibwt988Iq7jJYLFo/640?wx_fmt=jpeg&watermark=1#imgIndex=13",
+      "sha256": "b8810b1173128102f85a2658fa805c0e205690ed12d0308f26baea03b64e75b4",
+      "bytes": 32668,
+      "width": 1074,
+      "height": 391,
+      "alt": "ResNet残差网络相关配图"
+    },
+    {
+      "number": 15,
+      "path": "public/img/2026/ai-history-photo-go-chat/15.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9QUGOlSNibqabib5a6mzibjr917eJdoy59HqPzmYMfMRY5yu68FznprZ64yvgs3XW9uQvjvAmnRMgqczp3rSiapGB57rPq2l20suyM/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=14",
+      "sha256": "343e91f4333a3c98b491200677ade57a65e43d6f1119802df328df35411d15fe",
+      "bytes": 255066,
+      "width": 1080,
+      "height": 572,
+      "alt": "图4：AlphaGo的学习与搜索"
+    },
+    {
+      "number": 16,
+      "path": "public/img/2026/ai-history-photo-go-chat/16.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9RMateUCHuoo7S7xMc4Qy9UcGA8tzr4cy21SwyuNA2gSibc2aFemibIEEcbwKZZbtT9sjw0e1JCWPQg5heKSiavu8LJvJvS4w7QDo/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=15",
+      "sha256": "783b2916728ac805c8348997b3c8dba5a2fe9ccba36cd9375ab37cb311f6b9e9",
+      "bytes": 69590,
+      "width": 1080,
+      "height": 413,
+      "alt": "第四局第78手棋局示意"
+    },
+    {
+      "number": 17,
+      "path": "public/img/2026/ai-history-photo-go-chat/17.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9RsibfrFpAQeVDYsBqDnXIYnpD4SDOgvP1CSISoRbw4tticaeNBlxlfa22Qib0lvFWBsgTam74WTSvib0icVWjOFzdwU6zxjuNI4tNQ/640?wx_fmt=webp&from=appmsg&watermark=1#imgIndex=16",
+      "sha256": "acd0acb2437eba252bed97c419f9d004723d686e658e0be68fa9fd3f97c39321",
+      "bytes": 25067,
+      "width": 1080,
+      "height": 608,
+      "alt": "语言理解相关配图"
+    },
+    {
+      "number": 18,
+      "path": "public/img/2026/ai-history-photo-go-chat/18.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9R5FWSsZn0Xwye3W9CdaPPAEiaiciaicfibqiabBe5icsbfEibicjr0Tqp8fQnj6ElBicr3YXa1nzVjJib4WVz1HibYnEMPT9UwuU3o9aqd1HU/640?wx_fmt=jpeg&watermark=1#imgIndex=17",
+      "sha256": "d25cde311e9ea3d12aa0ef308fe524cdb1c541d04852fab756c520daa222bd04",
+      "bytes": 97858,
+      "width": 1054,
+      "height": 708,
+      "alt": "Attention Is All You Need论文相关配图"
+    },
+    {
+      "number": 19,
+      "path": "public/img/2026/ai-history-photo-go-chat/19.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9SoEWywGumdj5fEgzsXKmzp9FHZfncFjlICxX0OBafnfah9TtyVwP7IzNYTvFR8kA90C9MI1dyuiaxapGS9axCrTUoGQrsqj5RA/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=18",
+      "sha256": "86e33fc28e9b3087bfb81eb8ce9dfd4c145858348984a3a625f90ffd060127d4",
+      "bytes": 165145,
+      "width": 1080,
+      "height": 540,
+      "alt": "图5：Transformer注意力机制"
+    },
+    {
+      "number": 20,
+      "path": "public/img/2026/ai-history-photo-go-chat/20.png",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_png/szibiaSP92X9TbndnrZXFR0t5sfLVRncq4961JdRxkZazMVESicd9iaToTE2KMuC5icv7E8AicZrU0aFLfN8nqOldDnZcXgWvFicRQ7dibH5YqOJic2Y/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=19",
+      "sha256": "109f3ed335174fe87d0ae83ecfb444bd3a6dea1d4ae797617d4a1819c035e38c",
+      "bytes": 229908,
+      "width": 880,
+      "height": 504,
+      "alt": "GPT-3相关配图"
+    },
+    {
+      "number": 21,
+      "path": "public/img/2026/ai-history-photo-go-chat/21.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9S5YCkTEvbCnszdtWn4n3QkpUl5UzWOicRHWfZFRUX2RaNPu2Aee0Cuu8piaiaiazJrzibDHAE2aK0mLjczHTgNE31RibAicbUdVJaOps/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=20",
+      "sha256": "aff7d4f1d704706819a5d781b496145784d7aa5d9c977e5fdbaf331f5ffa3417",
+      "bytes": 60458,
+      "width": 1080,
+      "height": 669,
+      "alt": "ChatGPT相关配图"
+    },
+    {
+      "number": 22,
+      "path": "public/img/2026/ai-history-photo-go-chat/22.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9ROkSG7m54XhY6EfQBibtgwF0SaqpNwmZzw0G6pu5icr5HqbufpFib2WryvfQQpShY3zorOsx7kL5nk4Aia4MX9icAJUIHyAD6l3vTo/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=21",
+      "sha256": "0b188f1f189d4604893923e6cdf51f4b41df568a4b009d2c970a938b6a142063",
+      "bytes": 217325,
+      "width": 1080,
+      "height": 556,
+      "alt": "图6：对话模型的发展"
+    },
+    {
+      "number": 23,
+      "path": "public/img/2026/ai-history-photo-go-chat/23.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9T8kfOf5JBrlGCGl3rqWNuiabSSy5kEHKZsXvrv6ZFPeRIPn9iaDAxrq6icTVFk5P8VoRZagDtvWhbsdAV0lJGMFbTfHgUicEsib8Ls/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=22",
+      "sha256": "2eb063affc029fe6ec0b6d108824fd87489ca4114aae84cc312e5c8d9d350d07",
+      "bytes": 235311,
+      "width": 1080,
+      "height": 458,
+      "alt": "AI核心论文时间线"
+    },
+    {
+      "number": 24,
+      "path": "public/img/2026/ai-history-photo-go-chat/24.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9SSnic1nNwl0fVtyX4cLNtibzV7icPAIia7gZpITtumDhefqazlwu1bU3Wos5LHgFVHIymUH5icaKpApA2mPfVkwoOzNUnleog3lnqg/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=23",
+      "sha256": "dd595aadc4bbbde124cd545e82f49ee6b72eaccba6d18f473dcbb6c4aa4fb187",
+      "bytes": 14503,
+      "width": 596,
+      "height": 335,
+      "alt": "姚顺雨"
+    },
+    {
+      "number": 25,
+      "path": "public/img/2026/ai-history-photo-go-chat/25.jpg",
+      "url": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/szibiaSP92X9QcWlkfkAibdItEY2kXRxic6uAcsvz7QF4v2wmMS8WOVtiaoyelApLS7pwzniczK1vxKbZ4ibJGtFc9CX5LGn0XpP2fO6DjXLRibVnug/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=24",
+      "sha256": "a6df8fabe094bea22a1904a132d2633e64fc5db029baa10c044307df0f4cb8a8",
+      "bytes": 55953,
+      "width": 1080,
+      "height": 720,
+      "alt": "思维链相关配图"
+    },
+    {
+      "number": 26,
+      "path": "public/img/2026/ai-history-photo-go-chat/26.jpg",
+      "url": "https://mmbiz.qpic.cn/mmbiz_jpg/szibiaSP92X9RdLQ2cr42z6UcZYTeU9FDnogCkibetFUKrdXHXOuMsicEfXXFficgGq7Ue4UUpewebluaGPHGzMZHK0ImPb8oWs1KaMFSfj8IFv0/640?wx_fmt=jpeg&from=appmsg&watermark=1#imgIndex=25",
+      "sha256": "3c2cbed0156b83f1ce2ff46c493cc5a9d08b5cfc3ed2d3bb4d801f8733c6fcd5",
+      "bytes": 18267,
+      "width": 597,
+      "height": 335,
+      "alt": "DeepSeek-R1相关配图"
+    },
+    {
+      "number": 27,
+      "path": "public/img/2026/ai-history-photo-go-chat/27.png",
+      "url": "https://mmbiz.qpic.cn/mmbiz_png/szibiaSP92X9SCeYhZ2nZ0Ee74X2HsSMqaPWdmY3UAaAp0ZViajicRTokKw2l6USB1BJ5GW8LxfAK34ZMJw3EFRTjYKoEiam0zDscf1JySSj3hxk/640?wx_fmt=png&from=appmsg&watermark=1#imgIndex=26",
+      "sha256": "417fc8ca51fe0afd3671c78d30657535bf2ac68f8cfd615d52b383b5f3163e89",
+      "bytes": 251587,
+      "width": 1080,
+      "height": 588,
+      "alt": "图7：AI能力演进与使用方法"
+    }
+  ],
+  "localChecks": {
+    "buildPages": 176,
+    "internalReferences": 4956,
+    "imagesDecoded": 27,
+    "widths": [
+      1280,
+      390,
+      320
+    ],
+    "headings": 14,
+    "publicArticles": 61,
+    "listingSearchRssSitemap": true,
+    "browserErrors": []
+  }
+}
