@@ -59,7 +59,7 @@ const nav = [{ href: '/projects/', label: 'AI项目' }, { href: '/archives/', la
           <button id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题" hidden><span aria-hidden="true">◐</span></button>
           {isHome && <a class="contact-button" href={`mailto:${SITE.email}`} title={`发送邮件至 ${SITE.email}`}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></svg>
-            联系我
+            <span>联系我</span>
           </a>}
         </nav>
       </header>
@@ -81,8 +81,7 @@ const nav = [{ href: '/projects/', label: 'AI项目' }, { href: '/archives/', la
   </body>
 </html>
 <style>
-  .contact-button { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); font-size: 13px; white-space: nowrap; text-decoration: none; }
-  .contact-button:hover { border-color: var(--accent); background: var(--soft); }
+  .contact-button { display: inline-flex; flex-shrink: 0; align-items: center; gap: 6px; min-height: 44px; padding: 0; border: 0; background: none; font: inherit; white-space: nowrap; text-decoration: none; }
   @media (max-width: 760px) {
     .home-header { flex-wrap: wrap; row-gap: 14px; }
     .home-header nav { width: 100%; justify-content: flex-end; flex-wrap: wrap; gap: 8px 14px; }
