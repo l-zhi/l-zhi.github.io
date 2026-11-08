@@ -2,6 +2,16 @@ import { test, expect } from '@playwright/test';
 
 const videos = [
   {
+    article: '/2026/08/08/agile-development-with-ai/',
+    bvid: 'BV1fyWJ67E3a',
+    title: '以前6个人干半个月，现在1人+AI一天干完：为什么大厂研发越来越少，敏捷开发也没人提了？',
+    duration: '10:28',
+    posterWidth: 1600,
+    images: 8,
+    sections: 6,
+    bodyText: '软件项目失败的最常见原因',
+  },
+  {
     article: '/2026/10/28/ai-usage-gap-and-unknowns/',
     bvid: 'BV1QFxy63EKJ',
     title: 'AI 这么强，可惜大多数人都不会用',

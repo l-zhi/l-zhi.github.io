@@ -1,10 +1,15 @@
 ---
 title: "AI时代，还需要敏捷开发么？"
-date: "2026-08-08T16:17:00+08:00"
+date: "2026-11-08T22:09:00+08:00"
 description: "回顾敏捷开发解决的问题，讨论 AI 降低沟通和试错成本后，团队流程与个人职责如何调整。"
 permalink: "2026/08/08/agile-development-with-ai"
 tags: ["AI 编程", "软件工程"]
 categories: ["荔枝AI圈"]
+video:
+  bvid: "BV1fyWJ67E3a"
+  title: "以前6个人干半个月，现在1人+AI一天干完：为什么大厂研发越来越少，敏捷开发也没人提了？"
+  duration: "10:28"
+  poster: "/img/2026/agile-development-with-ai/bilibili-cover.jpg"
 draft: false
 unlisted: false
 ---
