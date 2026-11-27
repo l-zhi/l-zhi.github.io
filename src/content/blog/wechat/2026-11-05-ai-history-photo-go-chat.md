@@ -5,6 +5,11 @@ description: "程序明明是人写的，为什么它能走出一招连人类顶
 permalink: "2026/11/05/ai-history-photo-go-chat"
 tags: ["AI", "人工智能发展史", "机器学习"]
 categories: ["荔枝AI圈"]
+video:
+  bvid: "BV1yay6zUEJg"
+  title: "10分钟 · 看懂 AI 80年进化史"
+  duration: "10:27"
+  poster: "/img/2026/ai-history-photo-go-chat/bilibili-cover.jpg"
 draft: false
 ---
 

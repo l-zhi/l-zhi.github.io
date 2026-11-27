@@ -12,6 +12,16 @@ const videos = [
     bodyText: '软件项目失败的最常见原因',
   },
   {
+    article: '/2026/11/05/ai-history-photo-go-chat/',
+    bvid: 'BV1yay6zUEJg',
+    title: '10分钟 · 看懂 AI 80年进化史',
+    duration: '10:27',
+    posterWidth: 1365,
+    images: 27,
+    sections: 8,
+    bodyText: '首尔棋盘上的「第 37 手」',
+  },
+  {
     article: '/2026/10/28/ai-usage-gap-and-unknowns/',
     bvid: 'BV1QFxy63EKJ',
     title: 'AI 这么强，可惜大多数人都不会用',
